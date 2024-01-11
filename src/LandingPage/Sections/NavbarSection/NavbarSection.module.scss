@@ -1,0 +1,81 @@
+@import "../../scss/reset";
+@import "../../scss/global";
+
+.navbar {
+   background-color: #1d1d1d;
+   padding-bottom: 7px;
+   display: block;
+   &__inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+   }
+   &__socials {
+      display: flex;
+   }
+   &__social_link {
+      display: inline-block;
+      padding: 3px 5px;
+      transition: all 0.3s;
+      &:hover path {
+         fill: $cda;
+      }
+      path {
+         fill: $dgray;
+      }
+   }
+
+   &__contacts {
+      display: flex;
+      align-items: center;
+   }
+   &__email_link {
+      display: flex;
+      align-items: center;
+      padding: 2px 20px;
+      color: $dgray;
+      font-family: $h1;
+      font-size: 0.8rem;
+      font-weight: 500;
+      transition: all 0.3s;
+      &:hover .navbar__email_icon path {
+         fill: $cda;
+      }
+      &:hover {
+         color: $cda;
+      }
+   }
+   &__email_icon {
+      display: inline-block;
+      margin-right: 10px;
+      transition: all 0.3s;
+      path {
+         fill: $dgray;
+      }
+   }
+
+   &__phone_link {
+      display: flex;
+      align-items: center;
+      padding: 2px 20px;
+      color: $dgray;
+      font-family: $h1;
+      font-size: 0.8rem;
+      font-weight: 500;
+      transition: all 0.3s;
+      &:hover .navbar__phone_icon path {
+         fill: $cda;
+      }
+      &:hover {
+         color: $cda;
+      }
+   }
+   &__phone_icon {
+      display: inline-block;
+      margin-right: 10px;
+      transition: all 0.3s;
+      path {
+         fill: $dgray;
+      }
+   }
+}

@@ -1,0 +1,136 @@
+@import "../../scss/reset";
+@import "../../scss/global";
+.footer {
+   background-color: #373737;
+padding-top: 30px;
+   .weekdays__icon {
+      height: 36px;
+      width: 36px;
+      path {
+         fill: $cda;
+      }
+   }
+
+   .weekends__icon {
+      height: 36px;
+      width: 36px;
+      path {
+         fill: $cda;
+      }
+   }
+   &__copyright_wrapper {
+      background-color: #262626;
+   }
+   &__copyright {
+      font-size: 0.8rem;
+      text-align: center;
+      color: $gray;
+      padding: 15px 0;
+   }
+}
+.contactus {
+
+   margin-bottom: 30px;
+   height: 40px;
+   width: 100%;
+   display: grid;
+   grid-template-columns: 2fr 2fr 1fr;
+   gap: 10px;
+   &__number {
+      width: 100%;
+      border-radius: 10px;
+      padding-left: 20px;
+      border: none;
+      &::placeholder {
+         color: rgba($dgray, 0.5);
+      }
+      &:focus {
+         outline: none;
+         border: 1px solid #cda05f;
+         box-shadow: 0 0 4px #ffffff;
+      }
+   }
+   &__name {
+      width: 100%;
+      border-radius: 10px;
+      padding-left: 20px;
+      border: none;
+      &::placeholder {
+         color: rgba($dgray, 0.5);
+      }
+      &:focus {
+         outline: none;
+         border: 1px solid #cda05f;
+         box-shadow: 0 0 4px #ffffff;
+      }
+   }
+   &__btn {
+      width: 100%;
+      font-size: 1.05rem;
+      font-weight: 400;
+      &:focus {
+         outline: none;
+         border: 1px solid #cda05f;
+         box-shadow: 0 0 4px #ffffff;
+      }
+   }
+}
+.contacts {
+   display: grid;
+   grid-template-columns: 2fr 3fr;
+   justify-content: space-between;
+   margin-bottom: 30px;
+   &__hours{
+      width: 80%;
+   }
+   &__title {
+      color: #cda05f;
+      font-size: 2rem;
+      font-weight: 200;
+      padding-bottom: 20px;
+      margin-bottom: 30px;
+      position: relative;
+      &::after {
+         content: "";
+         position: absolute;
+         bottom: 0;
+         left: 0;
+         right: 0;
+         height: 1px;
+         background-color: #cda05f;
+      }
+   }
+   .weekdays {
+      display: flex;
+      height: 100px;
+      align-items: center;
+      position: relative;
+      &::after {
+         content: "";
+         position: absolute;
+         left: 55px;
+         top: 10px;
+         bottom: 0;
+         width: 1px;
+         height: 80px;
+         background-color: #cda05f;
+      }
+      &__icon {
+         margin-right: 40px;
+      }
+      &__days {
+         font-size: 1.2rem;
+         margin-bottom: 5px;
+         color: $cda;
+      }
+      &__hours {
+         color: #cda05f;
+      }
+   }
+   &__map {
+      height: 350px;
+      width: 100%;
+      border-radius: 10px;
+      overflow: hidden;
+   }
+}

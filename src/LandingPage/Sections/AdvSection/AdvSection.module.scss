@@ -1,0 +1,47 @@
+@import "../../scss/reset";
+@import "../../scss/global";
+.adv {
+   padding-top: 50px;
+   padding-bottom: 30px;
+   &__inner {
+      display: flex;
+      justify-content: space-around;
+   }
+   &__item {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+      height: 100%;
+   }
+   &__light {
+      margin-top: 5px;
+      margin-bottom: -5px;
+   }
+   &__check {
+      margin-top: 5px;
+      margin-bottom: -5px;
+   }
+   &__heading {
+      margin-top: 15px;
+      font-size: 1.5rem;
+      font-weight: 400;
+      padding-bottom: 10px;
+      margin-bottom: 30px;
+      position: relative;
+      width: 70%;
+      &::after {
+         @extend %cdaline;
+         height: 2px;
+         width: 100%;
+      }
+   }
+   &__text {
+      display: block;
+      width: 80%;
+      font-weight: 300;
+      line-height: 1.8rem;
+   }
+}

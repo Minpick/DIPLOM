@@ -1,0 +1,109 @@
+@import "../../scss/reset";
+@import "../../scss/global";
+.info {
+   transform: translateY(-90px);
+   &__inner {
+      display: flex;
+      justify-content: space-around;
+   }
+   &__box {
+      width: 50%;
+      background-color: #9f9f9f27;
+      padding: 50px;
+      border-bottom-right-radius: 10px;
+      border-bottom-left-radius: 10px;
+      box-shadow: 0 0 100px 10px #00000033;
+   }
+   &__title {
+      font-weight: 400;
+      font-size: 2rem;
+      padding-bottom: 10px;
+      margin-bottom: 30px;
+      position: relative;
+      width: fit-content;
+      line-height: 2.2rem;
+      &::after {
+         @extend %cdaline;
+         height: 2px;
+      }
+   }
+   &__text {
+      line-height: 1.8rem;
+      font-size: 1rem;
+   }
+   &__circles {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      &_text {
+         font-weight: 400;
+         letter-spacing: 1px;
+         font-size: 1.4rem;
+      }
+   }
+
+   &__circle {
+      width: 150px;
+      height: 150px;
+      position: relative;
+      &_number {
+         position: absolute;
+         top: 0;
+         left: 0;
+         height: 100%;
+         width: 100%;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         font-size: 1.5rem;
+         transform: translate(0, 3px);
+         & h5 {
+            font-weight: 400;
+         }
+         & span {
+            font-size: 1rem;
+         }
+      }
+      & svg {
+         width: 150px;
+         height: 150px;
+         transform: rotate(-89deg) scale(0.7);
+      }
+      & circle {
+         width: 150px;
+         height: 150px;
+         fill: none;
+         stroke-width: 6px;
+         stroke-linecap: round;
+         transform: translate(3px, 3px);
+         stroke-dashoffset: 440;
+         stroke-dasharray: 440;
+      }
+   }
+   .circle_95 circle:first-child {
+      stroke-dashoffset: 0;
+      stroke: #4949491f;
+   }
+   .circle_95 circle:last-child {
+      stroke-dashoffset: calc(440 - 440 * 95 / 100);
+      stroke: #cda05f;
+   }
+   .circle_74 circle:first-child {
+      stroke-dashoffset: 0;
+      stroke: #4949491f;
+   }
+   .circle_74 circle:last-child {
+      stroke-dashoffset: calc(440 - 440 * 74 / 100);
+      stroke: #cda05f;
+   }
+   .circle_97 circle:first-child {
+      stroke-dashoffset: 0;
+      stroke: #4949491f;
+   }
+   .circle_97 circle:last-child {
+      stroke-dashoffset: calc(440 - 440 * 97 / 100);
+      stroke: #cda05f;
+   }
+}

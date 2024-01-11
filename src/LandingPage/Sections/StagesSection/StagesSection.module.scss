@@ -1,0 +1,65 @@
+@import "../../scss/reset";
+@import "../../scss/global";
+.stages {
+   padding-bottom: 70px;
+   &__heading {
+      margin-top: 15px;
+      font-size: 1.8rem;
+      font-weight: 400;
+      padding-bottom: 10px;
+      margin-bottom: 30px;
+      position: relative;
+      width: fit-content;
+      &::after {
+         @extend %cdaline;
+         height: 2px;
+         width: 100%;
+      }
+   }
+   &__content {
+      display: flex;
+   }
+   &__points {
+      width: 170%;
+      font-weight: 300;
+      line-height: 1.5rem;
+      margin-right: 20px;
+      & span {
+         font-weight: 500;
+      }
+   }
+   &__points_item {
+      margin-bottom: 50px;
+   }
+   &__graph {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      border-left: 1px solid #00000033;
+   }
+   &__graph_item {
+      font-weight: 400;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 80%;
+      height: 10%;
+      border: 1px solid $cda;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      position: relative;
+      &::after {
+         position: absolute;
+         content: "";
+         background-color: $cda;
+         width: 1px;
+         height: 46px;
+         transform: translate(-50%, 52px);
+      }
+      &:last-child::after {
+         width: 0;
+      }
+   }
+}

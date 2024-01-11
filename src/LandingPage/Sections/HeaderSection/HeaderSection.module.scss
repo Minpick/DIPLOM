@@ -1,0 +1,39 @@
+@import "../../scss/reset";
+@import "../../scss/global";
+.header {
+   background-color: transparent;
+   position: relative;
+   z-index: 2;
+   &__inner {
+      justify-content: space-between;
+      display: flex;
+      align-items: center;
+   }
+   &__logo {
+      max-width: 300px;
+      margin: 5px 0 0 -18px;
+   }
+   &__menu {
+      display: flex;
+      height: 75px;
+      align-items: center;
+   }
+   &__menu_list {
+      height: 100%;
+      display: flex;
+   }
+   &__menu_item {
+      height: 100%;
+   }
+   &__menu_link {
+      padding-left: 20px;
+      display: flex;
+      align-items: center;
+      height: 100%;
+      color: #d8d8d8;
+      transition: all 0.3s;
+      &:hover {
+         color: $cda;
+      }
+   }
+}

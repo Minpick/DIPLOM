@@ -1,0 +1,56 @@
+html,
+body {
+	height: 100%;
+	font-family: "Roboto", sans-serif;
+	font-weight: 400;
+	scroll-behavior: smooth;
+}
+
+$dgray: #5a5a5a;
+$gray: #949494;
+$h1: "Roboto", sans-serif;
+$cda: #9d7e52;
+
+%cdaline {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	height: 1px;
+	background-color: #cda05f;
+}
+
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	min-height: 100%;
+}
+
+.main {
+	flex: 1 0 auto;
+}
+.footer {
+	flex: 0 0 auto;
+}
+
+.container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 15px;
+}
+button {
+	background-color: #cda05f;
+	color: #fff;
+	font-size: 0.8rem;
+	border-radius: 10px;
+	cursor: pointer;
+	transition: all 0.3s;
+	border: none;
+	&:hover {
+		box-shadow: 0 0 4px #ffffff;
+	}
+}
+a{
+	cursor: pointer;
+}
