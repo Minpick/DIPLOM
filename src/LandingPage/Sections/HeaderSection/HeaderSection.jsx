@@ -1,5 +1,6 @@
 import React from 'react'
 import style from './HeaderSection.module.scss'
+import logosite from '../../images/logosite.png'
 
 const HeaderSection = () => {
    return (
@@ -8,7 +9,7 @@ const HeaderSection = () => {
          <div className={style.container}>
             <div className={style.header__inner}>
                <a className={style.header__logo} href="#">
-                  <img src={"../../images/logosite.png"} alt="Logo"/>
+                  <img src={logosite} alt="Logo"/>
                </a>
                <nav className={style.header__menu}>
                   <ul className={style.header__menu_list}>

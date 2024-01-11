@@ -1,5 +1,8 @@
 import React from 'react'
 import style from './TeamSection.module.scss'
+import ks from '../../images/team/ks.jpg'
+import ma from '../../images/team/ma.jpg'
+import ol from '../../images/team/ol.jpg'
 
 
 const TeamSection = () => {
@@ -16,7 +19,7 @@ const TeamSection = () => {
             <ul className={style.team__list}>
                <li className={style.team__item}>
                   <div className={style.team__image}>
-                     <img src="src/LandingPage/images/team/ks.jpg" alt=""/>
+                     <img src={ks} alt=""/>
                   </div>
                   <div className={style.team__content}>
                      <div className={style.team__name}>
@@ -29,7 +32,7 @@ const TeamSection = () => {
                </li>
                <li className={style.team__item}>
                   <div className={style.team__image}>
-                     <img src="src/LandingPage/images/team/ma.jpg" alt=""/>
+                     <img src={ma} alt=""/>
                   </div>
                   <div className={style.team__content}>
                      <div className={style.team__name}>
@@ -42,7 +45,7 @@ const TeamSection = () => {
                </li>
                <li className={style.team__item}>
                   <div className={style.team__image}>
-                     <img src="src/LandingPage/images/team/ol.jpg" alt=""/>
+                     <img src={ol} alt=""/>
                   </div>
                   <div className={style.team__content}>
                      <div className={style.team__name}>
