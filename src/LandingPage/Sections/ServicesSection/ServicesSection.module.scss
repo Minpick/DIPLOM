@@ -49,3 +49,8 @@
       font-size: 0.9rem;
    }
 }
+@media(max-width:1000px){
+   .services__items{
+      grid-template-columns: 1fr;
+   }
+}

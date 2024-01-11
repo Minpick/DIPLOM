@@ -45,3 +45,12 @@
       line-height: 1.8rem;
    }
 }
+@media(max-width:1000px){
+   .adv__inner{
+      display: flex;
+      flex-direction: column;
+   }
+.adv__item{
+   margin-bottom: 30px;
+}
+}

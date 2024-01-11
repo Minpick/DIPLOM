@@ -107,3 +107,11 @@
       stroke: #cda05f;
    }
 }
+@media(max-width:1000px){
+   .info__circles{
+      display: none;
+   }
+   .info__box{
+      width: 100%;
+   }
+}

@@ -134,3 +134,17 @@ padding-top: 30px;
       overflow: hidden;
    }
 }
+
+@media(max-width:1000px){
+   .contactus{
+      grid-template-columns: 1fr 1fr;
+      height: 100px;
+      &__btn{
+         grid-column: span 2; 
+      }
+   }
+   .contacts{
+      display: flex;
+      flex-direction: column;
+   }
+}

@@ -37,3 +37,123 @@
       }
    }
 }
+@media(max-width: 1000px) {
+   .overlay{
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #1e1b1b64;
+      z-index: 5;
+      visibility: hidden;
+      opacity: 0;
+      transition: all .3s ;
+   }
+   .overlay_show{
+      visibility: visible;
+      opacity: 1;
+   }
+   .header{
+      z-index: 8;
+   }
+   .header__inner {
+      padding: 0 10px;
+      position: fixed;
+      top: 0;
+      right: 0;
+      background-color: #000000;
+      height: 100vh;
+justify-content: flex-start;
+      transform: translateX(100%);
+      transition: all .3s;
+      flex-direction: column;
+
+   }
+
+   .header__menu_list{
+      margin-top: 200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 0 30px;
+   }
+   
+   .header__menu_link{
+      height: 75px;
+      padding: 30px 0;
+   }
+
+   .header__inner_open {
+      transform: translateX(0);
+   }
+
+ 
+
+   .burger {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      right: 15px;
+      top: 15px;
+      border-radius: 50%;
+      z-index: 9;
+      width: 50px;
+      height: 50px;
+      transition: all .3s;
+      align-items: center;
+      justify-content: center;
+   
+   }
+
+   .burger span {
+
+      display: block;
+      width: 30px;
+      height: 4px;
+      background-color: #ffffff;
+      border-radius: 3px;
+      margin: 4px 0;
+   }
+
+   .burger::before,
+   .burger::after {
+      content: "";
+      display: block;
+      width: 30px;
+      height: 4px;
+      border-radius: 3px;
+      background-color: #ffffff;
+   }
+.burger_follow{
+   box-shadow: 0px 0px 1000px 0px #1E1B1B;
+   background-color: #cda05f;
+}
+.burger_open {
+      background-color:transparent;
+      box-shadow: none;
+   }
+
+   .burger_open span {
+      margin: 0;
+      transform: scale(0);
+   }
+
+   .burger_open::before {
+      transform: translateY(100%) rotate(45deg);
+
+   }
+
+   .burger_open::after {
+      transform: translateY(-100%) rotate(-45deg);
+
+   }
+
+
+
+   .header__logo {
+      margin-top: 70px;
+      margin-bottom: 50px;
+   }
+}
