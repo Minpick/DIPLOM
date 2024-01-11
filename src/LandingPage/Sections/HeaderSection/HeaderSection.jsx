@@ -8,7 +8,7 @@ const HeaderSection = () => {
          <div className={style.container}>
             <div className={style.header__inner}>
                <a className={style.header__logo} href="#">
-                  <img src={"src/LandingPage/images/logosite.png"} alt="Logo"/>
+                  <img src={"../../images/logosite.png"} alt="Logo"/>
                </a>
                <nav className={style.header__menu}>
                   <ul className={style.header__menu_list}>
