@@ -35,7 +35,6 @@ dd {
 
 ul[class],ul {
   padding: 0;
-  // margin: 0;
   list-style: none;
 }
 
@@ -54,4 +53,5 @@ select {
 
 a{
   text-decoration: none;
+  cursor: pointer;
 }
