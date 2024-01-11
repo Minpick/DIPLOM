@@ -77,7 +77,7 @@ const HeaderSection = () => {
                            <a
                               className={classNames(style.header__menu_link)}
                               onClick={closeMenu}
-                              href="auth.html">Личный кабинет</a>
+                              href="auth">Личный кабинет</a>
                         </li>
                      </ul>
                   </nav>

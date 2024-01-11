@@ -12,15 +12,17 @@ import FooterSection from './Sections/FooterSection/FooterSection'
 const LandingPage = () => {
   return (
     <>
-   <NavbarSection/>
-   <HeaderSection/>
-   <IntroSection/>
-   <InfoSection/>
-   <AdvSection/>
-   <ServicesSection/>
-   <StagesSection/>
-   <TeamSection/>
-   <FooterSection/>
+      <NavbarSection />
+      <main>
+        <HeaderSection />
+        <IntroSection />
+        <InfoSection />
+        <AdvSection />
+        <ServicesSection />
+        <StagesSection />
+        <TeamSection />
+      </main>
+      <FooterSection />
     </>
   )
 }
