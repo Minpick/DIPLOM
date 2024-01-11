@@ -11,12 +11,12 @@ import LkPage from './LkPage/LkPage'
 import LaPage from './LaPage/LaPage'
 
 const router = createBrowserRouter(createRoutesFromElements(
-  <>
-    <Route path='/' element={<LandingPage />} />
+  <Route path='/'>
+    <Route index element={<LandingPage />} />
     <Route path='auth' element={<AuthPage />} />
     <Route path='lk' element={<LkPage/>}/>
     <Route path='la' element={<LaPage/>}/>
-  </>
+  </Route>
 
 
 ))
