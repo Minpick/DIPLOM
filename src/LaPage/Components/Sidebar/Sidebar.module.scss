@@ -1,0 +1,34 @@
+.sidebar {
+   display: flex;
+   flex-direction: column;
+   width: 100%;
+   height: 100%;
+   background-color: rgba(14, 14, 33, 1);
+   background-color: transparent;
+ 
+   display: flex;
+   align-items: center;
+   grid-area: sd;
+   position: relative;
+ 
+   &__logo {
+     width: 150px;
+     position: relative;
+   }
+ 
+   &__btn {
+     width: 100%;
+     height: 50px;
+     background-color: transparent;
+     border: none;
+     margin-bottom: 5px;
+     transition: all 0.3s;
+     cursor: pointer;
+     &:hover {
+       background-color: rgb(255, 255, 255, 0.08);
+     }
+   }
+   &__selected {
+     background-color: rgb(255, 255, 255, 0.06);
+   }
+ }
