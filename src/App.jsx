@@ -5,6 +5,7 @@ import {
   createRoutesFromElements,
   Route,
   Navigate,
+  Outlet,
 } from "react-router-dom"
 import LandingPage from './LandingPage/LandingPage'
 import AuthPage from './AuthPage/AuthPage'
@@ -13,7 +14,7 @@ import Layout from './LaPage/Components/Layout/Layout'
 import ClientsPage from './LaPage/Pages/ClientsPage/ClientsPage'
 
 const router = createBrowserRouter(createRoutesFromElements(
-  <Route path='/'>
+  <Route path='/' element={<Outlet/>}>
     <Route index element={<LandingPage />} />
     <Route path='auth' element={<AuthPage />} />
     <Route path='lk' element={<div>LKPAge</div>}>
