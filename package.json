@@ -15,7 +15,7 @@
   "scripts": {
     "start": "vite",
     "dev": "vite",
-    "build": "VITE_CJS_TRACE=true vite build",
+    "build": "set \"VITE_CJS_TRACE=true\" && vite build",
     "preview": "vite preview"
   }
 }
