@@ -1,17 +1,18 @@
 import React from 'react'
 import logo from '../../images/logo-white.png'
 import style from './Sidebar.module.scss'
+import { NavLink } from 'react-router-dom'
 
 
 const Sidebar = () => {
+  const btn = style.sidebar__btn
   return (
-    <div className="sidebar">
+    <div className="sidebar" id='sidebar'>
       <img src={logo} alt="logo" className="sidebar__logo" />
-
-      <button className={style.sidebar__btn} >Клиенты</button>
-      <button className={style.sidebar__btn} >Сотрудники</button>
-      <button className={style.sidebar__btn}>Задачи</button>
-      <button className={style.sidebar__btn}>Сделки</button>
+      <NavLink className={({ isActive }) => isActive ? style.active : style.btn} to='clients'>Клиенты</NavLink>
+      <NavLink className={({ isActive }) => isActive ? style.active : style.btn} to='employee'>Сотрудники</NavLink>
+      <NavLink className={({ isActive }) => isActive ? style.active : style.btn} to='tasks'>Задачи</NavLink>
+      <NavLink className={({ isActive }) => isActive ? style.active : style.btn} to='deals'>Сделки</NavLink>
     </div>
   )
 }
