@@ -8,6 +8,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "*",
+    "@vitejs/plugin-react-swc": "^3.5.0",
     "vite": "latest",
     "sass": "^1.69.7"
   },
