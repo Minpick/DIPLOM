@@ -24,9 +24,7 @@ const router = createBrowserRouter(createRoutesFromElements(
       <Route path='clients' element={<ClientsPage />} />
     </Route>
   </Route>
-
-
-))
+),{ basename: import.meta.env.BASE_URL })
 function App() {
 
   return (
