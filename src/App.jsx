@@ -24,7 +24,7 @@ const router = createBrowserRouter(createRoutesFromElements(
       <Route path='clients' element={<ClientsPage />} />
     </Route>
   </Route>
-))
+),{basename:'/'})
 function App() {
 
   return (
