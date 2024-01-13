@@ -1,3 +1,5 @@
+import axios from "axios"
+
 const BASE_URL = 'http://localhost:8085/employee'
 
 export async function fetchClients() {
