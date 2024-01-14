@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import './DeleteButton.scss'
 
 
-const DeleteButton = ({isHover}) => {
+const DeleteButton = ({onClick}) => {
   return (
    <button 
    className='delete_btn'
+onClick={onClick}
    // onClick={(event) => deleteClient(event, client.id)}
 
    >

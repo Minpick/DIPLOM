@@ -1,0 +1,80 @@
+// @import "../../../../LandingPage/scss/global";
+
+
+ 
+//  .add_form {
+//     display: flex;
+//     background-color: #eeeeee;
+//     border: 1px solid rgba(0, 0, 0, 0.307);
+//     border-radius: 20px;
+//     overflow: hidden;
+//     position: absolute;
+//     color: black;
+//     z-index: 3;
+//     padding: 5px;
+//     top: 40%;
+//     left: 50%;
+//     transform: translate(-50%, -50%);
+//     width: 1400px;
+//     height: fit-content;
+//   }
+// .add_left {
+//     padding: 10px;
+//     display: flex;
+//     flex-direction: column;
+//     width: 100%;
+//   }
+//  .add_right {
+//     padding: 10px;
+//     width: 100%;
+//     display: flex;
+//     height: 100%;
+//     flex-direction: column;
+//     .add_comment {
+//       display: block;
+//       height: 100%;
+//       border-radius: 10px;
+//       padding: 10px;
+//       resize: none;
+//       color: $dgray;
+//       border: 1px solid rgba(0, 0, 0, 0.2);
+//       background-color: #fff;
+//     }
+//   }
+//   .add_label {
+//     color: $dgray;
+//     font-weight: 600;
+//     margin-left: 1px;
+//   }
+//   .add_input {
+//     padding-left: 10px;
+//     height: 40px;
+//     margin-bottom: 10px;
+
+//     color: $dgray;
+//     border-radius: 5px;
+//     background-color: #fff;
+//     border: 1px solid rgba(0, 0, 0, 0.2);
+//     &:focus {
+//       color: $gray;
+//       outline: 1px solid $dgray;
+//     }
+//   }
+
+  
+//   .add_btn {
+//     background-color: rgb(27, 27, 60);
+//     border: none;
+//     height: 40px;
+//     margin-top: 10px;
+//     transition: all 0.3s;
+//     font-weight: 600;
+//     font-size: 1rem;
+//     border-radius: 5px;
+//     cursor: pointer;
+//     border: 1px solid rgba(0, 0, 0, 0.2);
+//     &:hover {
+//       background-color: rgba(27, 27, 60, 0.9);
+//     }
+//   }
+

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { QueryClient, useMutation, useQuery } from 'react-query'
-import { BASE_URL, fetchClients } from '../../../API/requests'
-import style from './ClientsList.module.scss'
+import { useMutation, useQuery } from 'react-query'
+import { BASE_URL,  fetchEmployees } from '../../../API/requests'
+import style from './EmployeeList.module.scss'
 import DeleteButton from '../../../UI/DeleteButton/DeleteButton'
 import classNames from 'classnames'
 import axios from 'axios'
@@ -9,16 +9,16 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { queryClient } from '../../../../App'
 
-const ClientsList = () => {
-   const { data } = useQuery({ queryKey: ['clients'], queryFn: fetchClients })
-   const deleteClient = useMutation((id) => {
+const EmployeeList = () => {
+   const { data } = useQuery({ queryKey: ['employees'], queryFn: fetchEmployees })
+   const deleteEmployee = useMutation((id) => {
       return axios.delete(`${BASE_URL}/clients/${id}`);
    }, {
       onSuccess: () => {
-         queryClient.invalidateQueries('clients')
+         queryClient.invalidateQueries('employees')
       },
    });
-   const clients = data?.data?.map(client => {
+   const employees = data?.data?.map(client => {
       return (
             <li key={client.id}
                className={classNames('clients__item')}>
@@ -34,15 +34,15 @@ const ClientsList = () => {
                      {client.email}
                   </div>
                </Link>
-               <DeleteButton onClick={() => deleteClient.mutate(client.id)} />
+               <DeleteButton onClick={() => deleteEmployee.mutate(client.id)} />
             </li>
       )
    })
    return (
       <div className={style.list}>
-         {clients}
+         {employees}
       </div>
    )
 }
 
-export default ClientsList
+export default EmployeeList

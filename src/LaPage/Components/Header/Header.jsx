@@ -1,21 +1,31 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import style from './Header.module.scss'
-import { useLocation, useSearchParams } from 'react-router-dom'
+import { Link, useLocation, useSearchParams } from 'react-router-dom'
 
 const Header = () => {
+
    const [time, setTime] = useState(new Date())
+   useEffect(() => {
+      const interval = setInterval(() => {
+       setTime(new Date());
+      }, 5000);
+      return () => {
+         clearInterval(interval);
+       };
+    }, []);
    const location = useLocation()
-   const btn_text = location.pathname === '/la/clients' ? 'Добавить клиента' :
-      location.pathname === '/la/employee' ? 'Добавить сотрудника' :
-         location.pathname === '/la/tasks' ? 'Добавить задачу' :
+   const btn_text = location.pathname.substring(0,7) === '/la/cli' ? 'Добавить клиента' :
+      location.pathname.substring(0,7) === '/la/emp' ? 'Добавить сотрудника' :
+         location.pathname.substring(0,7) === '/la/tas' ? 'Добавить задачу' :
             'Добавить сделку'
 
 
    return (
       <div className={style.header}>
-         <button
+         <Link to='new'
+         relative='path'
             className={style.header__add_client}>{btn_text}
-         </button>
+         </Link>
 
          <div className={style.header__time}>{time.toLocaleTimeString().substring(0, 5)}</div>
          <div className={style.header__user}>Кирилл Бусарев

@@ -7,6 +7,9 @@
   box-shadow: none;
   scale: 1.1;
 }
+.clients__item{
+  position: relative;
+}
 .clients__item:hover {
   .delete_btn{
     display: block;

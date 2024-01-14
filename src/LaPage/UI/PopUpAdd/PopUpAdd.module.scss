@@ -1,5 +1,5 @@
 .overlay{
-   display: none;
+   display: flex;
    justify-content: center;
    align-items: center;
    position: absolute;
@@ -14,8 +14,13 @@
    }
 }
 .content{
-   width: 70%;
-   height: 70%;
-   background-color: wheat;
+   position: absolute;
+   top: 40%;
+   right: 40%;
+   z-index: 5;
+   color: black;
+   width: 20%;
+   height: 20%;
+   background-color: rgb(250, 250, 250);
    border-radius: 10px;
 }
