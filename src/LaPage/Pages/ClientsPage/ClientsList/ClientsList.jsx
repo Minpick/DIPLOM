@@ -8,9 +8,11 @@ import axios from 'axios'
 
 import { Link } from 'react-router-dom'
 import { queryClient } from '../../../../App'
+import PaginationBtns from '../../../UI/PaginationBtns/PaginationBtns'
 
 const ClientsList = () => {
-   const { data } = useQuery({ queryKey: ['clients'], queryFn: fetchClients })
+   const [page,setPage]=useState(0)
+   const { data } = useQuery({ queryKey: ['clients',page], queryFn: ()=>fetchClients(page) })
    const deleteClient = useMutation((id) => {
       return axios.delete(`${BASE_URL}/clients/${id}`);
    }, {
@@ -41,6 +43,7 @@ const ClientsList = () => {
    return (
       <div className={style.list}>
          {clients}
+         <PaginationBtns  page={page} setPage={setPage}   />
       </div>
    )
 }

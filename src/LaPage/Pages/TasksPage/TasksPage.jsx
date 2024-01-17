@@ -1,8 +1,15 @@
 import React from 'react'
+import DefaultPage from '../../Components/DefaultPage/DefaultPage'
 
 const TasksPage = () => {
   return (
-    <div>TasksPage</div>
+    <DefaultPage
+    li1={'Задача'}
+    li2={'Постановщик'}
+    li3={'Крайний срок'}
+    >
+      
+    </DefaultPage>
   )
 }
 

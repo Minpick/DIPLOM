@@ -24,7 +24,7 @@ const EditEmployee = () => {
    if (isLoading) return <div>Loading...</div>
    return (
       <>
-         <ClientsForm func={editEmployee} data = {data}/>
+         <ClientsForm func={editEmployee} data = {data} role={'ROLE_EMPLOYEE'}/>
       </>
    )
   

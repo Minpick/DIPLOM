@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useMutation, useQuery } from 'react-query'
 import { BASE_URL,  fetchEmployees } from '../../../API/requests'
 import style from './EmployeeList.module.scss'
@@ -8,16 +8,19 @@ import axios from 'axios'
 
 import { Link } from 'react-router-dom'
 import { queryClient } from '../../../../App'
+import PaginationBtns from '../../../UI/PaginationBtns/PaginationBtns'
 
 const EmployeeList = () => {
-   const { data } = useQuery({ queryKey: ['employees'], queryFn: fetchEmployees })
+   const [page,setPage]=useState(0)
+   const { data } = useQuery({ queryKey: ['employees',page], queryFn: ()=>fetchEmployees(page) })
    const deleteEmployee = useMutation((id) => {
-      return axios.delete(`${BASE_URL}/clients/${id}`);
+      return axios.delete(`${BASE_URL}/info/${id}`);
    }, {
       onSuccess: () => {
          queryClient.invalidateQueries('employees')
       },
    });
+
    const employees = data?.data?.map(client => {
       return (
             <li key={client.id}
@@ -41,6 +44,7 @@ const EmployeeList = () => {
    return (
       <div className={style.list}>
          {employees}
+        <PaginationBtns  page={page} setPage={setPage}  />
       </div>
    )
 }

@@ -4,6 +4,7 @@ import { Form, useLocation } from 'react-router-dom'
 import './ClientsForm.scss'
 
 const ClientsForm = ({func,data,role}) => {
+   console.log(role)
    const location = useLocation()
    const btn_text = location.pathname === '/la/clients/new' ? 'Добавить клиента' :
    location.pathname === '/la/clients/edit'?'Редактировать клиента' :
@@ -41,6 +42,7 @@ const ClientsForm = ({func,data,role}) => {
          birth: formData.get('birth'),
          role: role
       }
+      console.log(user)
       func.mutate(user)
    }
 
@@ -132,7 +134,7 @@ const ClientsForm = ({func,data,role}) => {
             {btn_text}
          </button>
       </div>
-      {!role&&<div className='add_right'>
+      {!role&& !data?.data.role &&<div className='add_right'>
          <textarea
             placeholder="Комментарии"
             name="comment"

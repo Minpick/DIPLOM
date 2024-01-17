@@ -1,0 +1,218 @@
+$base-bgcolor: #354152;
+$base-color: #7e8ba3;
+$base-font-weight: 300;
+$base-font-size: 1rem;
+$base-line-height: 1.5;
+$base-font-family: Helvetica Neue;
+$base-font-family-fallback: sans-serif;
+
+.auth {
+   background-color: #eeeeee;
+   height: 100vh;
+   font-family: "Roboto", sans-serif;
+}
+.link {
+   background-color: #cda05f;
+   color: #f5f5f5;
+   display: block;
+   box-shadow: none;
+   font-size: 1rem;
+
+   font-family: inherit;
+   border-radius: 7px;
+   transition: all 0.5s;
+   border: 1px solid #dbdbdb;
+   &:hover {
+      background-color: #cd9f5fe8;
+      box-shadow: 0px 1px 10px 0px #d6d6d6;
+   }
+}
+.align {
+   align-items: center;
+   display: flex;
+   flex-direction: row;
+
+   &__item {
+      &--start {
+         align-self: flex-start;
+      }
+
+      &--end {
+         align-self: flex-end;
+      }
+   }
+}
+
+.site {
+   &__logo {
+      margin-bottom: 0rem;
+   }
+}
+
+$input-placeholder-color: #7e8ba3;
+
+.form {
+   &__field {
+      margin-bottom: 1rem;
+      width: 100%;
+
+      button {
+         background-color: #cda05f;
+
+         color: #fff;
+         margin-bottom: 6rem;
+         width: 100%;
+         height: 40px;
+         font-size: 1.2rem;
+         box-shadow: none;
+         font-family: inherit;
+         border-radius: 10px;
+         color: #f5f5f5;
+         cursor: pointer;
+         transition: all 0.5s;
+         border: 1px solid #dbdbdb;
+         &:hover {
+            background-color: #cd9f5fe8;
+            box-shadow: 0px 1px 10px 0px #d6d6d6;
+         }
+      }
+   }
+
+   input {
+      outline: 0;
+      width: 100%;
+      padding: 0.5rem 1rem;
+      border: 0;
+      font: inherit;
+      font-weight: 400;
+
+      &::placeholder {
+         color: $input-placeholder-color;
+      }
+   }
+   width: 100%;
+}
+
+$grid-max-width: 25rem;
+$grid-width: 100%;
+
+.grid {
+   margin: 0 auto;
+   max-width: $grid-max-width;
+   width: $grid-width;
+}
+
+h2 {
+   font-size: 2rem;
+   font-weight: 500;
+   margin-bottom: 30px;
+}
+
+$link-color: #7e8ba3;
+
+.register {
+   box-shadow: 0 0 250px #cecece;
+   text-align: center;
+   padding: 0rem 2rem;
+   border-radius: 20px;
+   background-color: #fafafa88;
+   p{
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+      color: red;
+   }
+
+   input {
+      border: 2px solid #dfdfdf;
+      border-radius: 10px;
+      background-color: transparent;
+      box-shadow: 0px 1px 10px 0px #ededed;
+      &:focus {
+         box-shadow: 0px 1px 10px 0px #d6d6d6;
+      }
+   }
+}
+
+.arrow {
+   margin: 20px 10px 20px auto;
+   width: fit-content;
+   display: flex;
+   padding-bottom: 10px;
+   &:hover .link{
+      scale: 1.03;
+      color: black;
+      box-shadow: none;
+   }
+   .link {
+      font-size: 1.1rem;
+      font-weight: 400;
+      background-color: transparent;
+      color: black;
+      border: none;
+      color:  #898989;
+      box-shadow: none;
+      
+   }
+}
+.arrow svg {
+   width: 20px;
+   height: auto;
+   margin: 0 .5rem;
+   cursor: pointer;
+   overflow: visible;
+}
+.arrow .disabled polygon,
+.arrow .disabled path,
+.arrow .disabled:hover polygon,
+.arrow .disabled:hover path {
+   fill: #e2e2e2;
+}
+.arrow .disabled {
+   cursor: default;
+}
+.arrow .disabled:hover .arrow_pl {
+   animation: none;
+}
+
+.arrow svg polygon,
+.arrow svg path {
+   transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+   fill: #898989;
+}
+
+.arrow:hover svg polygon,
+.arrow:hover svg path {
+   transition: all 1s cubic-bezier(0.2, 1, 0.3, 1);
+   fill: #000;
+}
+.arrow:hover svg .arrow_pl {
+   animation: arrow-anim 0.8s cubic-bezier(0.2, 1, 0.3, 1) infinite;
+}
+.arrow:hover svg .arrow_pl_fixed {
+   animation: arrow-fixed-anim 0.8s cubic-bezier(0.2, 1, 0.3, 1) infinite;
+}
+
+@keyframes arrow-anim {
+   0% {
+      opacity: 1;
+      transform: translateX(0);
+   }
+   5% {
+      transform: translateX(-0.1rem);
+   }
+   100% {
+      transform: translateX(1rem);
+      opacity: 0;
+   }
+}
+@keyframes arrow-fixed-anim {
+   5% {
+      opacity: 0;
+   }
+   20% {
+      opacity: 0.4;
+   }
+   100% {
+      opacity: 1;
+   }
+}

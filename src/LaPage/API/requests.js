@@ -1,17 +1,70 @@
 import axios from "axios"
+import { redirect } from "react-router";
+
 
 export const BASE_URL = 'http://localhost:8085/employee'
 
-export async function fetchClients() {
-   const data = await axios.get(`${BASE_URL}/clients?offset=0&pageSize=20`)
+const refreshToken = async () => {
+   try {
+      const response = await axios.post('http://localhost:8085/refreshToken', {
+         // Передайте необходимые данные для обновления токена
+         refreshToken: localStorage.getItem('refreshToken'),
+      });
+      console.log(response)
+
+      // Обновите токен в axios или в localStorage, в зависимости от вашей логики
+      localStorage.setItem('token', response.data.token)
+      axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+
+      // Верните новый токен, чтобы его можно было использовать в месте вызова refreshToken
+      return response.data.token;
+   } catch (error) {
+      console.log(error)
+      localStorage.removeItem('token');
+      localStorage.removeItem('refreshToken')
+
+      // Обработайте ошибку обновления токена, например, выход пользователя или другие действия
+      throw redirect('/auth/login')
+   }
+};
+
+axios.interceptors.response.use(
+   (response) => response,
+   async (error) => {
+      const originalRequest = error.config;
+      if (error.response.status === 401 && originalRequest._retry) {
+         originalRequest._retry = false;
+
+         try {
+            const newAccessToken = await refreshToken();
+
+            // Повторите оригинальный запрос с обновленным токеном
+            originalRequest.headers['Authorization'] = 'Bearer ' + newAccessToken;
+            if (newAccessToken) {
+
+               return axios(originalRequest);
+            }
+         } catch (refreshError) {
+            console.log(refreshError)
+            // Обработайте ошибку обновления токена, например, перенаправьте пользователя на страницу входа
+            throw redirect('/auth/login');
+         }
+      }
+
+      return Promise.reject(error);
+   }
+);
+
+export async function fetchClients(page) {
+   const data = await axios.get(`${BASE_URL}/clients?offset=${page}&pageSize=20`)
    return data
 }
 export async function fetchClient(id) {
    const data = await axios.get(`${BASE_URL}/clients/${id}`)
    return data
 }
-export async function fetchEmployees() {
-   const data = await axios.get(`${BASE_URL}/info`)
+export async function fetchEmployees(page) {
+   const data = await axios.get(`${BASE_URL}/info?offset=${page}&pageSize=20`)
    return data
 }
 export async function fetchEmployee(id) {
