@@ -9,9 +9,7 @@ const refreshToken = async () => {
       const response = await axios.post('http://localhost:8085/refreshToken', {
          // Передайте необходимые данные для обновления токена
          refreshToken: localStorage.getItem('refreshToken'),
-      });
-      console.log(response)
-
+      })
       // Обновите токен в axios или в localStorage, в зависимости от вашей логики
       localStorage.setItem('token', response.data.token)
       axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
@@ -19,44 +17,45 @@ const refreshToken = async () => {
       // Верните новый токен, чтобы его можно было использовать в месте вызова refreshToken
       return response.data.token;
    } catch (error) {
-      console.log(error)
       localStorage.removeItem('token');
       localStorage.removeItem('refreshToken')
 
       // Обработайте ошибку обновления токена, например, выход пользователя или другие действия
-      throw redirect('/auth/login')
+      localStorage.clear()
+      throw error;
    }
 };
 
 axios.interceptors.response.use(
    (response) => response,
    async (error) => {
+      if(error.response.data==='Нужна повторная авторизация'){
+         localStorage.clear();
+      }
       const originalRequest = error.config;
-      if (error.response.status === 401 && originalRequest._retry) {
-         originalRequest._retry = false;
-
+      originalRequest._retryCount = originalRequest._retryCount || 0;
+      if (error.response.status === 401 && originalRequest._retryCount < 1) {
+         originalRequest._retryCount++;
          try {
             const newAccessToken = await refreshToken();
-
             // Повторите оригинальный запрос с обновленным токеном
             originalRequest.headers['Authorization'] = 'Bearer ' + newAccessToken;
             if (newAccessToken) {
-
                return axios(originalRequest);
             }
          } catch (refreshError) {
-            console.log(refreshError)
             // Обработайте ошибку обновления токена, например, перенаправьте пользователя на страницу входа
-            throw redirect('/auth/login');
+            localStorage.clear()
+            throw refreshError
          }
       }
-
+      localStorage.clear();
       return Promise.reject(error);
    }
 );
 
 export async function fetchClients(page) {
-   const data = await axios.get(`${BASE_URL}/clients?offset=${page}&pageSize=20`)
+   const data = await axios.get(`${BASE_URL}/clients?offset=${page}&pageSize=20&`)
    return data
 }
 export async function fetchClient(id) {

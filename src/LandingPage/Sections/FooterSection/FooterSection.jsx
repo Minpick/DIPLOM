@@ -63,12 +63,8 @@ const FooterSection = () => {
                      </div>
                   </div>
                   <div className={style.contacts__map}>
-                     <iframe src={"https://yandex.ru/map-widget/v1/?um=constructor%3Ae39759799d6414336452a329fcb3e1f1ecfa10a833bbb8f9d0da76c7451f39c0&amp;source=constructor"} width={"100%"} height="612" frameborder="0"></iframe>
-                     {/* <script type={"text/javascript"} charset={"utf-8"} async src={"https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Ae39759799d6414336452a329fcb3e1f1ecfa10a833bbb8f9d0da76c7451f39c0&amp;width=100%25&amp;height=720&amp;lang=ru_RU&amp;scroll=true"}></script> */}
-
-                     {/* <script type={"text/javascript"} charset={"utf-8"} async src={"https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Ae39759799d6414336452a329fcb3e1f1ecfa10a833bbb8f9d0da76c7451f39c0&amp;width=100%25&amp;height=720&amp;lang=ru_RU&amp;scroll=true"}></script> */}
-                     {/* <script type="text/javascript" charset="utf-8" async
-                              src={"https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A9b9567a5e9d7ecf37e52d7276af26e35c5e46ebb09ffd56ca7a956b8dab683c8&amp;width=750&amp;height=400&amp;lang=ru_RU&amp;scroll=true"}></script> */}
+                     <iframe src={"https://yandex.ru/map-widget/v1/?um=constructor%3Ae39759799d6414336452a329fcb3e1f1ecfa10a833bbb8f9d0da76c7451f39c0&amp;source=constructor"} width={"100%"} height="612" frameBorder="0"></iframe>
+                    
                   </div>
                </div>
             </div>

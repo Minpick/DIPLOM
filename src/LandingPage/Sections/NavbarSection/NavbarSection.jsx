@@ -4,7 +4,7 @@ import style from './NavbarSection.module.scss'
 
 const NavbarSection = () => {
    return (
-      <navbar className={style.navbar}>
+      <div className={style.navbar}>
          <div className={style.container}>
             <div className={style.navbar__inner}>
                <ul className={style.navbar__socials}>
@@ -54,7 +54,7 @@ const NavbarSection = () => {
                               viewBox="0 0 122.88 78.607" enableBackground="new 0 0 122.88 78.607" xmlSpace="preserve"
                               >
                               <g>
-                                 <path fill-rule="evenodd" clip-rule="evenodd"
+                                 <path fillRule="evenodd" clipRule="evenodd"
                                     d="M61.058,65.992l24.224-24.221l36.837,36.836H73.673h-25.23H0l36.836-36.836 L61.058,65.992L61.058,65.992z M1.401,0l59.656,59.654L120.714,0H1.401L1.401,0z M0,69.673l31.625-31.628L0,6.42V69.673L0,69.673z M122.88,72.698L88.227,38.045L122.88,3.393V72.698L122.88,72.698z" />
                               </g>
                            </svg>
@@ -65,7 +65,7 @@ const NavbarSection = () => {
                </div>
             </div>
          </div>
-      </navbar>
+      </div>
    )
 }
 
