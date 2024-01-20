@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { Form, Link, redirect, useActionData } from 'react-router-dom'
+import { Form, Link, redirect, useActionData, useSearchParams } from 'react-router-dom'
 import '../AuthPage/AuthPage.scss'
 import logo from '../../LaPage/images/logo-black.png'
 
@@ -9,7 +9,7 @@ async function loginUser(formData) {
    const data = axios.post('http://localhost:8085/signin', {
       phone: formData.get('phone'),
       password: formData.get('password'),
-   },{headers:{Authorization:''}})
+   },{headers:{}})
       .then(function (response) {
          localStorage.setItem("token", response.data.token)
          localStorage.setItem("refreshToken", response.data.refreshToken)
@@ -32,6 +32,9 @@ export async function action({ request }) {
 
 const LoginPage = () => {
    const [error, setError] = useState(false)
+const [searchParams,setSearchParams] = useSearchParams()
+const message = searchParams.get('message')
+
    const res = useActionData()
    useEffect(() => {
       setError(true)
@@ -45,6 +48,7 @@ const LoginPage = () => {
                   <div className="register">
                      <Link to='/'><img src={logo} alt="logo" className="site__logo" /></Link>
                      <h2>Вход</h2>
+                     {message&&<p>{message}</p>}
                      {error&&(typeof res?.response?.data)==='string' && <p>{res?.response?.data}</p>}
                      <Form replace method="post" className="form">
 

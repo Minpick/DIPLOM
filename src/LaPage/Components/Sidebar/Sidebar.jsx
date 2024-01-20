@@ -9,7 +9,7 @@ const Sidebar = () => {
   return (
     <div className="sidebar" id='sidebar'>
       <img src={logo} alt="logo" className="sidebar__logo" />
-      <NavLink className={({ isActive }) => isActive ? style.active : style.btn} to='clients'>Клиенты</NavLink>
+      <NavLink className={({ isActive }) => isActive ? style.active : style.btn} to='clients?status=in_progress'>Клиенты</NavLink>
       <NavLink className={({ isActive }) => isActive ? style.active : style.btn} to='employee'>Сотрудники</NavLink>
       <NavLink className={({ isActive }) => isActive ? style.active : style.btn} to='tasks'>Задачи</NavLink>
       <NavLink className={({ isActive }) => isActive ? style.active : style.btn} to='deals'>Сделки</NavLink>

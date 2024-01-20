@@ -11,7 +11,7 @@ async function regUser(formData) {
     phone: formData.get('phone'),
     password: formData.get('password'),
     confirmPassword: formData.get('confirmPassword')
-  },{headers:{Authorization:''}})
+  },{headers:{}})
     .then(function (response) {
       console.log(response)
       if(response.status===200){

@@ -1,36 +1,34 @@
 @import "../../../../LandingPage/scss/global";
 
-
- 
- .add_form {
-    display: flex;
-    background-color: #eeeeee;
-    border: 1px solid rgba(0, 0, 0, 0.307);
-    border-radius: 20px;
-    overflow: hidden;
-    position: absolute;
-    color: black;
-    z-index: 3;
-    padding: 5px;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width:  fit-content;
-    height: fit-content;
-  }
+.add_form {
+   display: flex;
+   background-color: #eeeeee;
+   border: 1px solid rgba(0, 0, 0, 0.307);
+   border-radius: 20px;
+   overflow: hidden;
+   position: absolute;
+   color: black;
+   z-index: 3;
+   padding: 5px;
+   top: 40%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   width: fit-content;
+   height: fit-content;
+}
 .add_left {
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    width: 650px;
-  }
- .add_right {
-    padding: 10px;
-    width: 650px;
-    display: flex;
-    height: 100%;
-    flex-direction: column;
-    .add_comment {
+   padding: 10px;
+   display: flex;
+   flex-direction: column;
+   width: 650px;
+}
+.add_right {
+   padding: 10px;
+   width: 650px;
+   display: flex;
+   height: 100%;
+   flex-direction: column;
+   .add_comment {
       display: block;
       height: 100%;
       border-radius: 10px;
@@ -39,42 +37,67 @@
       color: $dgray;
       border: 1px solid rgba(0, 0, 0, 0.2);
       background-color: #fff;
-    }
-  }
-  .add_label {
-    color: $dgray;
-    font-weight: 600;
-    margin-left: 1px;
-  }
-  .add_input {
-    padding-left: 10px;
-    height: 40px;
-    margin-bottom: 10px;
+   }
+}
+.add_label {
+   text-align: start;
+   color: $dgray;
+   font-weight: 600;
+   margin-left: 1px;
+}
+.add_input {
+   padding-left: 10px;
+   height: 40px;
+   margin-bottom: 10px;
 
-    color: $dgray;
-    border-radius: 5px;
-    background-color: #fff;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    &:focus {
+   color: $dgray;
+   border-radius: 5px;
+   background-color: #fff;
+   border: 1px solid rgba(0, 0, 0, 0.2);
+   &:focus {
       color: $gray;
       outline: 1px solid $dgray;
-    }
-  }
+   }
+}
 
-  
-  .add_btn {
-    background-color: rgb(27, 27, 60);
-    border: none;
-    height: 40px;
-    margin-top: 10px;
-    transition: all 0.3s;
-    font-weight: 600;
-    font-size: 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    &:hover {
+.add_btn {
+   background-color: rgb(27, 27, 60);
+   border: none;
+   height: 40px;
+   margin-top: 10px;
+   transition: all 0.3s;
+   font-weight: 600;
+   font-size: 1rem;
+   border-radius: 5px;
+   cursor: pointer;
+   border: 1px solid rgba(0, 0, 0, 0.2);
+   &:hover {
       background-color: rgba(27, 27, 60, 0.9);
-    }
-  }
+   }
+}
+.add_select {
+   color: #e1e1e1;
+
+   cursor: pointer;
+
+   margin-bottom: 10px;
+   height: 40px;
+   padding-left: 10px;
+   border: 1px solid rgba(0, 0, 0, 0.2);
+   background-color: rgb(27, 27, 60);
+   -webkit-appearance: none;
+   appearance: none;
+   font-weight: 600;
+   border: 1px solid rgba(0, 0, 0, 0.2);
+   transition: all 0.3s;
+
+   &:focus {
+      color: #fff;
+      outline: 1px solid $dgray;
+   }
+   &:hover {
+      background-color: rgba(27, 27, 60, 0.9);
+   }
+}
+
 

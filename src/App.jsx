@@ -29,7 +29,7 @@ import LoginPage,{action as LoginPageAction} from './AuthPage/login/LoginPage'
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      keepPreviousData:false,
+      // keepPreviousData:false,
       refetchOnWindowFocus:false
     },
   },
@@ -52,7 +52,7 @@ const router = createBrowserRouter(createRoutesFromElements(
     <Route path='la' element={<Layout />}   loader={async () => await requireAuth()}>
       <Route index element={<Navigate to='clients' replace />} />
       <Route path='clients' element={<ClientsPage />} >
-        <Route path='new' action={CreateClientAction} element={<CreateClient/>}/>
+        <Route path='new' action={CreateClientAction}  element={<CreateClient/>}/>
         <Route path='edit/:id' action={EditClientAction} element={<EditClient/>}/>
       </Route>
 

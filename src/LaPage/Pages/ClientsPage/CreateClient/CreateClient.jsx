@@ -8,8 +8,10 @@ import './CreateClient.scss'
 import ClientsForm from '../ClientsForm/ClientsForm'
 import { queryClient } from '../../../../App'
 
-export async function action() {
-   return redirect("..")
+export async function action({request}) {
+   const searchParams = new URL(request.url)
+   .searchParams.toString()
+   return redirect(`..?${searchParams}`)
 }
 
 const CreateClient = () => {
@@ -20,10 +22,21 @@ const CreateClient = () => {
          queryClient.invalidateQueries('clients')
       },
    });
-  
+   const statuses = [{
+      status:'in_progress',
+      name:'В работе'
+    },{
+      status:'planned',
+      name:'Планируемые'
+    },{
+      status:'completed',
+      name:'Завершенные'
+    }]
 
    return (
-      <ClientsForm func={createClient}/>
+      <ClientsForm func={createClient}
+      statuses = {statuses}
+      />
    )
 }
 

@@ -2,7 +2,7 @@
 
 @import "../../../LandingPage/scss/global";
 .page {
-   padding: 15px;
+   // padding: 15px;
    background-color: #ffffffe3;
    height: 100%;
    width: 100%;
@@ -10,6 +10,7 @@
    position: relative;
    &__navbar_item {
      margin-bottom: 10px;
+     margin-top: 10px;
    }
    &__navbar_list {
      text-align: center;
@@ -30,4 +31,4 @@
        background-color: $dgray;
      }
    }
- }
+}

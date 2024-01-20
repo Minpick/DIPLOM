@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import PopUpAdd from '../../../UI/PopUpAdd/PopUpAdd'
-import { Form, useLocation } from 'react-router-dom'
+import { Form, useLocation, useSearchParams } from 'react-router-dom'
 import './ClientsForm.scss'
 
-const ClientsForm = ({func,data,role}) => {
-   console.log(role)
+const ClientsForm = ({ func, data, role, statuses }) => {
+
    const location = useLocation()
    const btn_text = location.pathname === '/la/clients/new' ? 'Добавить клиента' :
-   location.pathname === '/la/clients/edit'?'Редактировать клиента' :
-   location.pathname === '/la/employee/new'?'Создать сотрудника' : 'Редактировать сотрудника'
+      location.pathname.substring(0, 15) === '/la/clients/edi' ? 'Редактировать клиента' :
+         location.pathname === '/la/employee/new' ? 'Создать сотрудника' : 'Редактировать сотрудника'
    const [addData, setAddData] = useState({
       firstName: '',
       lastName: '',
@@ -18,7 +18,8 @@ const ClientsForm = ({func,data,role}) => {
       passport: '',
       comment: '',
       birth: '',
-      role:role||''
+      role: role || '',
+      status: ''
    })
    function handleChange(event) {
       const { name, value, type, checked } = event.target
@@ -40,112 +41,126 @@ const ClientsForm = ({func,data,role}) => {
          passport: formData.get("passport"),
          comment: formData.get("comment"),
          birth: formData.get('birth'),
-         role: role
+         role: role,
+         status: formData.get('status')
       }
-      console.log(user)
+      // console.log(user)
       func.mutate(user)
    }
-
-   data&&useEffect(() => {
-         setAddData({
-            firstName: data?.data.firstName,
-            lastName: data?.data.lastName,
-            patronymic: data?.data.patronymic,
-            phone: data?.data.phone,
-            email: data?.data.email,
-            passport: data?.data.passport,
-            comment: data?.data.comment,
-            birth: data?.data?.birth?.substring(0,10),
-            role:data?.data.role
-         })
-      }, [data])
-  return (
-   <PopUpAdd>
-   <Form
-      onSubmit={(event)=>onSubmit(event)}
-      method="post"
-      className="add_form"
-      replace
-   >
-      <div className='add_left'>
-         <label htmlFor="lastName" className="add_label">Фамилия*</label>
-         <input
-            required
-            name="lastName"
-            onChange={handleChange}
-            value={addData.lastName||''}
-            type="text"
-            className='add_input'
-         />
-         <label htmlFor="firstName" className="add_label">Имя*</label>
-         <input
-            name="firstName"
-            type="text"
-            onChange={handleChange}
-            value={addData.firstName||''}
-            required
-            className='add_input'
-
-         />
-         <label htmlFor="patronymic" className="add_label">Отчество</label>
-         <input
-            name="patronymic"
-            value={addData.patronymic||''}
-            type="text"
-            className='add_input'
-            onChange={handleChange}
-         />
-         <label htmlFor="email" className="add_label">Электронная почта</label>
-         <input
-            name="email"
-            type="email"
-            value={addData.email||''}
-            className='add_input'
-            onChange={handleChange}
-         />
-         <label htmlFor="phone" className="add_label">Телефон*</label>
-         <input
-            required
-            name="phone"
-            type="phone"
-            value={addData.phone||''}
-            className='add_input'
-            onChange={handleChange}
-         />
-         <label htmlFor="passport" className="add_label">Паспорт</label>
-         <input
-            name="passport"
-            type="text"
-            value={addData.passport||''}
-            className='add_input'
-            onChange={handleChange}
-         />
-         <label htmlFor="birth" className="add_label">Дата рождения</label>
-         <input
-            name="birth"
-            type="date"
-            value={addData.birth||''}
-            className='add_input'
-            onChange={handleChange}
-         />
-         <button
-            className='add_btn'
+   data && useEffect(() => {
+      setAddData({
+         firstName: data?.data.firstName,
+         lastName: data?.data.lastName,
+         patronymic: data?.data.patronymic,
+         phone: data?.data.phone,
+         email: data?.data.email,
+         passport: data?.data.passport,
+         comment: data?.data.comment,
+         birth: data?.data?.birth?.substring(0, 10),
+         role: role,
+         status: data?.data.status
+      })
+   }, [data])
+   return (
+      <PopUpAdd>
+         <Form
+            onSubmit={(event) => onSubmit(event)}
+            method="post"
+            className="add_form"
+            replace
          >
-            {btn_text}
-         </button>
-      </div>
-      {!role&& !data?.data.role &&<div className='add_right'>
-         <textarea
-            placeholder="Комментарии"
-            name="comment"
-            value={addData.comment||''}
-            className="add_comment"
-            onChange={handleChange}
-         />
-      </div>}
-   </Form>
-</PopUpAdd >
-  )
+            <div className='add_left'>
+               <label htmlFor="lastName" className="add_label">Фамилия*</label>
+               <input
+                  required
+                  name="lastName"
+                  onChange={handleChange}
+                  value={addData.lastName || ''}
+                  type="text"
+                  className='add_input'
+               />
+               <label htmlFor="firstName" className="add_label">Имя*</label>
+               <input
+                  name="firstName"
+                  type="text"
+                  onChange={handleChange}
+                  value={addData.firstName || ''}
+                  required
+                  className='add_input'
+
+               />
+               <label htmlFor="patronymic" className="add_label">Отчество</label>
+               <input
+                  name="patronymic"
+                  value={addData.patronymic || ''}
+                  type="text"
+                  className='add_input'
+                  onChange={handleChange}
+               />
+               <label htmlFor="email" className="add_label">Электронная почта</label>
+               <input
+                  name="email"
+                  type="email"
+                  value={addData.email || ''}
+                  className='add_input'
+                  onChange={handleChange}
+               />
+               <label htmlFor="phone" className="add_label">Телефон*</label>
+               <input
+                  required
+                  name="phone"
+                  type="phone"
+                  value={addData.phone || ''}
+                  className='add_input'
+                  onChange={handleChange}
+               />
+               <label htmlFor="passport" className="add_label">Паспорт</label>
+               <input
+                  name="passport"
+                  type="text"
+                  value={addData.passport || ''}
+                  className='add_input'
+                  onChange={handleChange}
+               />
+               <label htmlFor="birth" className="add_label">Дата рождения</label>
+               <input
+                  name="birth"
+                  type="date"
+                  value={addData.birth || ''}
+                  className='add_input'
+                  onChange={handleChange}
+               />
+               <label htmlFor="status" className="add_label">Статус</label>
+               <select
+                  name='status'
+                  value={addData.status}
+                  onChange={handleChange}
+                  className='add_select'>
+                  {statuses.map((status) => {
+                     return (
+                        <option key={status.status} value={status.status.toUpperCase()}>{status.name}</option>
+                     )
+                  })}
+               </select>
+               <div className='add_arrow'></div>
+               <button
+                  className='add_btn'
+               >
+                  {btn_text}
+               </button>
+            </div>
+            {!role && !data?.data.role && <div className='add_right'>
+               <textarea
+                  placeholder="Комментарии"
+                  name="comment"
+                  value={addData.comment || ''}
+                  className="add_comment"
+                  onChange={handleChange}
+               />
+            </div>}
+         </Form>
+      </PopUpAdd >
+   )
 }
 
 export default ClientsForm

@@ -7,8 +7,10 @@ import axios from 'axios'
 import { queryClient } from '../../../../App'
 import ClientsForm from '../ClientsForm/ClientsForm'
 
-export async function action() {
-   return redirect("..")
+export async function action({request}) {
+   const searchParams = new URL(request.url)
+   .searchParams.toString()
+   return redirect(`..?${searchParams}`)
 }
 
 const EditClient = () => {
@@ -21,10 +23,23 @@ const EditClient = () => {
          queryClient.invalidateQueries('clients')
       },
    });
+   const statuses = [{
+      status:'in_progress',
+      name:'В работе'
+    },{
+      status:'planned',
+      name:'Планируемые'
+    },{
+      status:'completed',
+      name:'Завершенные'
+    }]
    if (isLoading) return <div>Loading...</div>
    return (
       <>
-         <ClientsForm func={editClient} data = {data}/>
+         <ClientsForm func={editClient} 
+         data = {data}
+         statuses={statuses}
+         />
       </>
    )
 }

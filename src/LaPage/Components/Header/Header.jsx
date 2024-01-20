@@ -19,11 +19,11 @@ const Header = () => {
       location.pathname.substring(0,7) === '/la/emp' ? 'Добавить сотрудника' :
          location.pathname.substring(0,7) === '/la/tas' ? 'Добавить задачу' :
             'Добавить сделку'
-
+const [searchParams,setSearchParams]= useSearchParams()
 
    return (
       <div className={style.header}>
-         <Link to='new'
+         <Link to={`new?${searchParams.toString()}`}
          relative='path'
             className={style.header__add_client}>{btn_text}
          </Link>
@@ -31,7 +31,7 @@ const Header = () => {
          <div className={style.header__time}>{time.toLocaleTimeString().substring(0, 5)}</div>
          <div className={style.header__user}>Кирилл Бусарев
             <Link 
-            onClick={()=>{localStorage.removeItem('token');localStorage.removeItem('refreshToken');axios.defaults.headers.common ={}}}
+            onClick={()=>{localStorage.clear();axios.defaults.headers.common ={}}}
             >
                <svg className={style.header__exit_svg} width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <g>
