@@ -2,7 +2,7 @@ import axios from "axios"
 import { redirect } from "react-router";
 
 
-export const BASE_URL = 'http://localhost:8085/employee'
+export const BASE_URL = 'http://localhost:8085'
 
 const refreshToken = async () => {
    try {
@@ -34,6 +34,10 @@ axios.interceptors.response.use(
       }
       const originalRequest = error.config;
       originalRequest._retryCount = originalRequest._retryCount || 0;
+      // if(error.response.status === 500&& originalRequest._retryCount < 2){
+      //    originalRequest._retryCount++;
+      //             return axios(originalRequest);
+      // }
       if (error.response.status === 401 && originalRequest._retryCount < 1) {
          originalRequest._retryCount++;
          try {
@@ -57,19 +61,23 @@ axios.interceptors.response.use(
 );
 
 export async function fetchClients(page,status) {
-   const data = await axios.get(`${BASE_URL}/clients?offset=${page}&pageSize=20&status=${status}`)
+   const data = await axios.get(`${BASE_URL}/employee/clients?offset=${page}&pageSize=20&status=${status}`)
+   return data
+}
+export async function fetchTasks(page,status) {
+   const data = await axios.get(`${BASE_URL}/task?offset=${page}&pageSize=20&status=${status}`)
    return data
 }
 export async function fetchClient(id) {
-   const data = await axios.get(`${BASE_URL}/clients/${id}`)
+   const data = await axios.get(`${BASE_URL}/employee/clients/${id}`)
    return data
 }
 export async function fetchEmployees(page) {
 
-   const data = await axios.get(`${BASE_URL}/info?offset=${page}&pageSize=20`)
+   const data = await axios.get(`${BASE_URL}/employee/info?offset=${page}&pageSize=20`)
    return data
 }
 export async function fetchEmployee(id) {
-   const data = await axios.get(`${BASE_URL}/info/${id}`)
+   const data = await axios.get(`${BASE_URL}/employee/info/${id}`)
    return data
 }

@@ -7,6 +7,7 @@ import logo from '../../LaPage/images/logo-black.png'
 
 async function loginUser(formData) {
    localStorage.clear()
+   axios.defaults.headers.common['Authorization'] = ``;
    const data = axios.post('http://localhost:8085/signin', {
       phone: formData.get('phone'),
       password: formData.get('password'),
@@ -14,7 +15,7 @@ async function loginUser(formData) {
       .then(function (response) {
          localStorage.setItem("token", response.data.token)
          localStorage.setItem("refreshToken", response.data.refreshToken)
-         axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token')
+         axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token
          if (response.status === 200) {
             return redirect('/la')
          }

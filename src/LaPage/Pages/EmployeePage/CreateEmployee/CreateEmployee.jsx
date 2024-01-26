@@ -10,7 +10,7 @@ export async function action() {
 }
 const CreateEmployee = () => {
    const createEmployee = useMutation((user) => {
-      return axios.post(`${BASE_URL}/info/new`, user);
+      return axios.post(`${BASE_URL}/employee/info/new`, user);
    }, {
       onSuccess: () => {
          queryClient.invalidateQueries('employees')

@@ -19,7 +19,7 @@ const ClientsList = () => {
       queryClient.invalidateQueries('clients');
     }, [status]);
    const deleteClient = useMutation((id) => {
-      return axios.delete(`${BASE_URL}/clients/${id}`);
+      return axios.delete(`${BASE_URL}/employee/clients/${id}`);
    }, {
       onSuccess: () => {
          queryClient.invalidateQueries('clients')

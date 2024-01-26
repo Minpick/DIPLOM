@@ -17,7 +17,7 @@ const EditClient = () => {
    const { id } = useParams()
    const { data, isLoading} = useQuery({ queryKey: ['client'], queryFn: () => fetchClient(id) })
    const editClient = useMutation((user) => {
-      return axios.patch(`${BASE_URL}/clients/${id}`, user);
+      return axios.patch(`${BASE_URL}/employee/clients/${id}`, user);
    }, {
       onSuccess: () => {
          queryClient.invalidateQueries('clients')

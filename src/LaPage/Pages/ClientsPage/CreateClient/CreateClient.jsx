@@ -16,7 +16,7 @@ export async function action({request}) {
 
 const CreateClient = () => {
    const createClient = useMutation((user) => {
-      return axios.post(`${BASE_URL}/clients/new`, user);
+      return axios.post(`${BASE_URL}/employee/clients/new`, user);
    }, {
       onSuccess: () => {
          queryClient.invalidateQueries('clients')

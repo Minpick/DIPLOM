@@ -50,7 +50,7 @@ const router = createBrowserRouter(createRoutesFromElements(
     <Route path='lk' element={<div>LKPAge</div>}>
     </Route>
     <Route path='la' element={<Layout />}   loader={async () => await requireAuth()}>
-      <Route index element={<Navigate to='clients' replace />} />
+      <Route index element={<Navigate to='clients?status=in_progress' replace />} />
       <Route path='clients' element={<ClientsPage />} >
         <Route path='new' action={CreateClientAction}  element={<CreateClient/>}/>
         <Route path='edit/:id' action={EditClientAction} element={<EditClient/>}/>

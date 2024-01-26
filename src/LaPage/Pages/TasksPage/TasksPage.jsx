@@ -1,5 +1,6 @@
 import React from 'react'
 import DefaultPage from '../../Components/DefaultPage/DefaultPage'
+import TasksList from './TasksList/TasksList'
 
 const TasksPage = () => {
   return (
@@ -8,7 +9,7 @@ const TasksPage = () => {
     li2={'Постановщик'}
     li3={'Крайний срок'}
     >
-      
+      <TasksList/>
     </DefaultPage>
   )
 }
