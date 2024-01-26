@@ -10,11 +10,11 @@ const PopUpAdd = ({ children }) => {
       <>
          <div className={style.overlay}
             onClick={() => navigate(`..?${searchParams.toString()}`)}
-         >
+            >
          </div>
-         {/* <div className={style.content}> */}
+         <div className={style.content}>
             {children}
-         {/* </div> */}
+         </div>
       </>
    )
 }

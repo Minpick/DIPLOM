@@ -6,6 +6,7 @@ import logo from '../../LaPage/images/logo-black.png'
 
 
 async function loginUser(formData) {
+   localStorage.clear()
    const data = axios.post('http://localhost:8085/signin', {
       phone: formData.get('phone'),
       password: formData.get('password'),
@@ -36,6 +37,7 @@ const [searchParams,setSearchParams] = useSearchParams()
 const message = searchParams.get('message')
 
    const res = useActionData()
+   
    useEffect(() => {
       setError(true)
    }, [res])
@@ -50,6 +52,7 @@ const message = searchParams.get('message')
                      <h2>Вход</h2>
                      {message&&<p>{message}</p>}
                      {error&&(typeof res?.response?.data)==='string' && <p>{res?.response?.data}</p>}
+                     {res?.response?.status===500&& <p>Неправильный логин или пароль</p>}
                      <Form replace method="post" className="form">
 
                         <div className="form__field">

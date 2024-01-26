@@ -19,7 +19,9 @@ const ClientsForm = ({ func, data, role, statuses }) => {
       comment: '',
       birth: '',
       role: role || '',
-      status: ''
+      status: '',
+      login:'',
+      password:''
    })
    function handleChange(event) {
       const { name, value, type, checked } = event.target
@@ -42,7 +44,9 @@ const ClientsForm = ({ func, data, role, statuses }) => {
          comment: formData.get("comment"),
          birth: formData.get('birth'),
          role: role,
-         status: formData.get('status')
+         status: formData.get('status'),
+         login:formData.get('login'),
+         password: formData.get('password')
       }
       // console.log(user)
       func.mutate(user)
@@ -58,7 +62,9 @@ const ClientsForm = ({ func, data, role, statuses }) => {
          comment: data?.data.comment,
          birth: data?.data?.birth?.substring(0, 10),
          role: role,
-         status: data?.data.status
+         status: data?.data.status,
+         login:data?.data.login,
+         password:data?.data.password
       })
    }, [data])
    return (
@@ -130,18 +136,37 @@ const ClientsForm = ({ func, data, role, statuses }) => {
                   className='add_input'
                   onChange={handleChange}
                />
-               <label htmlFor="status" className="add_label">Статус</label>
-               <select
-                  name='status'
-                  value={addData.status}
+               <label htmlFor="login" className="add_label">Логин госуслуг</label>
+               <input
+                  name="login"
+                  type="text"
+                  value={addData.login || ''}
+                  className='add_input'
                   onChange={handleChange}
-                  className='add_select'>
-                  {statuses.map((status) => {
-                     return (
-                        <option key={status.status} value={status.status.toUpperCase()}>{status.name}</option>
-                     )
-                  })}
+               />
+               <label htmlFor="password" className="add_label">Пароль госуслуг</label>
+               <input
+                  name="password"
+                  type="text"
+                  value={addData.password || ''}
+                  className='add_input'
+                  onChange={handleChange}
+               />
+              
+              {statuses&& <>
+                  <label htmlFor="status" className="add_label">Статус</label>
+                  <select
+                     name='status'
+                     value={addData.status}
+                     onChange={handleChange}
+                     className='add_select'>
+                     {statuses.map((status) => {
+                        return (
+                           <option key={status.status} value={status.status.toUpperCase()}>{status.name}</option>
+                        )
+                     })}
                </select>
+               </>}
                <div className='add_arrow'></div>
                <button
                   className='add_btn'
