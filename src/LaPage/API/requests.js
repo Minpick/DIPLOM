@@ -65,7 +65,7 @@ export async function fetchClients(page,status) {
    return data
 }
 export async function fetchTasks(page,status) {
-   const data = await axios.get(`${BASE_URL}/task?offset=${page}&pageSize=20&status=${status}`)
+   const data = await axios.get(`${BASE_URL}/task?offset=${page}&pageSize=20&status=in_progress`)
    return data
 }
 export async function fetchClient(id) {

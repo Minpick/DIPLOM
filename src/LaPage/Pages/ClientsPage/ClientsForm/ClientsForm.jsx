@@ -136,22 +136,26 @@ const ClientsForm = ({ func, data, role, statuses }) => {
                   className='add_input'
                   onChange={handleChange}
                />
-               <label htmlFor="login" className="add_label">Логин госуслуг</label>
-               <input
-                  name="login"
-                  type="text"
-                  value={addData.login || ''}
-                  className='add_input'
-                  onChange={handleChange}
-               />
-               <label htmlFor="password" className="add_label">Пароль госуслуг</label>
-               <input
-                  name="password"
-                  type="text"
-                  value={addData.password || ''}
-                  className='add_input'
-                  onChange={handleChange}
-               />
+         {role!=='ROLE_EMPLOYEE' && !data?.data.role &&
+        <>
+            <label htmlFor="login" className="add_label">Логин госуслуг</label>
+            <input
+               name="login"
+               type="text"
+               value={addData.login || ''}
+               className='add_input'
+               onChange={handleChange}
+            />
+            <label htmlFor="password" className="add_label">Пароль госуслуг</label>
+            <input
+               name="password"
+               type="text"
+               value={addData.password || ''}
+               className='add_input'
+               onChange={handleChange}
+            />
+        </>
+         }
               
               {statuses&& <>
                   <label htmlFor="status" className="add_label">Статус</label>
@@ -174,7 +178,7 @@ const ClientsForm = ({ func, data, role, statuses }) => {
                   {btn_text}
                </button>
             </div>
-            {!role && !data?.data.role && <div className='add_right'>
+            {role!=='ROLE_EMPLOYEE' && !data?.data.role && <div className='add_right'>
                <textarea
                   placeholder="Комментарии"
                   name="comment"

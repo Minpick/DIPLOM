@@ -24,6 +24,8 @@ import EditEmployee,{action as EditEmployeeAction} from './LaPage/Pages/Employee
 import RegPage,{action as RegPageAction} from './AuthPage/reg/RegPage'
 import AuthPage from './AuthPage/AuthPage/AuthPage'
 import LoginPage,{action as LoginPageAction} from './AuthPage/login/LoginPage'
+import LkLayout from './LkPage/Components/LkLayout/LkLayout'
+import ProgressPage from './LkPage/Pages/ProgressPage/ProgressPage'
 
 
 export const queryClient = new QueryClient({
@@ -47,7 +49,12 @@ const router = createBrowserRouter(createRoutesFromElements(
     <Route path='registration' element={<RegPage />} action={RegPageAction}/>
     <Route path='login' element={<LoginPage />} action={LoginPageAction} />
     </Route>
-    <Route path='lk' element={<div>LKPAge</div>}>
+    <Route path='lk' element={<LkLayout/>}>
+    <Route index element={<Navigate to='progress' replace />} />
+      <Route path='progress' element={<ProgressPage/>}/>
+      <Route path='chat' element={<div>chat</div>}/>
+      <Route path='docs' element={<div>docs</div>}/>
+      <Route path='payment' element={<div>payment</div>}/>
     </Route>
     <Route path='la' element={<Layout />}   loader={async () => await requireAuth()}>
       <Route index element={<Navigate to='clients?status=in_progress' replace />} />

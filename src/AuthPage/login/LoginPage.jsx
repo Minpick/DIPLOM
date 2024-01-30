@@ -50,6 +50,7 @@ const message = searchParams.get('message')
                <div className="grid align__item">
                   <div className="register">
                      <Link to='/'><img src={logo} alt="logo" className="site__logo" /></Link>
+                     <Link to='/lk'>LK</Link>
                      <h2>Вход</h2>
                      {message&&<p>{message}</p>}
                      {error&&(typeof res?.response?.data)==='string' && <p>{res?.response?.data}</p>}
