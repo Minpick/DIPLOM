@@ -2,36 +2,52 @@ import React, { useEffect, useState } from 'react'
 import style from './Header.module.scss'
 import { Link, useLocation, useSearchParams } from 'react-router-dom'
 import axios from 'axios'
+import { useQuery } from 'react-query'
+import { fetchRecipients } from '../../API/requests'
+import Select from '../../Pages/TasksPage/Select/Select'
 
 const Header = () => {
+ 
+   const [searchParams, setSearchParams] = useSearchParams()
+
+
+
+ 
    axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token')
    const [time, setTime] = useState(new Date())
    useEffect(() => {
       const interval = setInterval(() => {
-       setTime(new Date());
+         setTime(new Date());
       }, 5000);
       return () => {
          clearInterval(interval);
-       };
-    }, []);
+      };
+   }, []);
    const location = useLocation()
-   const btn_text = location.pathname.substring(0,7) === '/la/cli' ? 'Добавить клиента' :
-      location.pathname.substring(0,7) === '/la/emp' ? 'Добавить сотрудника' :
-         location.pathname.substring(0,7) === '/la/tas' ? 'Добавить задачу' :
+   const btn_text = location.pathname.substring(0, 7) === '/la/cli' ? 'Добавить клиента' :
+      location.pathname.substring(0, 7) === '/la/emp' ? 'Добавить сотрудника' :
+         location.pathname.substring(0, 7) === '/la/tas' ? 'Добавить задачу' :
             'Добавить сделку'
-const [searchParams,setSearchParams]= useSearchParams()
 
    return (
       <div className={style.header}>
-         <Link to={`new?${searchParams.toString()}`}
-         relative='path'
-            className={style.header__add_client}>{btn_text}
-         </Link>
+
+            <div className={style.select}>
+               <Link
+   
+                  to={location.pathname.includes('edit') ? `/${location.pathname.match(/^\/([^\/]+\/[^\/]+)/)[1]}/new?${searchParams.toString()}` : `new?${searchParams.toString()}`}
+                  relative='path'
+                  className={style.header__add_client}>{btn_text}
+               </Link>
+              {  location.pathname.substring(0, 7) === '/la/tas'&& <Select/>}
+            </div>
+
+
 
          <div className={style.header__time}>{time.toLocaleTimeString().substring(0, 5)}</div>
          <div className={style.header__user}>Кирилл Бусарев
-            <Link 
-            onClick={()=>{localStorage.clear();axios.defaults.headers.common ={}}}
+            <Link
+               onClick={() => { localStorage.clear(); axios.defaults.headers.common = {} }}
             >
                <svg className={style.header__exit_svg} width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <g>

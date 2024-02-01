@@ -26,6 +26,8 @@ import AuthPage from './AuthPage/AuthPage/AuthPage'
 import LoginPage,{action as LoginPageAction} from './AuthPage/login/LoginPage'
 import LkLayout from './LkPage/Components/LkLayout/LkLayout'
 import ProgressPage from './LkPage/Pages/ProgressPage/ProgressPage'
+import CreateTask,{action as CreateTaskAction} from './LaPage/Pages/TasksPage/CreateTask/CreateTask'
+import EditTask,{action as EditTaskAction} from './LaPage/Pages/TasksPage/EditTask/EditTask'
 
 
 export const queryClient = new QueryClient({
@@ -67,7 +69,17 @@ const router = createBrowserRouter(createRoutesFromElements(
       <Route path='new' action={CreateEmployeeAction} element={<CreateEmployee/>}/>
       <Route path='edit/:id' action={EditEmployeeAction} element={<EditEmployee/>}/>
       </Route>
-      <Route path='tasks' element={<TasksPage />} />
+
+      <Route path='tasks' element={<TasksPage />} >
+      <Route path='new'
+       action={CreateTaskAction}
+       element={<CreateTask/>}
+       />
+      <Route path='edit/:id' 
+      action={EditTaskAction}
+       element={<EditTask/>}
+       />
+      </Route>
       <Route path='deals' element={<DealsPage />} />
     </Route>
   </Route>

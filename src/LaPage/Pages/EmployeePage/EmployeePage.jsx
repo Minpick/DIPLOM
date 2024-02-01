@@ -4,11 +4,10 @@ import DefaultPage from '../../Components/DefaultPage/DefaultPage'
 import EmployeeList from './EmployeeList/EmployeeList'
 
 const EmployeePage = () => {
+  const li = ['Сотрудник','Телефон','Почта']
   return (
     <DefaultPage
-    li1={'Сотрудник'}
-    li2={'Телефон'}
-    li3={'Почта'}
+    li={li}
     >
       <EmployeeList/>
     </DefaultPage>

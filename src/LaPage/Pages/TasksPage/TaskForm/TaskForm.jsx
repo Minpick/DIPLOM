@@ -1,0 +1,130 @@
+import React, { useEffect, useState } from 'react'
+import { useLocation } from 'react-router'
+import Loading from '../../../UI/Loading/Loading'
+import PopUpAdd from '../../../UI/PopUpAdd/PopUpAdd'
+import { Form } from 'react-router-dom'
+import moment from 'moment'
+
+const TaskForm = ({ func, data, isLoading, recipients }) => {
+   const location = useLocation()
+   const btn_text = location.pathname === '/la/tasks/new' ? 'Добавить задачу' : 'Редактировать задачу'
+   const [addData, setAddData] = useState({
+      name: '',
+      comment: '',
+      expiryDate: '',
+      status: 'in_progress',
+      timestamp: '',
+      recipientId: ''
+   })
+   function handleChange(event) {
+      const { name, value, type, checked } = event.target
+      setAddData(prevFormData => {
+         return {
+            ...prevFormData,
+            [name]: type === "checkbox" ? checked : value
+         }
+      })
+   }
+   function onSubmit(event) {
+      const formData = new FormData(event.target)
+      const task = {
+         name: formData.get('name'),
+         comment: formData.get("comment"),
+         expiryDate: formData.get('expiryDate') + "T00:00:00.000+00:00",
+         recipientId: formData.get('recipientId')
+      }
+
+      // recipientId:formData.get('recipientId')
+      console.log(task)
+      func.mutate(task)
+   }
+   data && useEffect(() => {
+      setAddData({
+         name: data?.data.name,
+         comment: data?.data.comment,
+         expiryDate: data?.data.expiryDate.substring(0, 10),
+         timestamp: data?.data.timestamp,
+         recipientId: data?.data.recipientId
+      })
+   }, [data])
+   if (isLoading) {
+      return (
+         <Loading />
+      )
+   }
+   return (
+      <PopUpAdd>
+         <Form
+            onSubmit={(event) => onSubmit(event)}
+            method="post"
+            className="add_form"
+            replace
+         >
+            <div className='add_left'>
+               <label htmlFor="name" className="add_label">Название*</label>
+               <input
+                  required
+                  name="name"
+                  onChange={handleChange}
+                  value={addData.name || ''}
+                  type="text"
+                  className='add_input'
+               />
+
+
+
+
+               <label htmlFor="expiryDate" className="add_label">Крайний срок*</label>
+               <input
+                  name="expiryDate"
+                  type="date"
+                  value={addData.expiryDate || ''}
+                  className='add_input'
+                  onChange={handleChange}
+                  required
+               />
+
+               {(recipients || data?.data.recipientId) && <>
+                  <label htmlFor="recipient" className="add_label">Исполнитель</label>
+                  <select
+                     name='recipientId'
+                     value={addData.recipientId}
+                     onChange={handleChange}
+                     className='add_select'>
+                     {recipients.map((recipient) => {
+                        return (
+                           <option key={recipient.id} value={recipient.id}>{`${recipient.firstName} ${recipient.lastName} ${recipient.patronymic}`}</option>
+                        )
+                     })}
+                  </select>
+               </>}
+
+               <button
+                  className='add_btn'
+               >
+                  {btn_text}
+               </button>
+               {data && <>
+                  <div style={{display:'flex',marginBottom:'-10px'}}>
+                     <label className="add_label">Дата создания:</label>
+                     <div className='timestamp'>
+                     {moment(addData.timestamp).format('DD.MM.YYYY')}
+                     </div>
+                  </div>
+               </>}
+            </div>
+            <div className='add_right'>
+               <textarea
+                  placeholder="Комментарии"
+                  name="comment"
+                  value={addData.comment || ''}
+                  className="add_comment"
+                  onChange={handleChange}
+               />
+            </div>
+         </Form>
+      </PopUpAdd >
+   )
+}
+
+export default TaskForm

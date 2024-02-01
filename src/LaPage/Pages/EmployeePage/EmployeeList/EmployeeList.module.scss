@@ -11,7 +11,8 @@
    font-size: 1.1rem;
    font-weight: 400;
    position: relative;
-   transition: all 0.3s;
+   transition: all 0.4s;
+   background-color: transparent;
    a {
      color: $dgray;
    }
@@ -26,6 +27,7 @@
      background-color: #94949460;
    }
    &:hover {
+    background-color: #e4e4e4e3;
      a{
        color: black;
      }
@@ -36,7 +38,7 @@
    }
  }
 &__field{
-
+width: 100%;
   color: $dgray;
 }
 }

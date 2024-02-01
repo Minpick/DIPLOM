@@ -7,30 +7,32 @@ import DefaultPage from '../../Components/DefaultPage/DefaultPage'
 const ClientsPage = () => {
 
 
-const statuses = [{
-  status:'in_progress',
-  name:'В работе'
-},{
-  status:'planned',
-  name:'Планируемые'
-},{
-  status:'completed',
-  name:'Завершенные'
-}
+  const statuses = [{
+    status: 'in_progress',
+    name: 'В работе'
+  }, {
+    status: 'planned',
+    name: 'Планируемые'
+  }, {
+    status: 'completed',
+    name: 'Завершенные'
+  }
 ]
-  return (
-    <DefaultPage
-      li1={'Клиент'}
-      li2={'Телефон'}
-      li3={'Почта'}
-      statuses={statuses}
-      // statusesName={statusesName}
-    >
-      {<ClientsList />}
+const li = ['Клиент','Телефон','Почта']
+return (
+  <DefaultPage
+    li1={'Клиент'}
+    li2={'Телефон'}
+    li3={'Почта'}
+    li={li}
+    statuses={statuses}
+  // statusesName={statusesName}
+  >
+    {<ClientsList />}
 
-    </DefaultPage>
+  </DefaultPage>
 
-  )
+)
 }
 
 export default ClientsPage

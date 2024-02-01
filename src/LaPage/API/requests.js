@@ -28,7 +28,7 @@ const refreshToken = async () => {
 axios.interceptors.response.use(
    (response) => response,
    async (error) => {
-      if(error.response.data==='Нужна повторная авторизация'){
+      if(error.response?.data==='Нужна повторная авторизация'){
          localStorage.clear();
          return Promise.reject(error);
       }
@@ -65,11 +65,23 @@ export async function fetchClients(page,status) {
    return data
 }
 export async function fetchTasks(page,status) {
-   const data = await axios.get(`${BASE_URL}/task?offset=${page}&pageSize=20&status=in_progress`)
+   const data = await axios.get(`${BASE_URL}/task?offset=${page}&pageSize=20&status=${status}`)
+   return data
+}
+export async function fetchAdminTasks(page,status,id) {
+   const data = await axios.get(`${BASE_URL}/task/admin?offset=${page}&pageSize=20&status=${status}&id=${id}`)
+   return data
+}
+export async function fetchTask(id) {
+   const data = await axios.get(`${BASE_URL}/task/${id}`)
    return data
 }
 export async function fetchClient(id) {
    const data = await axios.get(`${BASE_URL}/employee/clients/${id}`)
+   return data
+}
+export async function fetchRecipients(){
+   const data = await axios.get(`${BASE_URL}/task/fullName`)
    return data
 }
 export async function fetchEmployees(page) {

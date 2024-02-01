@@ -49,7 +49,7 @@ const TeamSection = () => {
                   </div>
                   <div className={style.team__content}>
                      <div className={style.team__name}>
-                        Воробьева Олеся
+                        Янгазова Олеся
                      </div>
                      <div className={style.team__pos}>
                         Юрист

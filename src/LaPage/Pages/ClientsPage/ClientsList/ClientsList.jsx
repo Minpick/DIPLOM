@@ -9,12 +9,13 @@ import axios from 'axios'
 import { Link, useSearchParams } from 'react-router-dom'
 import { queryClient } from '../../../../App'
 import PaginationBtns from '../../../UI/PaginationBtns/PaginationBtns'
+import Loading from '../../../UI/Loading/Loading'
 
 const ClientsList = () => {
    const [page,setPage]=useState(0)
    const [searchParams,setSearchParams]= useSearchParams()
    const status = searchParams.get('status')
-   const { data } = useQuery({ queryKey: ['clients',page,status], queryFn: ()=>fetchClients(page,status) })
+   const { data,isLoading } = useQuery({ queryKey: ['clients',page,status], queryFn: ()=>fetchClients(page,status) })
    useEffect(() => {
       queryClient.invalidateQueries('clients');
     }, [status]);
@@ -25,6 +26,11 @@ const ClientsList = () => {
          queryClient.invalidateQueries('clients')
       },
    });
+   if (isLoading) {
+      return (
+         <Loading />
+      )
+   }
    const clients = data?.data?.map(client => {
       return (
             <li key={client.id}

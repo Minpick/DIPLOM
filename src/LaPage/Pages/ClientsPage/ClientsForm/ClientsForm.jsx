@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react'
 import PopUpAdd from '../../../UI/PopUpAdd/PopUpAdd'
 import { Form, useLocation, useSearchParams } from 'react-router-dom'
 import './ClientsForm.scss'
+import Loading from '../../../UI/Loading/Loading'
 
-const ClientsForm = ({ func, data, role, statuses }) => {
+const ClientsForm = ({ func, data, role, statuses,isLoading }) => {
 
    const location = useLocation()
    const btn_text = location.pathname === '/la/clients/new' ? 'Добавить клиента' :
@@ -48,7 +49,7 @@ const ClientsForm = ({ func, data, role, statuses }) => {
          login:formData.get('login'),
          password: formData.get('password')
       }
-      // console.log(user)
+      console.log(user)
       func.mutate(user)
    }
    data && useEffect(() => {
@@ -67,6 +68,11 @@ const ClientsForm = ({ func, data, role, statuses }) => {
          password:data?.data.password
       })
    }, [data])
+   if (isLoading) {
+      return (
+         <Loading />
+      )
+   }
    return (
       <PopUpAdd>
          <Form
@@ -171,7 +177,6 @@ const ClientsForm = ({ func, data, role, statuses }) => {
                      })}
                </select>
                </>}
-               <div className='add_arrow'></div>
                <button
                   className='add_btn'
                >

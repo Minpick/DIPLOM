@@ -3,13 +3,23 @@ import DefaultPage from '../../Components/DefaultPage/DefaultPage'
 import TasksList from './TasksList/TasksList'
 
 const TasksPage = () => {
+  const li = ['Задача','Постановщик','Крайний срок']
+  const statuses = [{
+    status: 'in_progress',
+    name: 'В работе'
+  }, {
+    status: 'completed',
+    name: 'Завершенные'
+  }
+]
   return (
     <DefaultPage
-    li1={'Задача'}
-    li2={'Постановщик'}
-    li3={'Крайний срок'}
+    li={li}
+    statuses={statuses}
     >
-      <TasksList/>
+      <TasksList 
+      userRole={'ADMIN'}
+      />
     </DefaultPage>
   )
 }

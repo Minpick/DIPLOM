@@ -4,6 +4,7 @@
    background-color: rgba(14, 14, 33, 1);
    background-color: transparent;
    grid-area: hd;
+   position: relative;
    display: grid;
    grid-template-columns: 1fr 1fr 1fr;
    grid-template-areas: "btn time user";
@@ -29,12 +30,13 @@
    }
    &__add_client {
      margin: auto 0;
-     font-size: 1rem;
      width: 50%;
+     margin-right: 20px;
      box-shadow: none;
      display: flex;
      justify-content: center;
      align-items: center;
+     font-size: 1rem;
      background-color: rgba(14, 14, 33, 1);
      background-color: transparent;
      border: 1px solid #ffffffde;
@@ -47,4 +49,8 @@
        scale: 1.02;
      }
    }
+ }
+ .select{
+  display: flex;
+  align-items: center;
  }

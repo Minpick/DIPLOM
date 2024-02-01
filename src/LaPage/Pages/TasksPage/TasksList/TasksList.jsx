@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { BASE_URL, fetchTasks } from '../../../API/requests'
+import { BASE_URL, fetchAdminTasks, fetchTasks } from '../../../API/requests'
 import classNames from 'classnames'
 import { Link, useSearchParams } from 'react-router-dom'
 import DeleteButton from '../../../UI/DeleteButton/DeleteButton'
@@ -8,12 +8,21 @@ import { useMutation, useQuery } from 'react-query'
 import { queryClient } from '../../../../App'
 import axios from 'axios'
 import style from './TasksList.module.scss'
+import moment from "moment";
+import Loading from '../../../UI/Loading/Loading'
 
-const TasksList = () => {
+const TasksList = ({userRole}) => {
    const [page, setPage] = useState(0)
    const [searchParams, setSearchParams] = useSearchParams()
    const status = searchParams.get('status')
-   const { data } = useQuery({ queryKey: ['tasks', page, status], queryFn: () => fetchTasks(page, status) })
+
+   if(userRole=='ADMIN'){
+      console.log('admin')
+      const id= searchParams.get('recipientId')
+      var { data,isLoading } = useQuery({ queryKey: ['tasks', page, status,id], queryFn: () => fetchAdminTasks(page, status,id) })
+   }else{
+      var { data,isLoading } = useQuery({ queryKey: ['tasks', page, status], queryFn: () => fetchTasks(page, status) })
+   }
    useEffect(() => {
       queryClient.invalidateQueries('tasks');
    }, [status]);
@@ -24,12 +33,17 @@ const TasksList = () => {
          queryClient.invalidateQueries('tasks')
       },
    });
+   if (isLoading) {
+      return (
+         <Loading />
+      )
+   }
    const tasks = data?.data?.map(task => {
       return (
          <li key={task.id}
             className={classNames('clients__item')}>
             <Link to={`edit/${task.id}?${searchParams.toString()}`}
-               className={classNames(style.clients__item, 'clients__item')}>
+               className={classNames(style.clients__item, 'clients__item',task.status==='EXPIRED'?style.expired:task.status=='COMPLETED'?style.completed:'')}>
                <div className={style.clients__field}>
                   {task.name}
                </div>
@@ -37,10 +51,12 @@ const TasksList = () => {
                   {task.producer}
                </div>
                <div className={style.clients__field}>
-                  {task.expiryDate}
+                  {moment(task.expiryDate).format('DD.MM.YYYY')}
                </div>
             </Link>
+            {/* {status == 'completed' &&  */}
             <DeleteButton onClick={() => deleteTask.mutate(task.id)} />
+            {/* // } */}
          </li>
       )
    })

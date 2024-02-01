@@ -11,11 +11,14 @@
    &__navbar_item {
      margin-bottom: 10px;
      margin-top: 10px;
+     width: 100%;
    }
    &__navbar_list {
      text-align: center;
-     display: grid;
-     grid-template-columns: 1fr 1fr 1fr;
+    //  display: grid;
+    //  grid-template-columns: 1fr 1fr 1fr;
+    display: flex;
+    justify-content: space-around;
  
      font-size: 1.1rem;
      color: #5a5a5a;

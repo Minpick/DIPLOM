@@ -5,6 +5,7 @@ import { BASE_URL, fetchEmployee } from '../../../API/requests'
 import axios from 'axios'
 import { queryClient } from '../../../../App'
 import ClientsForm from '../../ClientsPage/ClientsForm/ClientsForm'
+import Loading from '../../../UI/Loading/Loading'
 
 export async function action() {
    return redirect("..")
@@ -21,10 +22,14 @@ const EditEmployee = () => {
          queryClient.invalidateQueries('employees')
       },
    });
-   if (isLoading) return <div>Loading...</div>
+   if (isLoading) {
+      return (
+         <Loading />
+      )
+   }
    return (
       <>
-         <ClientsForm func={editEmployee} data = {data} role={'ROLE_EMPLOYEE'}/>
+         <ClientsForm func={editEmployee} data = {data} role={'ROLE_EMPLOYEE'} isLoading={isLoading}/>
       </>
    )
   
