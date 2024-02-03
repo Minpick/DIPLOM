@@ -12,7 +12,7 @@ const Sidebar = () => {
       <NavLink className={({ isActive }) => isActive ? style.active : style.btn} to='clients?status=in_progress'>Клиенты</NavLink>
       <NavLink className={({ isActive }) => isActive ? style.active : style.btn} to='employee'>Сотрудники</NavLink>
       <NavLink className={({ isActive }) => isActive ? style.active : style.btn} to='tasks?status=in_progress'>Задачи</NavLink>
-      <NavLink className={({ isActive }) => isActive ? style.active : style.btn} to='deals'>Сделки</NavLink>
+      <NavLink className={({ isActive }) => isActive ? style.active : style.btn} to='chat'>Сообщения</NavLink>
     </div>
   )
 }

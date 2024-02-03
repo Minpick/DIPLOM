@@ -3,9 +3,15 @@ import PopUpAdd from '../../../UI/PopUpAdd/PopUpAdd'
 import { Form, useLocation, useSearchParams } from 'react-router-dom'
 import './ClientsForm.scss'
 import Loading from '../../../UI/Loading/Loading'
+import Warning from '../../../UI/Warning/Warning'
 
-const ClientsForm = ({ func, data, role, statuses,isLoading }) => {
-
+const ClientsForm = ({ func, data, role, statuses, isLoading, action }) => {
+   const [actionState, setActionState] = useState()
+   useEffect(() => {
+      if (action) {
+         setActionState(true)
+      }
+   }, [action])
    const location = useLocation()
    const btn_text = location.pathname === '/la/clients/new' ? 'Добавить клиента' :
       location.pathname.substring(0, 15) === '/la/clients/edi' ? 'Редактировать клиента' :
@@ -21,9 +27,10 @@ const ClientsForm = ({ func, data, role, statuses,isLoading }) => {
       birth: '',
       role: role || '',
       status: '',
-      login:'',
-      password:''
+      login: '',
+      password: ''
    })
+
    function handleChange(event) {
       const { name, value, type, checked } = event.target
       setAddData(prevFormData => {
@@ -46,11 +53,15 @@ const ClientsForm = ({ func, data, role, statuses,isLoading }) => {
          birth: formData.get('birth'),
          role: role,
          status: formData.get('status'),
-         login:formData.get('login'),
+         login: formData.get('login'),
          password: formData.get('password')
       }
       console.log(user)
-      func.mutate(user)
+      try {
+         func.mutate(user)
+      } catch (error) {
+         console.log(error)
+      }
    }
    data && useEffect(() => {
       setAddData({
@@ -64,8 +75,8 @@ const ClientsForm = ({ func, data, role, statuses,isLoading }) => {
          birth: data?.data?.birth?.substring(0, 10),
          role: role,
          status: data?.data.status,
-         login:data?.data.login,
-         password:data?.data.password
+         login: data?.data.login,
+         password: data?.data.password
       })
    }, [data])
    if (isLoading) {
@@ -73,10 +84,16 @@ const ClientsForm = ({ func, data, role, statuses,isLoading }) => {
          <Loading />
       )
    }
+   const hideWarning = () => {
+      setActionState(false)
+   }
    return (
+
       <PopUpAdd>
+         {actionState &&
+            <Warning onClick={hideWarning} message={action?.response.data.phone} />}
          <Form
-            onSubmit={(event) => onSubmit(event)}
+            // onSubmit={(event) => onSubmit(event)}
             method="post"
             className="add_form"
             replace
@@ -142,28 +159,28 @@ const ClientsForm = ({ func, data, role, statuses,isLoading }) => {
                   className='add_input'
                   onChange={handleChange}
                />
-         {role!=='ROLE_EMPLOYEE' && !data?.data.role &&
-        <>
-            <label htmlFor="login" className="add_label">Логин госуслуг</label>
-            <input
-               name="login"
-               type="text"
-               value={addData.login || ''}
-               className='add_input'
-               onChange={handleChange}
-            />
-            <label htmlFor="password" className="add_label">Пароль госуслуг</label>
-            <input
-               name="password"
-               type="text"
-               value={addData.password || ''}
-               className='add_input'
-               onChange={handleChange}
-            />
-        </>
-         }
-              
-              {statuses&& <>
+               {role !== 'ROLE_EMPLOYEE' && !data?.data.role &&
+                  <>
+                     <label htmlFor="login" className="add_label">Логин госуслуг</label>
+                     <input
+                        name="login"
+                        type="text"
+                        value={addData.login || ''}
+                        className='add_input'
+                        onChange={handleChange}
+                     />
+                     <label htmlFor="password" className="add_label">Пароль госуслуг</label>
+                     <input
+                        name="password"
+                        type="text"
+                        value={addData.password || ''}
+                        className='add_input'
+                        onChange={handleChange}
+                     />
+                  </>
+               }
+
+               {statuses && <>
                   <label htmlFor="status" className="add_label">Статус</label>
                   <select
                      name='status'
@@ -175,7 +192,7 @@ const ClientsForm = ({ func, data, role, statuses,isLoading }) => {
                            <option key={status.status} value={status.status.toUpperCase()}>{status.name}</option>
                         )
                      })}
-               </select>
+                  </select>
                </>}
                <button
                   className='add_btn'
@@ -183,7 +200,7 @@ const ClientsForm = ({ func, data, role, statuses,isLoading }) => {
                   {btn_text}
                </button>
             </div>
-            {role!=='ROLE_EMPLOYEE' && !data?.data.role && <div className='add_right'>
+            {role !== 'ROLE_EMPLOYEE' && !data?.data.role && <div className='add_right'>
                <textarea
                   placeholder="Комментарии"
                   name="comment"

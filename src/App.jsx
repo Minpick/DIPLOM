@@ -9,13 +9,12 @@ import {
   redirect,
 } from "react-router-dom"
 import LandingPage from './LandingPage/LandingPage'
-// import AuthPage,{action as AuthPageAction} from './AuthPage/reg/RegPage'
+
 
 import Layout from './LaPage/Components/Layout/Layout'
 import ClientsPage from './LaPage/Pages/ClientsPage/ClientsPage'
 import EmployeePage from './LaPage/Pages/EmployeePage/EmployeePage'
 import TasksPage from './LaPage/Pages/TasksPage/TasksPage'
-import DealsPage from './LaPage/Pages/DealsPage/DealsPage'
 import CreateClient, { action as CreateClientAction } from './LaPage/Pages/ClientsPage/CreateClient/CreateClient'
 import EditClient,{ action as EditClientAction }  from './LaPage/Pages/ClientsPage/EditClient/EditClient'
 import { QueryClient, QueryClientProvider } from 'react-query'
@@ -28,6 +27,8 @@ import LkLayout from './LkPage/Components/LkLayout/LkLayout'
 import ProgressPage from './LkPage/Pages/ProgressPage/ProgressPage'
 import CreateTask,{action as CreateTaskAction} from './LaPage/Pages/TasksPage/CreateTask/CreateTask'
 import EditTask,{action as EditTaskAction} from './LaPage/Pages/TasksPage/EditTask/EditTask'
+import ChatPage from './LaPage/Pages/ChatPage/ChatPage'
+import ChatWindow from './LaPage/Pages/ChatPage/ChatWindow/ChatWindow'
 
 
 export const queryClient = new QueryClient({
@@ -80,7 +81,9 @@ const router = createBrowserRouter(createRoutesFromElements(
        element={<EditTask/>}
        />
       </Route>
-      <Route path='deals' element={<DealsPage />} />
+      <Route path='chat' element={<ChatPage />} >
+        <Route path=':id' element={<ChatWindow/>}/>
+      </Route>
     </Route>
   </Route>
 ),{basename:'/'})

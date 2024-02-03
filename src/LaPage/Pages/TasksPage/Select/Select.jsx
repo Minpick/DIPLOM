@@ -22,6 +22,7 @@ const Select = () => {
          value={searchParams.get('recipientId')||''}
          onChange={handleChange}
          className='add_select task_select'>
+            <option value=''>Все задачи</option>
          {recipients?.map((recipient) => {
             return (
                <option key={recipient.id} value={recipient.id}>{`${recipient.firstName} ${recipient.lastName} ${recipient.patronymic}`}</option>

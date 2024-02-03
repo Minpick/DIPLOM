@@ -22,10 +22,27 @@
   justify-content: center;
 }
 .wrapper{
+   z-index: 100;
    left: 0;
    right: 0;
    top: 0;
    bottom: 0;
    position: absolute;
-
+  
+}
+.message{
+   z-index: 101;
+   color: black;
+   width: fit-content;
+   height: fit-content;
+   padding: 40px;
+   background-color: #eeeeee;
+   border: 1px solid rgba(0, 0, 0, 0.307);
+   border-radius: 20px;
+   overflow: hidden;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   font-size: 1.4rem;
+   font-weight: 500;
 }

@@ -17,7 +17,6 @@ const TasksList = ({userRole}) => {
    const status = searchParams.get('status')
 
    if(userRole=='ADMIN'){
-      console.log('admin')
       const id= searchParams.get('recipientId')
       var { data,isLoading } = useQuery({ queryKey: ['tasks', page, status,id], queryFn: () => fetchAdminTasks(page, status,id) })
    }else{
