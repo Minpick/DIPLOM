@@ -34,10 +34,6 @@ axios.interceptors.response.use(
       }
       const originalRequest = error.config;
       originalRequest._retryCount = originalRequest._retryCount || 0;
-      // if(error.response.status === 500&& originalRequest._retryCount < 2){
-      //    originalRequest._retryCount++;
-      //             return axios(originalRequest);
-      // }
       if (error.response.status === 401 && originalRequest._retryCount < 1) {
          originalRequest._retryCount++;
          try {

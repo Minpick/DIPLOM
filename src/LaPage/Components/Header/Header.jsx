@@ -7,9 +7,10 @@ import { fetchRecipients } from '../../API/requests'
 import Select from '../../Pages/TasksPage/Select/Select'
 
 const Header = () => {
- 
+
    const [searchParams, setSearchParams] = useSearchParams()
 
+   console.log(localStorage.getItem('token'))
    axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token')
    const [time, setTime] = useState(new Date())
    useEffect(() => {
@@ -29,15 +30,15 @@ const Header = () => {
    return (
       <div className={style.header}>
 
-            <div className={style.select}>
-               <Link
-   
-                  to={location.pathname.includes('edit') ? `/${location.pathname.match(/^\/([^\/]+\/[^\/]+)/)[1]}/new?${searchParams.toString()}` : `new?${searchParams.toString()}`}
-                  relative='path'
-                  className={style.header__add_client}>{btn_text}
-               </Link>
-              {location.pathname.substring(0, 7) === '/la/tas'&& <Select/>}
-            </div>
+         <div className={style.select}>
+            <Link
+
+               to={location.pathname.includes('edit') ? `/${location.pathname.match(/^\/([^\/]+\/[^\/]+)/)[1]}/new?${searchParams.toString()}` : `new?${searchParams.toString()}`}
+               relative='path'
+               className={style.header__add_client}>{btn_text}
+            </Link>
+            {location.pathname.substring(0, 7) === '/la/tas' && <Select />}
+         </div>
 
 
 
