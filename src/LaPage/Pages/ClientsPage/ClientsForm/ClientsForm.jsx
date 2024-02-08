@@ -5,7 +5,7 @@ import './ClientsForm.scss'
 import Loading from '../../../UI/Loading/Loading'
 import Warning from '../../../UI/Warning/Warning'
 
-const ClientsForm = ({ func, data, role, statuses, isLoading, action }) => {
+const ClientsForm = ({  data, statuses, isLoading, action }) => {
    const [actionState, setActionState] = useState()
    useEffect(() => {
       if (action) {
@@ -25,7 +25,7 @@ const ClientsForm = ({ func, data, role, statuses, isLoading, action }) => {
       passport: '',
       comment: '',
       birth: '',
-      role: role || '',
+      // role: role || '',
       status: '',
       login: '',
       password: ''
@@ -40,29 +40,27 @@ const ClientsForm = ({ func, data, role, statuses, isLoading, action }) => {
          }
       })
    }
-   function onSubmit(event) {
-      const formData = new FormData(event.target)
-      const user = {
-         firstName: formData.get("firstName"),
-         lastName: formData.get("lastName"),
-         patronymic: formData.get("patronymic"),
-         phone: formData.get("phone"),
-         email: formData.get("email"),
-         passport: formData.get("passport"),
-         comment: formData.get("comment"),
-         birth: formData.get('birth'),
-         role: role,
-         status: formData.get('status'),
-         login: formData.get('login'),
-         password: formData.get('password')
-      }
-      console.log(user)
-      try {
-         func.mutate(user)
-      } catch (error) {
-         console.log(error)
-      }
-   }
+   // function onSubmit(event) {
+   //    const formData = new FormData(event.target)
+   //    const user = {
+   //       firstName: formData.get("firstName"),
+   //       lastName: formData.get("lastName"),
+   //       patronymic: formData.get("patronymic"),
+   //       phone: formData.get("phone"),
+   //       email: formData.get("email"),
+   //       passport: formData.get("passport"),
+   //       comment: formData.get("comment"),
+   //       birth: formData.get('birth'),
+   //       role: role,
+   //       status: formData.get('status'),
+   //       login: formData.get('login'),
+   //       password: formData.get('password')
+   //    }
+   //    console.log(user)
+   
+   //       func.mutate(user)
+      
+   // }
    data && useEffect(() => {
       setAddData({
          firstName: data?.data.firstName,
@@ -73,7 +71,7 @@ const ClientsForm = ({ func, data, role, statuses, isLoading, action }) => {
          passport: data?.data.passport,
          comment: data?.data.comment,
          birth: data?.data?.birth?.substring(0, 10),
-         role: role,
+         // role: role,
          status: data?.data.status,
          login: data?.data.login,
          password: data?.data.password
@@ -159,7 +157,7 @@ const ClientsForm = ({ func, data, role, statuses, isLoading, action }) => {
                   className='add_input'
                   onChange={handleChange}
                />
-               {role !== 'ROLE_EMPLOYEE' && !data?.data.role &&
+               {location.pathname.substring(0,11) === '/la/clients'&&!data?.data.role &&
                   <>
                      <label htmlFor="login" className="add_label">Логин госуслуг</label>
                      <input
@@ -200,7 +198,7 @@ const ClientsForm = ({ func, data, role, statuses, isLoading, action }) => {
                   {btn_text}
                </button>
             </div>
-            {role !== 'ROLE_EMPLOYEE' && !data?.data.role && <div className='add_right'>
+            {location.pathname.substring(0,11) === '/la/clients'&&!data?.data.role && <div className='add_right'>
                <textarea
                   placeholder="Комментарии"
                   name="comment"

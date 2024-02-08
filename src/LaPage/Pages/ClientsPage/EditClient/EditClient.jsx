@@ -8,10 +8,48 @@ import { queryClient } from '../../../../App'
 import ClientsForm from '../ClientsForm/ClientsForm'
 import Loading from '../../../UI/Loading/Loading'
 
-export async function action({ request }) {
+export async function action({ request,params }) {
+  
    const searchParams = new URL(request.url)
-      .searchParams.toString()
-   return redirect(`..?${searchParams}`)
+   .searchParams.toString()
+   const formData = await request.formData()
+   const email = formData.get("email")
+   const phone = formData.get("phone")
+   const firstName = formData.get("firstName")
+   const lastName = formData.get("lastName")
+   const status = formData.get("status")
+   const login = formData.get("login")
+   const password = formData.get("password")
+   const birth = formData.get("birth")
+   const comment = formData.get("comment")
+   const passport = formData.get("passport")
+   const patronymic = formData.get("patronymic")
+   
+   const user = {
+      firstName: firstName,
+      lastName: lastName,
+      email:email,
+      phone:phone,
+      status: status,
+      patronymic: patronymic,
+      login: login,
+      password: password,
+      birth: birth,
+      comment: comment,
+      passport: passport
+
+   }
+   
+   console.log(user)
+   try {
+      const data = await axios.patch(`${BASE_URL}/employee/clients/${params.id}`, user)
+      return redirect(`..?${searchParams}`)
+   } catch (err) {
+      return err
+   }
+   finally{
+      queryClient.invalidateQueries('clients')
+   }
 }
 
 const EditClient = () => {
@@ -41,7 +79,7 @@ const EditClient = () => {
    }
    return (
       <>
-         <ClientsForm func={editClient}
+         <ClientsForm
             isLoading={isLoading}
             data={data}
             statuses={statuses}

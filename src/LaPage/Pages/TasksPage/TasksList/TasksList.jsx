@@ -14,10 +14,14 @@ import Loading from '../../../UI/Loading/Loading'
 const TasksList = ({userRole}) => {
    const [page, setPage] = useState(0)
    const [searchParams, setSearchParams] = useSearchParams()
+   
    const status = searchParams.get('status')
 
    if(userRole=='ADMIN'){
-      const id= searchParams.get('recipientId')
+      let id= searchParams.get('recipientId')
+      if(!id){
+         id=-1
+      }
       var { data,isLoading } = useQuery({ queryKey: ['tasks', page, status,id], queryFn: () => fetchAdminTasks(page, status,id) })
    }else{
       var { data,isLoading } = useQuery({ queryKey: ['tasks', page, status], queryFn: () => fetchTasks(page, status) })

@@ -10,9 +10,6 @@ const Header = () => {
  
    const [searchParams, setSearchParams] = useSearchParams()
 
-
-
- 
    axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token')
    const [time, setTime] = useState(new Date())
    useEffect(() => {
@@ -39,7 +36,7 @@ const Header = () => {
                   relative='path'
                   className={style.header__add_client}>{btn_text}
                </Link>
-              {  location.pathname.substring(0, 7) === '/la/tas'&& <Select/>}
+              {location.pathname.substring(0, 7) === '/la/tas'&& <Select/>}
             </div>
 
 

@@ -13,6 +13,7 @@ async function loginUser(formData) {
       password: formData.get('password'),
    },{headers:{}})
       .then(function (response) {
+         console.log(response)
          localStorage.setItem("token", response.data.token)
          localStorage.setItem("refreshToken", response.data.refreshToken)
          axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token
