@@ -11,20 +11,20 @@ import style from './TasksList.module.scss'
 import moment from "moment";
 import Loading from '../../../UI/Loading/Loading'
 
-const TasksList = ({userRole}) => {
+const TasksList = ({ userRole }) => {
    const [page, setPage] = useState(0)
    const [searchParams, setSearchParams] = useSearchParams()
-   
+
    const status = searchParams.get('status')
 
-   if(userRole=='ADMIN'){
-      let id= searchParams.get('recipientId')
-      if(!id){
-         id=-1
+   if (userRole == 'ADMIN') {
+      let id = searchParams.get('recipientId')
+      if (!id) {
+         id = -1
       }
-      var { data,isLoading } = useQuery({ queryKey: ['tasks', page, status,id], queryFn: () => fetchAdminTasks(page, status,id) })
-   }else{
-      var { data,isLoading } = useQuery({ queryKey: ['tasks', page, status], queryFn: () => fetchTasks(page, status) })
+      var { data, isLoading } = useQuery({ queryKey: ['tasks', page, status, id], queryFn: () => fetchAdminTasks(page, status, id) })
+   } else {
+      var { data, isLoading } = useQuery({ queryKey: ['tasks', page, status], queryFn: () => fetchTasks(page, status) })
    }
    useEffect(() => {
       queryClient.invalidateQueries('tasks');
@@ -46,13 +46,18 @@ const TasksList = ({userRole}) => {
          <li key={task.id}
             className={classNames('clients__item')}>
             <Link to={`edit/${task.id}?${searchParams.toString()}`}
-               className={classNames(style.clients__item, 'clients__item',task.status==='EXPIRED'?style.expired:task.status=='COMPLETED'?style.completed:'')}>
+               className={classNames(style.clients__item, 'clients__item', task.status === 'EXPIRED' ? style.expired : task.status == 'COMPLETED' ? style.completed : '')}>
                <div className={style.clients__field}>
                   {task.name}
                </div>
-               <div href="#" className={style.clients__field}>
-                  {task.producer}
-               </div>
+               {status === 'produce' ?
+                  <div href="#" className={style.clients__field}>
+                     {task.recipient}
+                  </div> :
+                  <div href="#" className={style.clients__field}>
+                     {task.producer}
+                  </div>
+               }
                <div className={style.clients__field}>
                   {moment(task.expiryDate).format('DD.MM.YYYY')}
                </div>

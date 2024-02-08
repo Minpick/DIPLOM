@@ -31,7 +31,7 @@ const TaskForm = ({ func, data, isLoading, recipients }) => {
          name: formData.get('name'),
          comment: formData.get("comment"),
          expiryDate: formData.get('expiryDate') + "T00:00:00.000+00:00",
-         recipientId: formData.get('recipientId')
+         recipientId: formData.get('recipientId')||data?.data.recipientId
       }
 
       // recipientId:formData.get('recipientId')
@@ -84,7 +84,7 @@ const TaskForm = ({ func, data, isLoading, recipients }) => {
                   required
                />
 
-               {(recipients || data?.data.recipientId) && <>
+               {recipients && <>
                   <label htmlFor="recipient" className="add_label">Исполнитель</label>
                   <select
                      name='recipientId'
@@ -98,6 +98,7 @@ const TaskForm = ({ func, data, isLoading, recipients }) => {
                      })}
                   </select>
                </>}
+
 
                <button
                   className='add_btn'

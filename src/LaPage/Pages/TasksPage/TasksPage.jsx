@@ -10,6 +10,10 @@ const TasksPage = () => {
   }, {
     status: 'completed',
     name: 'Завершенные'
+
+  }, {
+    status: 'produce',
+    name: 'Поставленные'
   }
 ]
   return (

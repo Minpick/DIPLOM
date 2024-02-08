@@ -9,8 +9,6 @@ import Select from '../../Pages/TasksPage/Select/Select'
 const Header = () => {
 
    const [searchParams, setSearchParams] = useSearchParams()
-
-   console.log(localStorage.getItem('token'))
    axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token')
    const [time, setTime] = useState(new Date())
    useEffect(() => {
