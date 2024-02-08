@@ -16,9 +16,11 @@ const TasksPage = () => {
     name: 'Поставленные'
   }
 ]
+const addLi = li[1]
   return (
     <DefaultPage
     li={li}
+    addLi={addLi}
     statuses={statuses}
     >
       <TasksList 
