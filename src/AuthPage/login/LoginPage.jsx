@@ -16,6 +16,7 @@ async function loginUser(formData) {
          console.log(response)
          localStorage.setItem("token", response.data.token)
          localStorage.setItem("refreshToken", response.data.refreshToken)
+         localStorage.setItem("user", JSON.stringify(response.data.user))
          axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token
          if (response.status === 200) {
             return redirect('/la')

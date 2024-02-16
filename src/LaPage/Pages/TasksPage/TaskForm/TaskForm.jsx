@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router'
 import Loading from '../../../UI/Loading/Loading'
 import PopUpAdd from '../../../UI/PopUpAdd/PopUpAdd'
-import { Form } from 'react-router-dom'
+import { Form, useSearchParams } from 'react-router-dom'
 import moment from 'moment'
 
 const TaskForm = ({ func, data, isLoading, recipients }) => {
@@ -12,10 +12,14 @@ const TaskForm = ({ func, data, isLoading, recipients }) => {
       name: '',
       comment: '',
       expiryDate: '',
-      status: 'in_progress',
       timestamp: '',
       recipientId: ''
    })
+   const [searchParams, setSearchParams] = useSearchParams()
+
+   const status = searchParams.get('status')
+   console.log(status)
+   const [statusState,setStatusState] = useState('')
    function handleChange(event) {
       const { name, value, type, checked } = event.target
       setAddData(prevFormData => {
@@ -31,7 +35,8 @@ const TaskForm = ({ func, data, isLoading, recipients }) => {
          name: formData.get('name'),
          comment: formData.get("comment"),
          expiryDate: formData.get('expiryDate') + "T00:00:00.000+00:00",
-         recipientId: formData.get('recipientId')||data?.data.recipientId
+         recipientId: formData.get('recipientId') || data?.data.recipientId,
+         taskStatus:statusState
       }
 
       // recipientId:formData.get('recipientId')
@@ -44,7 +49,7 @@ const TaskForm = ({ func, data, isLoading, recipients }) => {
          comment: data?.data.comment,
          expiryDate: data?.data.expiryDate.substring(0, 10),
          timestamp: data?.data.timestamp,
-         recipientId: data?.data.recipientId
+         recipientId: data?.data.recipientId,
       })
    }, [data])
    if (isLoading) {
@@ -84,6 +89,7 @@ const TaskForm = ({ func, data, isLoading, recipients }) => {
                   required
                />
 
+
                {recipients && <>
                   <label htmlFor="recipient" className="add_label">Исполнитель</label>
                   <select
@@ -102,14 +108,21 @@ const TaskForm = ({ func, data, isLoading, recipients }) => {
 
                <button
                   className='add_btn'
+                  onClick={() => {setStatusState('IN_PROGRESS')}}
                >
-                  {btn_text}
+                  {status=='completed'?"Возобновить задачу":btn_text}
                </button>
+               {location.pathname.substring(0,14) === '/la/tasks/edit'&&status!=="completed"&&<button
+                  className='add_btn'
+                  onClick={() => {setStatusState('COMPLETED')}}
+               >
+                  {status=='completed'?'Возобновить задачу':'Завершить задачу'}
+               </button>}
                {data && <>
-                  <div style={{display:'flex',marginBottom:'-10px'}}>
+                  <div style={{ display: 'flex', marginBottom: '-10px' }}>
                      <label className="add_label">Дата создания:</label>
                      <div className='timestamp'>
-                     {moment(addData.timestamp).format('DD.MM.YYYY')}
+                        {moment(addData.timestamp).format('DD.MM.YYYY')}
                      </div>
                   </div>
                </>}

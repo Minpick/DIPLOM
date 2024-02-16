@@ -5,9 +5,9 @@ import axios from 'axios'
 import { useQuery } from 'react-query'
 import { fetchRecipients } from '../../API/requests'
 import Select from '../../Pages/TasksPage/Select/Select'
+import { userRole } from '../../Pages/TasksPage/TasksPage'
 
 const Header = () => {
-
    const [searchParams, setSearchParams] = useSearchParams()
    axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token')
    const [time, setTime] = useState(new Date())
@@ -19,6 +19,7 @@ const Header = () => {
          clearInterval(interval);
       };
    }, []);
+   const user = JSON.parse(localStorage.getItem('user'))
    const location = useLocation()
    const btn_text = location.pathname.substring(0, 7) === '/la/cli' ? 'Добавить клиента' :
       location.pathname.substring(0, 7) === '/la/emp' ? 'Добавить сотрудника' :
@@ -31,17 +32,17 @@ const Header = () => {
          <div className={style.select}>
             <Link
 
-               to={location.pathname.includes('edit') ? `/${location.pathname.match(/^\/([^\/]+\/[^\/]+)/)[1]}/new?${searchParams.toString()}` : `new?${searchParams.toString()}`}
+               to={location.pathname.includes('edit') ? `/${location.pathname.match(/^\/([^\/]+\/[^\/]+)/)[1]}/new?${searchParams.toString()}` : location.pathname.includes('new')?`?${searchParams.toString()}`:`new?${searchParams.toString()}`}
                relative='path'
                className={style.header__add_client}>{btn_text}
             </Link>
-            {location.pathname.substring(0, 7) === '/la/tas' && <Select />}
+            {location.pathname.substring(0, 7) === '/la/tas' && userRole=='ADMIN'&& <Select />}
          </div>
 
 
 
          <div className={style.header__time}>{time.toLocaleTimeString().substring(0, 5)}</div>
-         <div className={style.header__user}>Кирилл Бусарев
+         <div className={style.header__user}>{`${user.lastName} ${user.firstName}`}
             <Link
                onClick={() => { localStorage.clear(); axios.defaults.headers.common = {} }}
             >

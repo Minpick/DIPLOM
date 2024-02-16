@@ -8,6 +8,7 @@ import './CreateClient.scss'
 import ClientsForm from '../ClientsForm/ClientsForm'
 import { queryClient } from '../../../../App'
 import Loading from '../../../UI/Loading/Loading'
+import PopUpAdd from '../../../UI/PopUpAdd/PopUpAdd'
 
 
 export async function action({ request }) {
@@ -51,8 +52,8 @@ export async function action({ request }) {
       return redirect(`..?${searchParams}`)
    } catch (err) {
       // return <Loading/>
-      return err
       console.log(err.response.data.phone)
+      return err
    }
    finally{
       queryClient.invalidateQueries('clients')
@@ -82,10 +83,14 @@ const CreateClient = () => {
    }]
 
    return (
-      <ClientsForm
-         statuses={statuses}
-         action = {action}
-      />
+      <PopUpAdd>
+         <div className='form_wrapper'>
+            <ClientsForm
+               statuses={statuses}
+               action = {action}
+            />
+         </div>
+      </PopUpAdd>
    )
 }
 

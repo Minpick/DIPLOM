@@ -9,10 +9,14 @@ const ParamsBtns = ({ statuses}) => {
    const displayed = statuses.map((status) => {
       return (
          <NavLink
+         
          key={status.status}
             to={`?status=${status.status}${recipientId?`&recipientId=${recipientId}`:''}`}
             style={() => {
                return {
+                  color:"#5a5a5a",
+                  fontSize:'1.1rem',
+                  fontWeight:'700',
                   border: statusParam == status.status ? "1px solid #c1c1c1" : "",
                   backgroundColor: statusParam == status.status ? "transparent" : ""
                }

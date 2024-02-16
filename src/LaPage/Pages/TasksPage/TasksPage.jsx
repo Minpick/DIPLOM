@@ -2,6 +2,10 @@ import React from 'react'
 import DefaultPage from '../../Components/DefaultPage/DefaultPage'
 import TasksList from './TasksList/TasksList'
 
+
+export const userRole = 'ADMIN'
+
+
 const TasksPage = () => {
   const li = ['Задача','Постановщик','Крайний срок']
   const statuses = [{
@@ -16,15 +20,14 @@ const TasksPage = () => {
     name: 'Поставленные'
   }
 ]
-const addLi = li[1]
+
   return (
     <DefaultPage
     li={li}
-    addLi={addLi}
     statuses={statuses}
     >
       <TasksList 
-      userRole={'ADMIN'}
+      userRole={userRole}
       />
     </DefaultPage>
   )

@@ -16,7 +16,7 @@ const TasksList = ({ userRole }) => {
    const [searchParams, setSearchParams] = useSearchParams()
 
    const status = searchParams.get('status')
-
+   const recipientId = searchParams.get('recipientId')
    if (userRole == 'ADMIN') {
       let id = searchParams.get('recipientId')
       if (!id) {
@@ -50,7 +50,7 @@ const TasksList = ({ userRole }) => {
                <div className={style.clients__field}>
                   {task.name}
                </div>
-               {status === 'produce' ?
+               {(status === 'produce'||(userRole==='ADMIN'&&!recipientId)) ?
                   <div href="#" className={style.clients__field}>
                      {task.recipient}
                   </div> :

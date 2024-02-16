@@ -5,13 +5,10 @@
       // grid-template-columns: 1fr 1fr 1fr;
       display: flex;
       justify-content: space-around;
-      a {
-         font-size: 1.1rem;
-         color: #5a5a5a;
-         font-weight: 700;
-      }
+     
    }
    &__navbar_btn {
+     
       width: 100%;
       background-color: #cccccc;
       padding: 5px;

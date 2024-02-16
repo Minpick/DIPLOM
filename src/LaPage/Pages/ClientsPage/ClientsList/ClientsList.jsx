@@ -35,7 +35,7 @@ const ClientsList = () => {
       return (
             <li key={client.id}
                className={classNames('clients__item')}>
-               <Link to={`edit/${client.id}?${searchParams.toString()}`}
+               <Link to={`${client.id}/edit?${searchParams.toString()}`}
                   className={classNames(style.clients__item, 'clients__item')}>
                   <div className={style.clients__field}>
                      {client.lastName + ' ' + client.firstName + ' ' + client.patronymic}

@@ -7,11 +7,13 @@ import logo from '../../LaPage/images/logo-black.png'
 
 
 async function regUser(formData) {
-  const data = axios.post('http://localhost:8085/signup', {
-    phone: formData.get('phone'),
-    password: formData.get('password'),
-    confirmPassword: formData.get('confirmPassword')
-  },{headers:{}})
+   const user = {
+      phone: formData.get('phone'),
+      password: formData.get('password'),
+      confirmPassword: formData.get('confirmPassword')
+   }
+   console.log(user)
+  const data = axios.post('http://localhost:8085/signup', user ,{headers:{}})
     .then(function (response) {
       console.log(response)
       if(response.status===200){

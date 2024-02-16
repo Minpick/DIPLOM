@@ -6,6 +6,7 @@ import axios from 'axios'
 import { queryClient } from '../../../../App'
 import ClientsForm from '../../ClientsPage/ClientsForm/ClientsForm'
 import Loading from '../../../UI/Loading/Loading'
+import PopUpAdd from '../../../UI/PopUpAdd/PopUpAdd'
 
 export async function action({request,params}) {
    const searchParams = new URL(request.url)
@@ -20,6 +21,7 @@ export async function action({request,params}) {
    const birth = formData.get("birth")
    const passport = formData.get("passport")
    const patronymic = formData.get("patronymic")
+   const role = formData.get("role")
 
    const user = {
       firstName: firstName,
@@ -29,7 +31,7 @@ export async function action({request,params}) {
       patronymic: patronymic,
       birth: birth,
       passport: passport,
-      role: 'ROLE_EMPLOYEE',
+      role: role,
       status: "IN_PROGRESS"
    }
 
@@ -62,9 +64,11 @@ const EditEmployee = () => {
       )
    }
    return (
-      <>
-         <ClientsForm data={data} isLoading={isLoading} />
-      </>
+      <PopUpAdd>
+         <div className='form_wrapper'>
+            <ClientsForm data={data} isLoading={isLoading} />
+         </div>
+      </PopUpAdd>
    )
 
 }

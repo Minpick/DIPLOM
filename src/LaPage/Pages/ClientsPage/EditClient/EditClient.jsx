@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import PopUpAdd from '../../../UI/PopUpAdd/PopUpAdd'
-import { Await, Form, defer, redirect, useLoaderData, useParams, useSearchParams } from 'react-router-dom'
+import { Await, Form, Link, defer, redirect, useActionData, useLoaderData, useParams, useSearchParams } from 'react-router-dom'
 import { BASE_URL, fetchClient } from '../../../API/requests'
 import { useMutation, useQuery } from 'react-query'
 import axios from 'axios'
 import { queryClient } from '../../../../App'
 import ClientsForm from '../ClientsForm/ClientsForm'
 import Loading from '../../../UI/Loading/Loading'
+import DealBtns from '../../DealPage/DealBtns/DealBtns'
+import './EditClient.scss'
 
-export async function action({ request,params }) {
-  
+export async function action({ request, params }) {
+
    const searchParams = new URL(request.url)
-   .searchParams.toString()
+      .searchParams.toString()
    const formData = await request.formData()
    const email = formData.get("email")
    const phone = formData.get("phone")
@@ -24,12 +26,12 @@ export async function action({ request,params }) {
    const comment = formData.get("comment")
    const passport = formData.get("passport")
    const patronymic = formData.get("patronymic")
-   
+
    const user = {
       firstName: firstName,
       lastName: lastName,
-      email:email,
-      phone:phone,
+      email: email,
+      phone: phone,
       status: status,
       patronymic: patronymic,
       login: login,
@@ -39,21 +41,24 @@ export async function action({ request,params }) {
       passport: passport
 
    }
-   
+
    console.log(user)
    try {
       const data = await axios.patch(`${BASE_URL}/employee/clients/${params.id}`, user)
       return redirect(`..?${searchParams}`)
    } catch (err) {
+      console.log(err.response.data)
       return err
    }
-   finally{
+   finally {
       queryClient.invalidateQueries('clients')
    }
 }
 
 const EditClient = () => {
+   const action = useActionData()
    const { id } = useParams()
+   const [searchParams,setSearchParams]= useSearchParams()
    const { data, isLoading } = useQuery({ queryKey: ['client'], queryFn: () => fetchClient(id) })
    const editClient = useMutation((user) => {
       return axios.patch(`${BASE_URL}/employee/clients/${id}`, user);
@@ -79,11 +84,25 @@ const EditClient = () => {
    }
    return (
       <>
-         <ClientsForm
-            isLoading={isLoading}
-            data={data}
-            statuses={statuses}
-         />
+         <PopUpAdd>
+            <div className='form_wrapper'>
+
+               <div className='form_btns_wrapper'>
+                  <Link
+                  to={`/la/clients/${id}/edit?${searchParams.toString()}`}
+                  className='form_btn'>
+                  {data? data?.data.lastName+' '+ data?.data.firstName:'Клиент'}
+                  </Link>
+                  <DealBtns/>
+               </div>
+               <ClientsForm
+                  isLoading={isLoading}
+                  data={data}
+                  statuses={statuses}
+                  action={action}
+               />
+            </div>
+         </PopUpAdd>
       </>
    )
 }

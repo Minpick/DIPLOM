@@ -1,0 +1,23 @@
+.form_btns_wrapper {
+   height: 40px;
+   // background-color: red;
+   border-bottom: 1px solid #c1c1c1;
+   width: 100%;
+   display: flex;
+   justify-content: space-around;
+   a {
+      color: black;
+   }
+}
+.form_btn {
+   color: black;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 100%;
+   border-left: 1px solid rgba(0, 0, 0, 0.307);
+   &:first-child {
+      border-left: none;
+   }
+}
+

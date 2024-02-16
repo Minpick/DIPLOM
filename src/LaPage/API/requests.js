@@ -56,8 +56,8 @@ axios.interceptors.response.use(
    }
 );
 
-export async function fetchClients(page = 0,status='in_progress',pageSize=12) {
-   const data = await axios.get(`${BASE_URL}/employee/clients?offset=${page}&pageSize=${pageSize}&status=${status}`)
+export async function fetchClients(page = 0,status,pageSize=12) {
+   const data = await axios.get(`${BASE_URL}/employee/clients?offset=${page}&pageSize=${pageSize}&status=${status?status:'in_progress'}`)
    return data
 }
 export async function fetchTasks(page,status) {
