@@ -15,9 +15,17 @@
    justify-content: center;
    align-items: center;
    width: 100%;
+   transition: all .5s;
+   background-color: transparent;
    border-left: 1px solid rgba(0, 0, 0, 0.307);
    &:first-child {
       border-left: none;
    }
+   &:hover{
+      background-color: #e6e6e6;
+   }
+}
+.form_btn_active{
+   background-color: #e3e3e3;
 }
 

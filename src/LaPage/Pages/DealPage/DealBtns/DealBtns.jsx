@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { useQuery } from 'react-query'
-import { Link, useParams } from 'react-router-dom'
+import { Link, NavLink, useParams } from 'react-router-dom'
 import { BASE_URL } from '../../../API/requests'
 import style from './DealBtns.module.scss'
 import classNames from 'classnames'
@@ -13,39 +13,59 @@ async function fetchDeals(id) {
 }
 
 const DealBtns = () => {
-   const { id } = useParams()
+   const { id, deal } = useParams()
    const { data } = useQuery({ queryKey: ['deals'], queryFn: () => fetchDeals(id) })
    const [showList, setShowList] = useState(false)
-   const list = data?.data.map((el, index, arr) => {
+   const list = data?.data.map((el) => {
       return (
-         <>
-            <Link
-               className={style.list_item}
-               to={`/la/clients/${id}/deal`}
-               onClick={() => setShowList(false)}
-            >
-               {el.name}
-            </Link>
-            {index === arr.length - 1 &&
-               <Link
-               to={`/la/clients/${id}/deal/new`}
-                  className={style.plus}>
-                  <span>&#43;</span>
-               </Link>
-            }
-         </>
+
+         <Link
+            key={el.id}
+            className={style.list_item}
+            to={`/la/clients/${id}/deal/${el.id}`}
+            onClick={() => setShowList(false)}
+         >
+            {el.name}
+         </Link>
+
+
       )
    })
+   list?.push(<Link
+      key={'plus-sign'}
+      to={`/la/clients/${id}/deal/new`}
+      className={style.plus}>
+      <span>&#43;</span>
+   </Link>)
+   if (deal) {
+      var displayed = data?.data.map((el) => {
+         if (el.id == deal) {
+            return (
+               <NavLink
+                  className={({ isActive }) =>
+                     isActive ? classNames(style.active, style.link) : style.link
+                  }
+                  to={`/la/clients/${id}/deal/${el.id}`}
+               >
+                  {el.name}
+               </NavLink>
+            )
+         }
+      })
+   }
    return (
       <>
          {data?.data.length !== 0 &&
             <div className={classNames('form_btn', style.wrapper)}>
-               {!showList && <Link
-                  className={style.link}
-                  to={`/la/clients/${id}/deal`}
+               {!showList && !deal && <NavLink
+                  className={({ isActive }) =>
+                     isActive ? classNames(style.active, style.link) : style.link
+                  }
+                  to={`/la/clients/${id}/deal/${data?.data[0].id}`}
                >
                   {data?.data[0].name}
-               </Link>}
+               </NavLink>}
+               {deal && displayed}
                {showList && <div className={style.list}>{list}</div>}
                <div
                   onClick={() => setShowList((prev) => !prev)}
@@ -55,10 +75,21 @@ const DealBtns = () => {
             </div>
          }
          {data?.data.length === 0 &&
-            <div
+            <Link
+               to={`/la/clients/${id}/deal/new`}
                className='form_btn'
             >Создать сделку
-            </div>}
+            </Link>}
+         {/* <div className={classNames('form_btn', style.wrapper)}>
+            {!showList && { displayed }}
+            {showList && <div className={style.list}>{list}</div>}
+            <div
+               onClick={() => setShowList((prev) => !prev)}
+               className={style.triangle_down}>
+
+            </div>
+         </div> */}
+
       </>
    )
 }

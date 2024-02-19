@@ -30,7 +30,10 @@ import EditTask, { action as EditTaskAction } from './LaPage/Pages/TasksPage/Edi
 import ChatPage from './LaPage/Pages/ChatPage/ChatPage'
 import ChatWindow from './LaPage/Pages/ChatPage/ChatWindow/ChatWindow'
 import DealPage from './LaPage/Pages/DealPage/DealPage'
-import CreateDeal from './LaPage/Pages/DealPage/CreateDeal/CreateDeal'
+import CreateDeal, { action as CreateDealAction } from './LaPage/Pages/DealPage/CreateDeal/CreateDeal'
+import DealPayment from './LaPage/Pages/DealPage/DealPayment/DealPayment'
+import DealMail from './LaPage/Pages/DealPage/DealMail/DealMail'
+import DealProgress from './LaPage/Pages/DealPage/DealProgress/DealProgress'
 
 
 export const queryClient = new QueryClient({
@@ -67,7 +70,13 @@ const router = createBrowserRouter(createRoutesFromElements(
         <Route path='new' action={CreateClientAction} element={<CreateClient />} />
         <Route path=':id/edit' action={EditClientAction} element={<EditClient />} />
         <Route path=':id/deal' element={<DealPage />}>
-          <Route path='new' element={<CreateDeal />} />
+          <Route path='new' action={CreateDealAction} element={<CreateDeal />} />
+          <Route path=':deal'>
+            <Route index element={<Navigate to='progress' replace />} />
+            <Route path='payment' element={<DealPayment />} />
+            <Route path='mail' element={<DealMail />} />
+            <Route path='progress' element={<DealProgress />} />
+          </Route>
         </Route>
       </Route>
 

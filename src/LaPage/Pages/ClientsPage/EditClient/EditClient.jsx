@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import PopUpAdd from '../../../UI/PopUpAdd/PopUpAdd'
-import { Await, Form, Link, defer, redirect, useActionData, useLoaderData, useParams, useSearchParams } from 'react-router-dom'
+import { Await, Form, Link, NavLink, defer, redirect, useActionData, useLoaderData, useParams, useSearchParams } from 'react-router-dom'
 import { BASE_URL, fetchClient } from '../../../API/requests'
 import { useMutation, useQuery } from 'react-query'
 import axios from 'axios'
@@ -9,6 +9,7 @@ import ClientsForm from '../ClientsForm/ClientsForm'
 import Loading from '../../../UI/Loading/Loading'
 import DealBtns from '../../DealPage/DealBtns/DealBtns'
 import './EditClient.scss'
+import classNames from 'classnames'
 
 export async function action({ request, params }) {
 
@@ -58,7 +59,7 @@ export async function action({ request, params }) {
 const EditClient = () => {
    const action = useActionData()
    const { id } = useParams()
-   const [searchParams,setSearchParams]= useSearchParams()
+   const [searchParams, setSearchParams] = useSearchParams()
    const { data, isLoading } = useQuery({ queryKey: ['client'], queryFn: () => fetchClient(id) })
    const editClient = useMutation((user) => {
       return axios.patch(`${BASE_URL}/employee/clients/${id}`, user);
@@ -88,12 +89,16 @@ const EditClient = () => {
             <div className='form_wrapper'>
 
                <div className='form_btns_wrapper'>
-                  <Link
-                  to={`/la/clients/${id}/edit?${searchParams.toString()}`}
-                  className='form_btn'>
-                  {data? data?.data.lastName+' '+ data?.data.firstName:'Клиент'}
-                  </Link>
-                  <DealBtns/>
+                  <NavLink
+                     to={`/la/clients/${id}/edit?${searchParams.toString()}`}
+                     // className='form_btn'
+                     className={({ isActive }) =>
+                        isActive ? classNames('form_btn', 'form_btn_active') : 'form_btn'
+                     }
+                  >
+                     {data ? data?.data.lastName + ' ' + data?.data.firstName : 'Клиент'}
+                  </NavLink>
+                  <DealBtns />
                </div>
                <ClientsForm
                   isLoading={isLoading}

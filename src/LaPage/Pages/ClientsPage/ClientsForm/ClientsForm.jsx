@@ -5,7 +5,7 @@ import './ClientsForm.scss'
 import Loading from '../../../UI/Loading/Loading'
 import Warning from '../../../UI/Warning/Warning'
 
-const ClientsForm = ({  data, statuses, isLoading, action }) => {
+const ClientsForm = ({ data, statuses, isLoading, action }) => {
    const [actionState, setActionState] = useState()
    useEffect(() => {
       if (action) {
@@ -57,9 +57,9 @@ const ClientsForm = ({  data, statuses, isLoading, action }) => {
    //       password: formData.get('password')
    //    }
    //    console.log(user)
-   
+
    //       func.mutate(user)
-      
+
    // }
    data && useEffect(() => {
       setAddData({
@@ -87,141 +87,141 @@ const ClientsForm = ({  data, statuses, isLoading, action }) => {
    }
    return (
 
-      
-            <>
-            
-            {/* {actionState &&
+
+      <>
+
+         {/* {actionState &&
                <Warning onClick={hideWarning} message={action?.response.data.phone?action?.response.data.phone:action?.response.data} />} */}
-            <Form
-               // onSubmit={(event) => onSubmit(event)}
-               method="post"
-               className="add_form"
-               replace
-            >
-               <div className='add_left'>
-                  <label htmlFor="lastName" className="add_label">Фамилия*</label>
-                  <input
-                     required
-                     name="lastName"
-                     onChange={handleChange}
-                     value={addData.lastName || ''}
-                     type="text"
-                     className='add_input'
-                  />
-                  <label htmlFor="firstName" className="add_label">Имя*</label>
-                  <input
-                     name="firstName"
-                     type="text"
-                     onChange={handleChange}
-                     value={addData.firstName || ''}
-                     required
-                     className='add_input'
-   
-                  />
-                  <label htmlFor="patronymic" className="add_label">Отчество</label>
-                  <input
-                     name="patronymic"
-                     value={addData.patronymic || ''}
-                     type="text"
-                     className='add_input'
-                     onChange={handleChange}
-                  />
-                  <label htmlFor="email" className="add_label">Электронная почта</label>
-                  <input
-                     name="email"
-                     type="email"
-                     value={addData.email || ''}
-                     className='add_input'
-                     onChange={handleChange}
-                  />
-                  <label htmlFor="phone" className="add_label">Телефон*</label>
-                  <input
-                     required
-                     name="phone"
-                     type="phone"
-                     value={addData.phone || ''}
-                     className='add_input'
-                     onChange={handleChange}
-                  />
-                  <label htmlFor="passport" className="add_label">Паспорт</label>
-                  <input
-                     name="passport"
-                     type="text"
-                     value={addData.passport || ''}
-                     className='add_input'
-                     onChange={handleChange}
-                  />
-                  <label htmlFor="birth" className="add_label">Дата рождения</label>
-                  <input
-                     name="birth"
-                     type="date"
-                     value={addData.birth || ''}
-                     className='add_input'
-                     onChange={handleChange}
-                  />
-                  {location.pathname.substring(0,11) === '/la/clients'&&!data?.data.role &&
-                     <>
-                        <label htmlFor="login" className="add_label">Логин госуслуг</label>
-                        <input
-                           name="login"
-                           type="text"
-                           value={addData.login || ''}
-                           className='add_input'
-                           onChange={handleChange}
-                        />
-                        <label htmlFor="password" className="add_label">Пароль госуслуг</label>
-                        <input
-                           name="password"
-                           type="text"
-                           value={addData.password || ''}
-                           className='add_input'
-                           onChange={handleChange}
-                        />
-                     </>
-                  }
-   
-                  {statuses && <>
-                     <label htmlFor="status" className="add_label">Статус</label>
-                     <select
-                        name='status'
-                        value={addData.status}
+         <Form
+            // onSubmit={(event) => onSubmit(event)}
+            method="post"
+            className="add_form"
+            replace
+         >
+            <div className='add_left'>
+               <label htmlFor="lastName" className="add_label">Фамилия*</label>
+               <input
+                  required
+                  name="lastName"
+                  onChange={handleChange}
+                  value={addData.lastName || ''}
+                  type="text"
+                  className='add_input'
+               />
+               <label htmlFor="firstName" className="add_label">Имя*</label>
+               <input
+                  name="firstName"
+                  type="text"
+                  onChange={handleChange}
+                  value={addData.firstName || ''}
+                  required
+                  className='add_input'
+
+               />
+               <label htmlFor="patronymic" className="add_label">Отчество</label>
+               <input
+                  name="patronymic"
+                  value={addData.patronymic || ''}
+                  type="text"
+                  className='add_input'
+                  onChange={handleChange}
+               />
+               <label htmlFor="email" className="add_label">Электронная почта</label>
+               <input
+                  name="email"
+                  type="email"
+                  value={addData.email || ''}
+                  className='add_input'
+                  onChange={handleChange}
+               />
+               <label htmlFor="phone" className="add_label">Телефон*</label>
+               <input
+                  required
+                  name="phone"
+                  type="phone"
+                  value={addData.phone || ''}
+                  className='add_input'
+                  onChange={handleChange}
+               />
+               <label htmlFor="passport" className="add_label">Паспорт</label>
+               <input
+                  name="passport"
+                  type="text"
+                  value={addData.passport || ''}
+                  className='add_input'
+                  onChange={handleChange}
+               />
+               <label htmlFor="birth" className="add_label">Дата рождения</label>
+               <input
+                  name="birth"
+                  type="date"
+                  value={addData.birth || ''}
+                  className='add_input'
+                  onChange={handleChange}
+               />
+               {location.pathname.substring(0, 11) === '/la/clients' && !data?.data.role &&
+                  <>
+                     <label htmlFor="login" className="add_label">Логин госуслуг</label>
+                     <input
+                        name="login"
+                        type="text"
+                        value={addData.login || ''}
+                        className='add_input'
                         onChange={handleChange}
-                        className='add_select'>
-                        {statuses.map((status) => {
-                           return (
-                              <option key={status.status} value={status.status.toUpperCase()}>{status.name}</option>
-                           )
-                        })}
-                     </select>
-                  </>}
-                  {location.pathname.substring(0,11) === '/la/employe'&& <>
-                     <label htmlFor="role" className="add_label">Права</label>
-                     <select
-                        name='role'
-                        value={addData.role}
+                     />
+                     <label htmlFor="password" className="add_label">Пароль госуслуг</label>
+                     <input
+                        name="password"
+                        type="text"
+                        value={addData.password || ''}
+                        className='add_input'
                         onChange={handleChange}
-                        className='add_select'>
-                        <option value='ROLE_EMPLOYEE'>Сотрудник</option>
-                        <option value='ROLE_ADMIN'>Администратор</option>
-                     </select>
-                  </>}
-                  <button
-                     className='add_btn'
-                  >
-                     {btn_text}
-                  </button>
-               </div>
-               {location.pathname.substring(0,11) === '/la/clients'&&!data?.data.role && <div className='add_right'>
-                  <textarea
-                     placeholder="Комментарии"
-                     name="comment"
-                     value={addData.comment || ''}
-                     className="add_comment"
+                     />
+                  </>
+               }
+
+               {statuses && <>
+                  <label htmlFor="status" className="add_label">Статус</label>
+                  <select
+                     name='status'
+                     value={addData.status}
                      onChange={handleChange}
-                  />
-               </div>}
-            </Form>
-            </>
+                     className='add_select'>
+                     {statuses.map((status) => {
+                        return (
+                           <option key={status.status} value={status.status.toUpperCase()}>{status.name}</option>
+                        )
+                     })}
+                  </select>
+               </>}
+               {location.pathname.substring(0, 11) === '/la/employe' && <>
+                  <label htmlFor="role" className="add_label">Права</label>
+                  <select
+                     name='role'
+                     value={addData.role}
+                     onChange={handleChange}
+                     className='add_select'>
+                     <option value='ROLE_EMPLOYEE'>Сотрудник</option>
+                     <option value='ROLE_ADMIN'>Администратор</option>
+                  </select>
+               </>}
+               <button
+                  className='add_btn'
+               >
+                  {btn_text}
+               </button>
+            </div>
+            {location.pathname.substring(0, 11) === '/la/clients' && !data?.data.role && <div className='add_right'>
+               <textarea
+                  placeholder="Комментарии"
+                  name="comment"
+                  value={addData.comment || ''}
+                  className="add_comment"
+                  onChange={handleChange}
+               />
+            </div>}
+         </Form>
+      </>
    )
 }
 
