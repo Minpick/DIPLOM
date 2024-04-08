@@ -59,6 +59,7 @@ const TaskForm = ({ func, data, isLoading, recipients }) => {
    }
    return (
       <PopUpAdd>
+         <div className='form_wrapper'>
          <Form
             onSubmit={(event) => onSubmit(event)}
             method="post"
@@ -137,6 +138,7 @@ const TaskForm = ({ func, data, isLoading, recipients }) => {
                />
             </div>
          </Form>
+         </div>
       </PopUpAdd >
    )
 }

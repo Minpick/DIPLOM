@@ -31,9 +31,10 @@ import ChatPage from './LaPage/Pages/ChatPage/ChatPage'
 import ChatWindow from './LaPage/Pages/ChatPage/ChatWindow/ChatWindow'
 import DealPage from './LaPage/Pages/DealPage/DealPage'
 import CreateDeal, { action as CreateDealAction } from './LaPage/Pages/DealPage/CreateDeal/CreateDeal'
-import DealPayment from './LaPage/Pages/DealPage/DealPayment/DealPayment'
-import DealMail from './LaPage/Pages/DealPage/DealMail/DealMail'
-import DealProgress from './LaPage/Pages/DealPage/DealProgress/DealProgress'
+import DealPayment,{action as DealPaymentAction} from './LaPage/Pages/DealPage/DealPayment/DealPayment'
+import DealMail,{action as DealMailAction} from './LaPage/Pages/DealPage/DealMail/DealMail'
+import DealProgress,{action as DealProgressAction} from './LaPage/Pages/DealPage/DealProgress/DealProgress'
+import CalendarPage from './LaPage/Pages/CalendarPage/CalendarPage'
 
 
 export const queryClient = new QueryClient({
@@ -73,9 +74,9 @@ const router = createBrowserRouter(createRoutesFromElements(
           <Route path='new' action={CreateDealAction} element={<CreateDeal />} />
           <Route path=':deal'>
             <Route index element={<Navigate to='progress' replace />} />
-            <Route path='payment' element={<DealPayment />} />
-            <Route path='mail' element={<DealMail />} />
-            <Route path='progress' element={<DealProgress />} />
+            <Route path='payment' action={DealPaymentAction} element={<DealPayment />} />
+            <Route path='mail' action={DealMailAction} element={<DealMail />} />
+            <Route path='progress' action={DealProgressAction} element={<DealProgress />} />
           </Route>
         </Route>
       </Route>
@@ -98,6 +99,7 @@ const router = createBrowserRouter(createRoutesFromElements(
       <Route path='chat' element={<ChatPage />} >
         <Route path=':id' element={<ChatWindow />} />
       </Route>
+      <Route  path='calendar' element={<CalendarPage/>}/>
     </Route>
   </Route>
 ), { basename: '/' })

@@ -42,6 +42,7 @@ const DealBtns = () => {
          if (el.id == deal) {
             return (
                <NavLink
+               key={el.id}
                   className={({ isActive }) =>
                      isActive ? classNames(style.active, style.link) : style.link
                   }

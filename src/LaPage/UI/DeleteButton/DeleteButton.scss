@@ -21,3 +21,27 @@
     right: 30px;
   }
 }
+.dealItem{
+  position: relative;
+}
+.dealItem:hover {
+  .delete_btn{
+    display: block;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    right: 0px;
+    // margin-left: 50px;
+  }
+}
+.shown_delete_btn{
+  display: block;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    right: 0px;
+}

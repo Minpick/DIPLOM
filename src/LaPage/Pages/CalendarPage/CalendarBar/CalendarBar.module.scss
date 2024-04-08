@@ -1,0 +1,31 @@
+.wrapper {
+   color: black;
+   display: flex;
+   font-size: 1.2rem;
+   align-items: center;
+   justify-content: space-around;
+}
+.left{
+   color: black;
+   display: flex;
+   font-size: 1.2rem;
+   align-items: center;
+   width: 100%;
+}
+.month {
+   margin: 10px;
+}
+.year {
+   margin: 10px;
+   margin-left: 0;
+}
+.right{
+   display: flex;
+   justify-content: flex-end;
+   width: 100%;
+   height: 40px;
+   align-items: center;
+}
+.btns{
+   margin-top: 5px;
+}
