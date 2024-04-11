@@ -95,8 +95,6 @@ const DealProgress = () => {
                         size='large'
                      />
 
-
-
                </Space>
                <input
                   className={style.input}

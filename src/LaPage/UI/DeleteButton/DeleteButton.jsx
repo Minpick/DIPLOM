@@ -3,11 +3,12 @@ import './DeleteButton.scss'
 import classNames from 'classnames'
 
 
-const DeleteButton = ({ onClick ,shown}) => {
+const DeleteButton = ({ onClick ,shown, toLeft}) => {
    return (
       <button
          className={shown?classNames('delete_btn','shown_delete_btn'):'delete_btn'}
          onClick={onClick}
+         style={toLeft?{left:'0'}:{right:'0'}}
       // onClick={(event) => deleteClient(event, client.id)}
 
       >

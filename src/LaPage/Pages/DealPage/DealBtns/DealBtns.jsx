@@ -1,10 +1,12 @@
 import axios from 'axios'
 import React, { useState } from 'react'
-import { useQuery } from 'react-query'
-import { Link, NavLink, useParams } from 'react-router-dom'
+import { useMutation, useQuery } from 'react-query'
+import { Link, NavLink, Navigate, useNavigate, useParams } from 'react-router-dom'
 import { BASE_URL } from '../../../API/requests'
 import style from './DealBtns.module.scss'
 import classNames from 'classnames'
+import DeleteButton from '../../../UI/DeleteButton/DeleteButton'
+import { queryClient } from '../../../../App'
 
 
 async function fetchDeals(id) {
@@ -14,6 +16,15 @@ async function fetchDeals(id) {
 
 const DealBtns = () => {
    const { id, deal } = useParams()
+   const navigate = useNavigate()
+   const deleteDeal = useMutation((id) => {
+      return axios.delete(`${BASE_URL}/deal/${id}`);
+   }, {
+      onSuccess: () => {
+         queryClient.invalidateQueries('deals')
+         navigate(`/la/clients/${id}/edit`)
+      },
+   });
    const { data } = useQuery({ queryKey: ['deals'], queryFn: () => fetchDeals(id) })
    const [showList, setShowList] = useState(false)
    const list = data?.data.map((el) => {
@@ -42,12 +53,13 @@ const DealBtns = () => {
          if (el.id == deal) {
             return (
                <NavLink
-               key={el.id}
+                  key={el.id}
                   className={({ isActive }) =>
                      isActive ? classNames(style.active, style.link) : style.link
                   }
                   to={`/la/clients/${id}/deal/${el.id}`}
                >
+                  <DeleteButton onClick={() => deleteDeal.mutate(el.id)} shown={true} toLeft={true}/>
                   {el.name}
                </NavLink>
             )

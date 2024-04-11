@@ -35,12 +35,14 @@ import DealPayment,{action as DealPaymentAction} from './LaPage/Pages/DealPage/D
 import DealMail,{action as DealMailAction} from './LaPage/Pages/DealPage/DealMail/DealMail'
 import DealProgress,{action as DealProgressAction} from './LaPage/Pages/DealPage/DealProgress/DealProgress'
 import CalendarPage from './LaPage/Pages/CalendarPage/CalendarPage'
+import DayInfo,{action as DayInfoAction} from './LaPage/Pages/CalendarPage/DayInfo/DayInfo'
+import BiddingPage from './LaPage/Pages/BiddingPage/BiddingPage'
 
 
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      // keepPreviousData:false,
+      keepPreviousData:false,
       refetchOnWindowFocus: false
     },
   },
@@ -99,7 +101,10 @@ const router = createBrowserRouter(createRoutesFromElements(
       <Route path='chat' element={<ChatPage />} >
         <Route path=':id' element={<ChatWindow />} />
       </Route>
-      <Route  path='calendar' element={<CalendarPage/>}/>
+      <Route  path='calendar' element={<CalendarPage/>}>
+        <Route   path='info' element={<DayInfo/>} action={DayInfoAction}/>
+      </Route>
+      <Route path='bidding' element={<BiddingPage/>}/>
     </Route>
   </Route>
 ), { basename: '/' })

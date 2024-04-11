@@ -2,6 +2,7 @@
 @import "../../scss/global";
 .services {
    padding: 100px 0 50px;
+   // background-color: #e6e6e6;
    &__heading {
       font-size: 1.8rem;
       font-weight: 400;
@@ -49,8 +50,8 @@
       font-size: 0.9rem;
    }
 }
-@media(max-width:1000px){
-   .services__items{
+@media (max-width: 1000px) {
+   .services__items {
       grid-template-columns: 1fr;
    }
 }
