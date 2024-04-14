@@ -21,22 +21,25 @@ const Header = () => {
    }, []);
    const user = JSON.parse(localStorage.getItem('user'))
    const location = useLocation()
-   const btn_text = location.pathname.substring(0, 7) === '/la/cli' ? 'Добавить клиента' :
-      location.pathname.substring(0, 7) === '/la/emp' ? 'Добавить сотрудника' :
-         location.pathname.substring(0, 7) === '/la/tas' ? 'Добавить задачу' :
-            'Добавить сделку'
-
+   const text = {
+      '/la/cli': 'Добавить клиента',
+      '/la/emp': 'Добавить сотрудника',
+      '/la/tas': 'Добавить задачу',
+      '/la/bid': 'Добавить лот'
+   }
+   const hidden = ['/la/cha', '/la/cal']
    return (
       <div className={style.header}>
 
          <div className={style.select}>
-            <Link
 
-               to={location.pathname.includes('edit') ? `/${location.pathname.match(/^\/([^\/]+\/[^\/]+)/)[1]}/new?${searchParams.toString()}` : location.pathname.includes('new')?`?${searchParams.toString()}`:`new?${searchParams.toString()}`}
+            {hidden.indexOf(location.pathname.substring(0, 7)) < 0 && <Link
+               to={location.pathname.includes('edit') ? `/${location.pathname.match(/^\/([^\/]+\/[^\/]+)/)[1]}/new?${searchParams.toString()}` : location.pathname.includes('new') ? `?${searchParams.toString()}` : `new?${searchParams.toString()}`}
                relative='path'
-               className={style.header__add_client}>{btn_text}
-            </Link>
-            {location.pathname.substring(0, 7) === '/la/tas' && userRole=='ADMIN'&& <Select />}
+               className={style.header__add_client}>
+                  {text[location.pathname.substring(0,7)]}
+            </Link>}
+            {location.pathname.substring(0, 7) === '/la/tas' && userRole == 'ADMIN' && <Select />}
          </div>
 
 

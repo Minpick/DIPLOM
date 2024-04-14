@@ -37,12 +37,14 @@ import DealProgress,{action as DealProgressAction} from './LaPage/Pages/DealPage
 import CalendarPage from './LaPage/Pages/CalendarPage/CalendarPage'
 import DayInfo,{action as DayInfoAction} from './LaPage/Pages/CalendarPage/DayInfo/DayInfo'
 import BiddingPage from './LaPage/Pages/BiddingPage/BiddingPage'
+import CreateBidding, {action as CreateBiddingAction} from './LaPage/Pages/BiddingPage/CreateBidding/CreateBidding'
+import EditBidding,{action as EditBiddingAction} from './LaPage/Pages/BiddingPage/EditBidding/EditBidding'
 
 
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      keepPreviousData:false,
+      // keepPreviousData:false,
       refetchOnWindowFocus: false
     },
   },
@@ -104,7 +106,16 @@ const router = createBrowserRouter(createRoutesFromElements(
       <Route  path='calendar' element={<CalendarPage/>}>
         <Route   path='info' element={<DayInfo/>} action={DayInfoAction}/>
       </Route>
-      <Route path='bidding' element={<BiddingPage/>}/>
+      <Route path='bidding' element={<BiddingPage/>}>
+      <Route path='new'
+          action={CreateBiddingAction}
+          element={<CreateBidding />}
+        />
+        <Route path='edit/:id'
+          action={EditBiddingAction}
+          element={<EditBidding />}
+        />
+      </Route>
     </Route>
   </Route>
 ), { basename: '/' })

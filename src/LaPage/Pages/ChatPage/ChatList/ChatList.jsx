@@ -16,7 +16,7 @@ const ChatList = () => {
    }
    const clients = data?.data.map((client) => {
       return (
-         <Link className={style.item} to={`${client.id}`}>{client.lastName} {client.firstName}</Link>
+         <Link className={style.item} key={client.id} to={`${client.id}`}>{client.lastName} {client.firstName}</Link>
       )
    })
    return (

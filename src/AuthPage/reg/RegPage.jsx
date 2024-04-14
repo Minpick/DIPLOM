@@ -13,7 +13,7 @@ async function regUser(formData) {
       confirmPassword: formData.get('confirmPassword')
    }
    console.log(user)
-  const data = axios.post('http://localhost:8085/signup', user ,{headers:{}})
+  const data = axios.post('http://localhost:8085/signup', user)
     .then(function (response) {
       console.log(response)
       if(response.status===200){

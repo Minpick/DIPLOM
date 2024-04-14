@@ -1,0 +1,97 @@
+@import "../../../../LandingPage/scss/global";
+.clients{
+   &__item {
+   width: 100%;
+   padding: 10px 0;
+   display: grid;
+   grid-template-columns: 1fr 1fr 1fr;
+   position: relative;
+   text-align: center;
+   color: $dgray;
+   font-size: 1.1rem;
+   font-weight: 400;
+   position: relative;
+   transition: all 0.4s;
+   background-color: transparent;
+   a {
+     color: $dgray;
+   }
+  
+   &::after {
+     position: absolute;
+     content: "";
+     bottom: 0;
+     left: 0;
+     right: 0;
+     height: 1px;
+     background-color: #94949460;
+   }
+   &:hover {
+    background-color: #e4e4e4e3;
+     a{
+       color: black;
+     }
+     .clients__field{
+      color: black;
+     }
+     color: black;
+   }
+ }
+&__field{
+width: 100%;
+  color: $dgray;
+}
+}
+// Checkbox.scss
+
+/* Скрыть оригинальный чекбокс */
+input[type="checkbox"] {
+  display: none;
+}
+
+/* Стилизация кастомного чекбокса */
+.customCheckbox {
+  position: absolute;
+  // display: inline-block;
+  width: 30px;
+  left: 10px;
+  top: 8px;
+  height: 30px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  cursor: pointer;
+  z-index: 1;
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3rem;
+  span{
+    opacity: 0;
+  }
+}
+
+/* Стилизация галочки */
+// .customCheckbox::after {
+//   content: "";
+//   display: inline-block;
+//   width: 10px;
+//   height: 10px;
+//   border: 2px solid #333;
+//   border-top: none;
+//   border-right: none;
+//   // transform: rotate(45deg);
+//   opacity: 0;
+// }
+
+
+/* Стилизация галочки при выборе */
+input[type="checkbox"]:checked + .customCheckbox span {
+  opacity: 1;
+}
+.checkboxWrapper{
+  position: relative;
+}
+
+

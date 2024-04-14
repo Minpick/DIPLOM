@@ -1,0 +1,24 @@
+.form{
+   width: 1200px;
+   height: 800px;
+   background-color: #eeeeee;
+   z-index: 5;
+   border-radius: 20px;
+   margin-top: -100px;
+   display: flex;
+   flex-direction: column;
+   padding: 10px 50px;
+}
+.label{
+   color: black;
+
+}
+.input{
+   background-color: transparent;
+   color: black;
+   border: .2px solid black;
+}
+
+.select{
+   color: black;
+}
