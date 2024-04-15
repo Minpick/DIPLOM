@@ -9,26 +9,29 @@ import DeleteButton from '../../../UI/DeleteButton/DeleteButton'
 import { queryClient } from '../../../../App'
 import classNames from 'classnames'
 import moment from 'moment'
+import { TimePicker } from 'antd'
 
 
-export async function action({ request}) {
+export async function action({ request }) {
   const formData = await request.formData()
   const year = new URL(request.url).searchParams.get("year")
   const month = new URL(request.url).searchParams.get("month")
   const day = new URL(request.url).searchParams.get("day")
-  const createdAt = moment(`${year}-${month.padStart(2,0)}-${day.padStart(2,0)}`).format('YYYY-MM-DD')
+  const time = formData.get("time")
+  // console.log(time)
+  const createdAt = moment(`${year}-${month.padStart(2, 0)}-${day.padStart(2, 0)}`).format('YYYY-MM-DD')+'T'+time+'.996Z'
   const nameEvent = formData.get("nameEvent")
   const comment = formData.get("comment")
   const statusEvent = formData.get("statusEvent")
   const dayInfo = {
-    createdAt: createdAt,
-    nameEvent: nameEvent,
+    time: createdAt,
+    name: nameEvent,
     comment: comment,
     statusEvent: statusEvent
   }
   console.log(dayInfo)
   try {
-    const data = await axios.post(`${BASE_URL}/calendar/create`, dayInfo)
+    const data = await axios.post(`${BASE_URL}/calendar/event`, dayInfo)
   } catch (err) {
     return err
   }
@@ -68,7 +71,10 @@ const DayInfo = () => {
     return (
       <li className={classNames(style.item, 'dealItem')} key={el.id}>
         <div className={style.event}>
-          {el.nameEvent}
+          {el.name}
+        </div>
+        <div className={style.comment}>
+          {el.time.substring(11,19)}
         </div>
         <div className={style.comment}>
           {el.comment}
@@ -83,11 +89,14 @@ const DayInfo = () => {
   return (
     <PopUpAdd>
       <div className={style.wrapper}>
-       
+
         <div>
           <ul className={style.ul}>
             <li className={style.li}>
               Событие
+            </li>
+            <li className={style.li}>
+               Время
             </li>
             <li className={style.li}>
               Комментарий
@@ -103,12 +112,13 @@ const DayInfo = () => {
               <span>&#43;</span>
             </div>}
             {showInput && <Form method="post" replace onSubmit={() => setShowInput(false)} className={style.form}>
-  
+
               <input
                 className={style.input}
                 name='nameEvent'
                 type='text'
                 placeholder='Событие' />
+                <TimePicker className={style.datePicker} name='time' />
               <input
                 className={style.input}
                 name='comment'
@@ -128,7 +138,7 @@ const DayInfo = () => {
                   Другое
                 </option>
               </select>
-  
+
               <button
                 className={style.btn}
                 type='submit'
@@ -142,7 +152,7 @@ const DayInfo = () => {
           </ul>
         </div>
         <div className={style.data}>
-          {`${day.padStart(2,0)}.${month.padStart(2,0)}.${year}`}
+          {`${day.padStart(2, 0)}.${month.padStart(2, 0)}.${year}`}
         </div>
       </div>
 

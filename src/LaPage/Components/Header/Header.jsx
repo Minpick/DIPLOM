@@ -45,7 +45,7 @@ const Header = () => {
 
 
          <div className={style.header__time}>{time.toLocaleTimeString().substring(0, 5)}</div>
-         <div className={style.header__user}>{`${user.lastName} ${user.firstName}`}
+         <div className={style.header__user}>{`${user?.lastName} ${user?.firstName}`}
             <Link
                onClick={() => { localStorage.clear(); axios.defaults.headers.common = {} }}
             >

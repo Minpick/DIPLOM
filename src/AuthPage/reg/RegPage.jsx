@@ -13,6 +13,7 @@ async function regUser(formData) {
       confirmPassword: formData.get('confirmPassword')
    }
    console.log(user)
+   axios.defaults.headers.common['Authorization'] = ``;
   const data = axios.post('http://localhost:8085/signup', user)
     .then(function (response) {
       console.log(response)

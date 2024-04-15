@@ -1,18 +1,25 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import style from './BiddingBar.module.scss'
 import { useLocation } from 'react-router-dom'
 import { useMutation, useQuery } from 'react-query'
 import axios from 'axios'
 import { BASE_URL } from '../../../API/requests'
 import { fetchBiddings } from '../BiddingList/BiddingList'
+import { queryClient } from '../../../../App'
 
 async function fetchBiddingClients() {
    const data = await axios.get(`${BASE_URL}/auction/fullName`)
    return data.data
 }
+async function fetchMarks(id) {
+   if (id) {
+      const data = await axios.get(`${BASE_URL}/auction/getCheckMarks/${id}`)
+      return data.data
+   }
+}
 
 
-const BiddingBar = ({ selectedLots, setSelectedLots,biddingsIds }) => {
+const BiddingBar = ({ selectedLots, setSelectedLots, biddingsIds }) => {
    const path = useLocation().pathname.substring(12, 15)
    const shown = ['new', 'edi']
    const { data } = useQuery('biddingClients', fetchBiddingClients)
@@ -21,23 +28,37 @@ const BiddingBar = ({ selectedLots, setSelectedLots,biddingsIds }) => {
    }, {
       onSuccess: () => {
          setSelectedLots([])
+         setSelectedValue('')
       },
    });
    const [selectedValue, setSelectedValue] = useState('');
 
-
    const handleSelectChange = (event) => {
       setSelectedValue(event.target.value);
+      // queryClient.invalidateQueries('marks')
    };
+
+   const marksData = useQuery(['marks', selectedValue], () => fetchMarks(selectedValue))
+
+   useEffect(() => {
+      if (marksData.data?.auctionsId.length) {
+         setSelectedLots([...marksData.data.auctionsId])
+         console.log(selectedLots)
+      }
+      else{
+         
+         setSelectedLots([])
+      }
+   }, [marksData.data?.auctionsId,selectedValue])
+
    const addClient = useMutation((arr) => {
-      console.log({ userId: arr[1], auctionId: arr[0] })
       return axios.post(`${BASE_URL}/auction/addClient`, { userId: arr[1], auctionId: arr[0] });
    }, {
       onSuccess: () => {
+         setSelectedValue('')
          setSelectedLots([])
       },
    });
-   console.log(selectedValue)
    const options = data?.map((client) => {
       return (
          <option

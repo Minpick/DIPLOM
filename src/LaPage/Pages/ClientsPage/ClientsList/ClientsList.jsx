@@ -11,14 +11,29 @@ import { queryClient } from '../../../../App'
 import PaginationBtns from '../../../UI/PaginationBtns/PaginationBtns'
 import Loading from '../../../UI/Loading/Loading'
 
+
+
+async function download() {
+   const response = await axios.get(`${BASE_URL}/documentGeneration/247`, {
+      responseType: 'blob'
+   })
+   const url = window.URL.createObjectURL(new Blob([response.data]));
+   const link = document.createElement('a');
+   link.href = url;
+   link.setAttribute('download', 'document.docx');
+   document.body.appendChild(link);
+   link.click();
+
+}
+
 const ClientsList = () => {
-   const [page,setPage]=useState(0)
-   const [searchParams,setSearchParams]= useSearchParams()
+   const [page, setPage] = useState(0)
+   const [searchParams, setSearchParams] = useSearchParams()
    const status = searchParams.get('status')
-   const { data,isLoading } = useQuery({ queryKey: ['clients',page,status], queryFn: ()=>fetchClients(page,status) })
+   const { data, isLoading } = useQuery({ queryKey: ['clients', page, status], queryFn: () => fetchClients(page, status) })
    useEffect(() => {
       queryClient.invalidateQueries('clients');
-    }, [status]);
+   }, [status]);
    const deleteClient = useMutation((id) => {
       return axios.delete(`${BASE_URL}/employee/clients/${id}`);
    }, {
@@ -33,28 +48,33 @@ const ClientsList = () => {
    }
    const clients = data?.data?.map(client => {
       return (
-            <li key={client.id}
-               className={classNames('clients__item')}>
-               <Link to={`${client.id}/edit?${searchParams.toString()}`}
-                  className={classNames(style.clients__item, 'clients__item')}>
-                  <div className={style.clients__field}>
-                     {client.lastName + ' ' + client.firstName + ' ' + client.patronymic}
-                  </div>
-                  <div href="#" className={style.clients__field}>
-                     {client.phone}
-                  </div>
-                  <div className={style.clients__field}>
-                     {client.email}
-                  </div>
-               </Link>
-               <DeleteButton onClick={() => deleteClient.mutate(client.id)} />
-            </li>
+         <li key={client.id}
+            className={classNames('clients__item')}>
+            <Link to={`${client.id}/edit?${searchParams.toString()}`}
+               className={classNames(style.clients__item, 'clients__item')}>
+               <div className={style.clients__field}>
+                  {client.lastName + ' ' + client.firstName + ' ' + client.patronymic}
+               </div>
+               <div href="#" className={style.clients__field}>
+                  {client.phone}
+               </div>
+               <div className={style.clients__field}>
+                  {client.email}
+               </div>
+            </Link>
+            <DeleteButton onClick={() => deleteClient.mutate(client.id)} />
+         </li>
       )
    })
    return (
       <div className={style.list}>
+         <button
+         onClick={download}
+         >
+            Сгенерировать док
+         </button>
          {clients}
-         <PaginationBtns  page={page} setPage={setPage}   />
+         <PaginationBtns page={page} setPage={setPage} />
       </div>
    )
 }

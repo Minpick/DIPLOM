@@ -11,15 +11,16 @@ async function loginUser(formData) {
    const data = axios.post('http://localhost:8085/signin', {
       phone: formData.get('phone'),
       password: formData.get('password'),
-   },{headers:{}})
+   })
       .then(function (response) {
          console.log(response)
-         localStorage.setItem("token", response.data.token)
-         localStorage.setItem("refreshToken", response.data.refreshToken)
-         localStorage.setItem("user", JSON.stringify(response.data.user))
-         axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token
          if (response.status === 200) {
-            return redirect('/la')
+            localStorage.setItem("token", response.data.token)
+            localStorage.setItem("refreshToken", response.data.refreshToken)
+            localStorage.setItem("role", response.data.user.roleName)
+            localStorage.setItem("user", JSON.stringify(response.data.user))
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token
+            return response.data.user.roleName === 'ROLE_CLIENT'?redirect('/lk'):redirect('/la')
          }
       })
       .catch(function (error) {
@@ -52,7 +53,7 @@ const message = searchParams.get('message')
                <div className="grid align__item">
                   <div className="register">
                      <Link to='/'><img src={logo} alt="logo" className="site__logo" /></Link>
-                     <Link to='/lk'>LK</Link>
+                     {/* <Link to='/lk'>LK</Link> */}
                      <h2>Вход</h2>
                      {message&&<p>{message}</p>}
                      {error&&(typeof res?.response?.data)==='string' && <p>{res?.response?.data}</p>}

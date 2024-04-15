@@ -39,6 +39,7 @@ import DayInfo,{action as DayInfoAction} from './LaPage/Pages/CalendarPage/DayIn
 import BiddingPage from './LaPage/Pages/BiddingPage/BiddingPage'
 import CreateBidding, {action as CreateBiddingAction} from './LaPage/Pages/BiddingPage/CreateBidding/CreateBidding'
 import EditBidding,{action as EditBiddingAction} from './LaPage/Pages/BiddingPage/EditBidding/EditBidding'
+import ProfilePage from './LkPage/Pages/ProfilePage/ProfilePage'
 
 
 export const queryClient = new QueryClient({
@@ -49,7 +50,15 @@ export const queryClient = new QueryClient({
     },
   },
 })
-const requireAuth = async () => {
+const requireAuthEmployee = async () => {
+  if (!localStorage.getItem('token')) {
+    throw redirect('/auth/login')
+  }
+}
+const requireAuthClient = async () => {
+  if(localStorage.getItem('role')==='ROLE_CLIENT'){
+    throw redirect('/lk')
+  }
   if (!localStorage.getItem('token')) {
     throw redirect('/auth/login')
   }
@@ -62,14 +71,16 @@ const router = createBrowserRouter(createRoutesFromElements(
       <Route path='registration' element={<RegPage />} action={RegPageAction} />
       <Route path='login' element={<LoginPage />} action={LoginPageAction} />
     </Route>
-    <Route path='lk' element={<LkLayout />}>
+    <Route path='lk' element={<LkLayout />} loader={async ()=> await requireAuthEmployee()}>
       <Route index element={<Navigate to='progress' replace />} />
       <Route path='progress' element={<ProgressPage />} />
       <Route path='chat' element={<div>chat</div>} />
-      <Route path='docs' element={<div>docs</div>} />
+      <Route path='biddings' element={<ProgressPage />} />
+      <Route path='profile' element={<ProfilePage />} />
+      <Route path='calendar' element={<div>docs</div>} />
       <Route path='payment' element={<div>payment</div>} />
     </Route>
-    <Route path='la' element={<Layout />} loader={async () => await requireAuth()}>
+    <Route path='la' element={<Layout />} loader={async () => await requireAuthClient()}>
       <Route index element={<Navigate to='clients?status=in_progress' replace />} />
       <Route path='clients' element={<ClientsPage />} >
         <Route path='new' action={CreateClientAction} element={<CreateClient />} />

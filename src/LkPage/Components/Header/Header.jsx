@@ -15,13 +15,20 @@ const Header = () => {
             <NavLink
             to='chat'
                className={({ isActive }) => isActive ? classNames(style.active, style.link) : style.link}
-               disabled={({isActive})=>isActive}
             >Чат с юристом</NavLink>
-            <Link className={style.logo} to='/'><img src={logo} /></Link>
             <NavLink
-            to='docs'
+            to='biddings'
                className={({ isActive }) => isActive ? classNames(style.active, style.link) : style.link}
-            >Загрузка документов</NavLink>
+            >Торги</NavLink>
+            <div className={style.logo} to='/'><img src={logo} /></div>
+            <NavLink
+            to='profile'
+               className={({ isActive }) => isActive ? classNames(style.active, style.link) : style.link}
+            >Профиль</NavLink>
+            <NavLink
+            to='calendar'
+               className={({ isActive }) => isActive ? classNames(style.active, style.link) : style.link}
+            >Календарь</NavLink>
             <NavLink
             to='payment'
                className={({ isActive }) => isActive ? classNames(style.active, style.link) : style.link}
