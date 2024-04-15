@@ -30,6 +30,12 @@ export async function action({ request }) {
    const comment = formData.get("comment")
    const passport = formData.get("passport")
    const patronymic = formData.get("patronymic")
+   const passportIssued = formData.get("passportIssued")
+   const dateIssuePassport = formData.get("dateIssuePassport")
+   const kp = formData.get("kp")
+   const registrationAddress = formData.get("registrationAddress")
+   const snils = formData.get("snils")
+   const placeOfBirth = formData.get("placeOfBirth")
    
    const user = {
       firstName: firstName,
@@ -42,7 +48,13 @@ export async function action({ request }) {
       password: password,
       birth: birth,
       comment: comment,
-      passport: passport
+      passport: passport,
+      passportIssued: passportIssued,
+      dateIssuePassport: dateIssuePassport,
+      kp: kp,
+      registrationAddress: registrationAddress,
+      snils: snils,
+      placeOfBirth: placeOfBirth
 
    }
    

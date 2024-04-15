@@ -13,18 +13,6 @@ import Loading from '../../../UI/Loading/Loading'
 
 
 
-async function download() {
-   const response = await axios.get(`${BASE_URL}/documentGeneration/247`, {
-      responseType: 'blob'
-   })
-   const url = window.URL.createObjectURL(new Blob([response.data]));
-   const link = document.createElement('a');
-   link.href = url;
-   link.setAttribute('download', 'document.docx');
-   document.body.appendChild(link);
-   link.click();
-
-}
 
 const ClientsList = () => {
    const [page, setPage] = useState(0)
@@ -68,11 +56,6 @@ const ClientsList = () => {
    })
    return (
       <div className={style.list}>
-         <button
-         onClick={download}
-         >
-            Сгенерировать док
-         </button>
          {clients}
          <PaginationBtns page={page} setPage={setPage} />
       </div>

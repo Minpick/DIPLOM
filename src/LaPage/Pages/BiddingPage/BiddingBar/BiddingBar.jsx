@@ -7,7 +7,7 @@ import { BASE_URL } from '../../../API/requests'
 import { fetchBiddings } from '../BiddingList/BiddingList'
 import { queryClient } from '../../../../App'
 
-async function fetchBiddingClients() {
+export async function fetchBiddingClients() {
    const data = await axios.get(`${BASE_URL}/auction/fullName`)
    return data.data
 }

@@ -27,7 +27,7 @@ const Header = () => {
       '/la/tas': 'Добавить задачу',
       '/la/bid': 'Добавить лот'
    }
-   const hidden = ['/la/cha', '/la/cal']
+   const hidden = ['/la/cha', '/la/cal','/la/doc']
    return (
       <div className={style.header}>
 

@@ -1,0 +1,37 @@
+.wrapper{
+   z-index: 5;
+}
+.select{
+   // padding: 10px;
+   border-radius: 7px;
+   position: relative;
+   height: 40px;
+   transition: all 0.3s;
+   font-weight: 500;
+   margin-right: 5px;
+   color: #5a5a5a;
+   // outline: none;
+   // width: 100%;
+   text-align-last: center;
+   position: relative;
+   background-color: #fff;
+   border: 1px solid rgba(0, 0, 0, 0.2);
+   cursor: pointer;
+   &:focus {
+      outline: none;
+      box-shadow: none;
+      color: #5a5a5a;
+      // outline: 1px solid #949494;
+      border: 1px solid #949494;
+   }
+   &:hover {
+      // cursor: pointer;
+      box-shadow: none;
+      outline: none;
+      // outline: 1px solid #949494;
+      background-color: #e3e3e3;
+      border: 1px solid #949494;
+   }
+   -webkit-appearance: none;
+   appearance: none;
+}

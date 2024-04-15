@@ -16,6 +16,7 @@ const Sidebar = () => {
       <NavLink className={({ isActive }) => isActive ? style.active : style.btn} to='chat'>Сообщения</NavLink>
       <NavLink className={({ isActive }) => isActive ? style.active : style.btn} to='bidding'>Торги</NavLink>
       <NavLink className={({ isActive }) => isActive ? style.active : style.btn} to={`calendar?year=${year}&month=${month}`}>Календарь</NavLink>
+      <NavLink className={({ isActive }) => isActive ? style.active : style.btn} to={`docs`}>Документы</NavLink>
     </div>
   )
 }

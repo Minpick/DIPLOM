@@ -28,7 +28,14 @@ const ClientsForm = ({ data, statuses, isLoading, action }) => {
       role: '',
       status: '',
       login: '',
-      password: ''
+      password: '',
+      passportIssued:'',
+      dateIssuePassport:'',
+      kp:'',
+      registrationAddress:'',
+      snils:'',
+      placeOfBirth:''
+
    })
 
    function handleChange(event) {
@@ -74,7 +81,13 @@ const ClientsForm = ({ data, statuses, isLoading, action }) => {
          role: data?.data?.role,
          status: data?.data.status,
          login: data?.data.login,
-         password: data?.data.password
+         password: data?.data.password,
+         passportIssued: data?.data.passportIssued,
+         dateIssuePassport: data?.data.dateIssuePassport,
+         kp: data?.data.kp,
+         registrationAddress: data?.data.registrationAddress,
+         snils: data?.data.snils,
+         placeOfBirth: data?.data.placeOfBirth
       })
    }, [data])
    if (isLoading) {
@@ -212,6 +225,52 @@ const ClientsForm = ({ data, statuses, isLoading, action }) => {
                </button>
             </div>
             {location.pathname.substring(0, 11) === '/la/clients' && !data?.data.role && <div className='add_right'>
+               <div className='add_right_wrapper'>
+                  <label htmlFor="passportIssued" className="add_label">Кем выдан</label>
+                  <input
+                     name="passportIssued"
+                     type="text"
+                     value={addData.passportIssued || ''}
+                     className='add_input'
+                     onChange={handleChange}
+                  /><label htmlFor="dateIssuePassport" className="add_label">Когда выдан</label>
+                  <input
+                     name="dateIssuePassport"
+                     type="date"
+                     value={addData.dateIssuePassport || ''}
+                     className='add_input'
+                     onChange={handleChange}
+                  /><label htmlFor="kp" className="add_label">КП</label>
+                  <input
+                     name="kp"
+                     type="text"
+                     value={addData.kp || ''}
+                     className='add_input'
+                     onChange={handleChange}
+                  /><label htmlFor="registrationAddress" className="add_label">Адрес регистрации</label>
+                  <input
+                     name="registrationAddress"
+                     type="text"
+                     value={addData.registrationAddress || ''}
+                     className='add_input'
+                     onChange={handleChange}
+                  /><label htmlFor="snils" className="add_label">СНИЛС</label>
+                  <input
+                     name="snils"
+                     type="text"
+                     value={addData.snils || ''}
+                     className='add_input'
+                     onChange={handleChange}
+                  /><label htmlFor="placeOfBirth" className="add_label">Место рождения</label>
+                  <input
+                     name="placeOfBirth"
+                     type="text"
+                     value={addData.placeOfBirth || ''}
+                     className='add_input'
+                     onChange={handleChange}
+                  />
+               </div>
+
                <textarea
                   placeholder="Комментарии"
                   name="comment"
