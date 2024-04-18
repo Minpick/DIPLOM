@@ -1,0 +1,9 @@
+.wrapper {
+   color: #616161;
+   font-size: 18px;
+   font-family: "Open Sans";
+   display: grid;
+   grid-template-columns: repeat(3,1fr);
+   font-weight: 500;
+   overflow: scroll;
+}

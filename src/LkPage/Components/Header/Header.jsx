@@ -20,7 +20,7 @@ const Header = () => {
             to='biddings'
                className={({ isActive }) => isActive ? classNames(style.active, style.link) : style.link}
             >Торги</NavLink>
-            <div className={style.logo} to='/'><img src={logo} /></div>
+            <Link className={style.logo} to='/'><img src={logo} /></Link>
             <NavLink
             to='profile'
                className={({ isActive }) => isActive ? classNames(style.active, style.link) : style.link}

@@ -42,6 +42,7 @@ import EditBidding, { action as EditBiddingAction } from './LaPage/Pages/Bidding
 import ProfilePage from './LkPage/Pages/ProfilePage/ProfilePage'
 import DocsPage from './LaPage/Pages/DocsPage/DocsPage'
 import DownloadDoc from './LaPage/Pages/DocsPage/DownloadDoc/DownloadDoc'
+import AuctionPage from './LkPage/Pages/AuctionPage/AuctionPage'
 
 
 export const queryClient = new QueryClient({
@@ -52,12 +53,15 @@ export const queryClient = new QueryClient({
     },
   },
 })
-const requireAuthEmployee = async () => {
+const requireAuthClient = async () => {
   if (!localStorage.getItem('token')) {
     throw redirect('/auth/login')
   }
+  if (localStorage.getItem('role') === 'ROLE_EMPLOYEE' || localStorage.getItem('role') === 'ROLE_ADMIN') {
+    throw redirect('/la')
+  }
 }
-const requireAuthClient = async () => {
+const requireAuthEmployee = async () => {
   if (localStorage.getItem('role') === 'ROLE_CLIENT') {
     throw redirect('/lk')
   }
@@ -68,21 +72,21 @@ const requireAuthClient = async () => {
 const router = createBrowserRouter(createRoutesFromElements(
   <Route path='/' element={<Outlet />}>
     <Route index element={<LandingPage />} />
-    <Route path='auth' element={<AuthPage />}>
+    <Route path='auth' element={<AuthPage />} >
       <Route index element={<Navigate to='login' replace />} />
       <Route path='registration' element={<RegPage />} action={RegPageAction} />
       <Route path='login' element={<LoginPage />} action={LoginPageAction} />
     </Route>
-    <Route path='lk' element={<LkLayout />} loader={async () => await requireAuthEmployee()}>
+    <Route path='lk' element={<LkLayout />} loader={async () => await requireAuthClient()}>
       <Route index element={<Navigate to='progress' replace />} />
       <Route path='progress' element={<ProgressPage />} />
       <Route path='chat' element={<div>chat</div>} />
-      <Route path='biddings' element={<ProgressPage />} />
+      <Route path='biddings' element={<AuctionPage />} />
       <Route path='profile' element={<ProfilePage />} />
       <Route path='calendar' element={<div>docs</div>} />
       <Route path='payment' element={<div>payment</div>} />
     </Route>
-    <Route path='la' element={<Layout />} loader={async () => await requireAuthClient()}>
+    <Route path='la' element={<Layout />} loader={async () => await requireAuthEmployee()}>
       <Route index element={<Navigate to='clients?status=in_progress' replace />} />
       <Route path='clients' element={<ClientsPage />} >
         <Route path='new' action={CreateClientAction} element={<CreateClient />} />
@@ -130,7 +134,7 @@ const router = createBrowserRouter(createRoutesFromElements(
         />
       </Route>
       <Route path='docs' element={<DocsPage />}>
-        <Route path='generate'  element={<DownloadDoc />}/>
+        <Route path='generate' element={<DownloadDoc />} />
       </Route>
     </Route>
   </Route>

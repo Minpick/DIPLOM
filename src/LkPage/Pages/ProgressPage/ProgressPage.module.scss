@@ -1,8 +1,18 @@
-.page{
-   height: 100%;
+.page {
    border-top-left-radius: 10px;
    border-top-right-radius: 10px;
+   border-radius: 10px;
    overflow: hidden;
-   border: 1px solid rgba(44, 44, 44, 0.264);
-   background-color: #fcfcfcdb;
+   width: 100%;
+   padding: 20px;
+   gap: 20px;
+   // border: 1px solid rgba(44, 44, 44, 0.264);
+   // background-color: #fcfcfcdb;
+   display: grid;
+   // grid-template-rows: 1fr 1fr;
+   grid-template-columns: repeat(2, 1fr);
+   // overflow: visible;
+   // &:nth-child(2) {
+   //    direction: rtl;
+   //  }
 }

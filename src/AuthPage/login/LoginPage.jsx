@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { Form, Link, redirect, useActionData, useSearchParams } from 'react-router-dom'
+import { Form, Link, Navigate, redirect, useActionData, useSearchParams } from 'react-router-dom'
 import '../AuthPage/AuthPage.scss'
 import logo from '../../LaPage/images/logo-black.png'
 
@@ -20,7 +20,7 @@ async function loginUser(formData) {
             localStorage.setItem("role", response.data.user.roleName)
             localStorage.setItem("user", JSON.stringify(response.data.user))
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token
-            return response.data.user.roleName === 'ROLE_CLIENT'?redirect('/lk'):redirect('/la')
+            return response.data.user.roleName === 'ROLE_CLIENT' ? redirect('/lk') : redirect('/la')
          }
       })
       .catch(function (error) {
@@ -37,11 +37,24 @@ export async function action({ request }) {
 
 const LoginPage = () => {
    const [error, setError] = useState(false)
-const [searchParams,setSearchParams] = useSearchParams()
-const message = searchParams.get('message')
-
+   const [searchParams, setSearchParams] = useSearchParams()
+   const message = searchParams.get('message')
+   if (localStorage.getItem('role') === 'ROLE_EMPLOYEE' || localStorage.getItem('role') === 'ROLE_ADMIN') {
+      return <Navigate to='/la' replace/>
+   } 
+   if (localStorage.getItem('role') === 'ROLE_CLIENT') {
+      return <Navigate to='/lk' replace/>
+   } 
+   // useEffect(() => {
+   //    if (localStorage.getItem('role') === 'ROLE_EMPLOYEE' || localStorage.getItem('role') === 'ROLE_ADMIN') {
+   //       return <Navigate to='/la' replace />
+   //    }
+   //    if (localStorage.getItem('role') === 'ROLE_CLIENT') {
+   //       return <Navigate to='/lk' replace />
+   //    }
+   // }, [])
    const res = useActionData()
-   
+
    useEffect(() => {
       setError(true)
    }, [res])
@@ -55,9 +68,9 @@ const message = searchParams.get('message')
                      <Link to='/'><img src={logo} alt="logo" className="site__logo" /></Link>
                      {/* <Link to='/lk'>LK</Link> */}
                      <h2>Вход</h2>
-                     {message&&<p>{message}</p>}
-                     {error&&(typeof res?.response?.data)==='string' && <p>{res?.response?.data}</p>}
-                     {res?.response?.status===500&& <p>Неправильный логин или пароль</p>}
+                     {message && <p>{message}</p>}
+                     {error && (typeof res?.response?.data) === 'string' && <p>{res?.response?.data}</p>}
+                     {res?.response?.status === 500 && <p>Неправильный логин или пароль</p>}
                      <Form replace method="post" className="form">
 
                         <div className="form__field">
@@ -68,7 +81,7 @@ const message = searchParams.get('message')
 
                         <div className="form__field">
                            <input name="password"
-                           onFocus={() => setError(false)} type="password" placeholder="Пароль" />
+                              onFocus={() => setError(false)} type="password" placeholder="Пароль" />
                         </div>
 
                         <div className="form__field">

@@ -53,7 +53,7 @@ const DealProgress = () => {
          queryClient.invalidateQueries('dealProgress')
       },
    });
-   const displayed = data?.data.map((el) => {
+   const displayed = data?.data?.map((el) => {
       return (
          <li className={classNames(style.item, 'dealItem')} key={el.id}>
             <div className={style.date}>
