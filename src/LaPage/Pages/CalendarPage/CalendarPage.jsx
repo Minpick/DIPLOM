@@ -50,7 +50,7 @@ const CalendarPage = () => {
    }
    const displayedDays = data?.map((el, index) => {
       return (
-         <Link to={`info?year=${year}&month=${month}&day=${moment(el.createdAt).format('D')}`} className={style.day} key={index} style={el.current ? { color: 'rgba(0, 0, 0, 0.713)' } : { color: '#77777734' }}>
+         <Link to={`info?year=${year}&month=${moment(el.createdAt).format('M')}&day=${moment(el.createdAt).format('D')}`} className={style.day} key={index} style={el.current ? { color: 'rgba(0, 0, 0, 0.713)' } : { color: '#77777734' }}>
            <div className={style.numbers}>
                {moment(el.createdAt).format('D')}
                {el.count>2?<span>+{el.count-2}</span>:''}
