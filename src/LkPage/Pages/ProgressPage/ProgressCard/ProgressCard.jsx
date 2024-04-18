@@ -2,6 +2,7 @@ import React from 'react'
 import style from './ProgressCard.module.scss'
 import classNames from 'classnames'
 import moment from 'moment'
+import CustomCard from '../../../UI/CustomCard/CustomCard'
 
 const ProgressCard = ({ arr }) => {
    const displayed = arr.map((el, index, array) => {
@@ -21,19 +22,9 @@ const ProgressCard = ({ arr }) => {
       )
    })
    return (
-      <div className={style.wrapper}>
-         <div className={style.box} />
-         <div className={style.content}>
-            <div className={style.heading}>
-               Сделка
-               <span>
-                  {arr[0].nameDeal}
-               </span>
-            </div>
-            {displayed}
-
-         </div>
-      </div>
+      <CustomCard heading={'Сделка'} name={arr[0].nameDeal}>
+         {displayed}
+      </CustomCard>
    )
 }
 

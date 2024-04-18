@@ -4,6 +4,7 @@ import axios from 'axios'
 import { BASE_URL } from '../../../LaPage/API/requests'
 import { useQuery } from 'react-query'
 import AuctionCard from './AuctionCard/AuctionCard'
+import CustomCard from '../../UI/CustomCard/CustomCard'
 
 
 async function fetchAuctions() {
@@ -17,7 +18,7 @@ const AuctionPage = () => {
    return (
       <div
          className={style.wrapper}>
-         <AuctionCard />
+         <AuctionCard/>
       </div>
    )
 }

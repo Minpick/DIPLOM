@@ -1,13 +1,12 @@
 import React from 'react'
 import style from './AuctionCard.module.scss'
+import CustomCard from '../../../UI/CustomCard/CustomCard'
 
 const AuctionCard = () => {
    return (
-      <div
-         className={style.wrapper}
-      >
-         etgker
-      </div>
+     <CustomCard heading={"Лот"}>
+
+     </CustomCard>
    )
 }
 

@@ -9,6 +9,7 @@ import { Link, Outlet, useSearchParams } from 'react-router-dom'
 
 
 export async function fetchDays(year, month) {
+   console.log(year,month)
    const data = await axios.get(`${BASE_URL}/calendar/${year}/${month}`)
    return data.data
 }
@@ -23,8 +24,8 @@ const CalendarPage = () => {
       )
    })
    const [searchParams, setSearchParams] = useSearchParams()
-   const [year, setYear] = useState(searchParams.get('year'))
-   const [month, setMonth] = useState(searchParams.get('month'))
+   const [year, setYear] = useState(parseInt(searchParams.get('year')))
+   const [month, setMonth] = useState(parseInt(searchParams.get('month')))
    // console.log(month)
    // function setCorrectMonth(month){
    //    setMonth(month)
