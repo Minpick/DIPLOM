@@ -2,4 +2,21 @@
    display: flex;
    flex-direction: column;
 }
-
+.btn {
+   width: 100%;
+   font-size: 1rem;
+   font-family: "Open Sans";
+   color: #fff;
+   height: 40px;
+   font-weight: 700;
+   transition: all 0.4s;
+   margin-top: 40px;
+   &:hover {
+      scale: 1.03;
+   }
+}
+.btnwrapper {
+   margin-top: 40px;
+   display: flex;
+   gap: 20px;
+}

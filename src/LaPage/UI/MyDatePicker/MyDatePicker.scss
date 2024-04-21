@@ -1,0 +1,133 @@
+.css-z3c6am-MuiFormControl-root-MuiTextField-root {
+   border: none;
+   outline: none;
+   background-color: #fff;
+   transition: border-color 0.4s;
+   color: #5a5a5a;
+   font-weight: 600;
+   // &:focus {
+   //    color: #949494;
+   //    outline: 1px solid #5a5a5a;
+   //    border: none;
+   // }
+   // height: 40px;'
+   // &:focus {
+   //    color: #949494;
+   //    outline: 1px solid #5a5a5a;
+   // }
+   // &:hover {
+   //    border: 1px solid #5a5a5a;
+   // }
+   &.Mui-focused {
+      color: #949494;
+      outline: none;
+      border: none;
+   }
+}
+.Mui-focused {
+   color: #949494;
+   outline: none;
+   border: none;
+}
+.MyDateTimePicker {
+   &.MuiOutlinedInput-root {
+      &.Mui-focused fieldset {
+         border-color: #fff;
+      }
+   }
+}
+.MuiMultiSectionDigitalClockSection-root {
+   li + .Mui-selected {
+      background-color: rgba(0, 0, 111, 0.911);
+      color: #fff;
+      transition: background-color 0.4s;
+      &:hover {
+         background-color: rgba(0, 0, 111, 0.711);
+      }
+   }
+   li {
+      transition: all 0.4s;
+      border-radius: 5px;
+      &:hover {
+         background-color: rgba(0, 0, 111, 0.351);
+      }
+   }
+}
+.MuiDayCalendar-weekContainer {
+   button[aria-selected="true"] {
+      background-color: rgba(0, 0, 111, 0.911);
+      color: #fff;
+      transition: background-color 0.4s;
+      &:hover {
+         background-color: rgba(0, 0, 111, 0.711);
+      }
+   }
+   button {
+      transition: all 0.4s;
+      &:hover {
+         background-color: rgba(0, 0, 111, 0.351);
+      }
+   }
+}
+
+
+.MuiDialogActions-root {
+   button {
+      background-color: rgba(0, 0, 111, 0.911);
+      color: #fff;
+      transition: background-color 0.4s;
+      &:hover {
+         background-color: rgba(0, 0, 111, 0.711);
+      }
+   }
+}
+// .css-1wy8uaa-MuiButtonBase-root-MuiPickersDay-root + .Mui-selected{
+//    background-color: rgba(4, 4, 156, 0.911);
+// }
+.css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root {
+   &.Mui-focused fieldset {
+      color: #949494;
+      border: 1px solid #5a5a5a;
+      // border: none;
+      outline: none;
+   }
+   margin-bottom: 5px;
+   color: #fff;
+   background-color: #fff;
+   font-weight: 600;
+   border: none;
+   outline: none;
+   height: 40px;
+   // &:focus {
+   //    color: #949494;
+   //    outline: 1px solid #5a5a5a;
+   //    border: none;
+   // }
+   transition: border-color 0.4s;
+   input {
+      transition: border-color 0.4s;
+      color: #5a5a5a;
+      animation: none;
+   }
+   div {
+      transition: border-color 0.4s;
+      color: #5a5a5a;
+      // &:focus {
+      //    color: #949494;
+      //    outline: 1px solid #5a5a5a;
+      //    border: none;
+      // }
+   }
+   fieldset {
+      color: #5a5a5a;
+      transition: border-color 0.4s;
+      // &:focus {
+      //    color: #949494;
+      //    outline: 1px solid #5a5a5a;
+      //    border: none;
+      // }
+      &:hover {
+         border: 1px solid #5a5a5a;
+      }
+   }
+}

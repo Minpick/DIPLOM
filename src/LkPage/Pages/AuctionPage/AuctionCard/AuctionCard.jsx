@@ -2,11 +2,11 @@ import React from 'react'
 import style from './AuctionCard.module.scss'
 import CustomCard from '../../../UI/CustomCard/CustomCard'
 
-const AuctionCard = () => {
+const AuctionCard = ({ id, name,selectedLots,setSelectedLots, children }) => {
    return (
-     <CustomCard heading={"Лот"}>
-
-     </CustomCard>
+      <CustomCard selectedLots={selectedLots} setSelectedLots={setSelectedLots} heading={"Лот"} id={id} name={name} customStyle={{minHeight:'300px'}}>
+         {children}
+      </CustomCard>
    )
 }
 

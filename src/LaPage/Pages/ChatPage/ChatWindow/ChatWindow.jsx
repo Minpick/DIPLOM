@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import style from './ChatWindow.module.scss'
-import { io } from 'socket.io-client'
 import axios from 'axios'
 
 const ChatWindow = () => {

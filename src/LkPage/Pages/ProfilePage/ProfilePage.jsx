@@ -6,11 +6,44 @@ import { useNavigate } from 'react-router'
 import style from './ProfilePage.module.scss'
 import ProfilePageForm from './ProfilePageForm/ProfilePageForm'
 import UploadDocs from './UploadDocs/UploadDocs'
+import { queryClient } from '../../../App'
+import moment from 'moment'
 
 
 async function fetchProfileInfo() {
    const data = await axios.get(`${BASE_URL}/employee/clients/showForClient`)
    return data.data
+}
+export async function action({request}){
+   const formData = await request.formData()
+   const email = formData.get("email")
+   const firstName = formData.get("firstName")
+   const lastName = formData.get("lastName")
+   const birth = moment(formData.get("birth"),'DD.MM.YYYY').format('YYYY-MM-DD')
+   const patronymic = formData.get("patronymic")
+   // const phone = formData.get("phone")
+   // console.log(phone)
+   
+   const user = {
+      firstName: firstName,
+      lastName: lastName,
+      email:email,
+      patronymic: patronymic,
+      birth: birth,
+      // phone:phone
+
+   }
+   console.log(user)
+   try {
+      const data = await axios.post(`${BASE_URL}/employee/clients/updateForClient`, user)
+      return redirect(`..?${searchParams}`)
+   } catch (err) {
+      // console.log(err.response.data.phone)
+      return err
+   }
+   finally{
+      queryClient.invalidateQueries('profileInfo')
+   }
 }
 
 const ProfilePage = () => {
@@ -21,15 +54,9 @@ const ProfilePage = () => {
       <div className={style.wrapper}>
          <div className={style.block}>
             <div
-            className={style.heading}
+               className={style.heading}
             >Личная информация</div>
             <ProfilePageForm data={data} />
-         <button
-            className={style.exitbtn}
-            onClick={() => { localStorage.clear(); navigate('/auth') }}
-         >
-            Выйти
-         </button>
          </div>
          <div className={style.block}>
             <div className={style.heading}>

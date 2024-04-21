@@ -5,146 +5,58 @@ import { queryClient } from '../../../../App'
 import { DatePicker, Space } from 'antd'
 import { locale } from '../../../API/locale'
 import moment from 'moment'
+import MyInput from '../../../UI/MyInput/MyInput'
+import MySelect from '../../../UI/MySelect/MySelect'
+import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import dayjs from 'dayjs'
+import MyDatePicker from '../../../UI/MyDatePicker/MyDatePicker'
 
 const BiddingForm = ({ data }) => {
-   const numberRef = useRef(null)
-   const initialPriceRef = useRef(null)
-   const depositRef = useRef(null)
-   const nameRef = useRef(null)
-   const marketValueRef = useRef(null)
-   const expiryDateRef = useRef(null)
-   const auctionDateRef = useRef(null)
-   const auctionFormRef = useRef(null)
-   const auctionTypeRef = useRef(null)
-   const limitationsRef = useRef(null)
-   const limitationDateRef = useRef(null)
-   const linkRef = useRef(null)
-   const areaNameRef = useRef(null)
-   useEffect(() => {
-      if (data) {
-         numberRef.current.defaultValue = data?.data.number
-         initialPriceRef.current.defaultValue = data?.data.initialPrice
-         depositRef.current.defaultValue = data?.data.deposit
-         nameRef.current.defaultValue = data?.data.name
-         marketValueRef.current.defaultValue = data?.data.marketValue
-         expiryDateRef.current.defaultValue = data?.data.expiryDate.substring(0, 10)
-         auctionDateRef.current.defaultValue = data?.data.auctionDate.substring(0, 10)
-         auctionFormRef.current.value = data?.data.auctionForm
-         auctionTypeRef.current.defaultValue = data?.data.auctionType
-         limitationsRef.current.defaultValue = data?.data.limitations
-         limitationDateRef.current.defaultValue = data?.data.limitationDate.substring(0, 10)
-         linkRef.current.defaultValue = data?.data.link
-         areaNameRef.current.defaultValue = data?.data.areaName
-
-
-      }
-   }, [data])
+   // const dateTimeRef = useRef(null);
+   // useEffect(() => {
+   //    if (data) {
+   //       dateTimeRef.current.value = data?.auctionDate
+   //    }
+   // }, [data])
    return (
       <Form
          replace
          className={style.form}
          method='post'
       >
-         <label htmlFor="number" className={style.label}>Номер лота</label>
-         <input
-            name="number"
-            ref={numberRef}
-            type="text"
-            className={style.input}
-         />
-         <label htmlFor="initialPrice" className={style.label}>Начальная цена</label>
-         <input
-            name="initialPrice"
-            ref={initialPriceRef}
-            type="text"
-            className={style.input}
-         />
-         <label htmlFor="deposit" className={style.label}>Задаток</label>
-         <input
-            name="deposit"
-            ref={depositRef}
-            type="text"
-            className={style.input}
-         />
-         <label htmlFor="name" className={style.label}>Название</label>
-         <input
-            name="name"
-            ref={nameRef}
-            type="text"
-            className={style.input}
-         />
-         <label htmlFor="marketValue" className={style.label}>Рыночная цена</label>
-         <input
-            name="marketValue"
-            ref={marketValueRef}
-            type="text"
-            className={style.input}
-         />
-         <label htmlFor="expiryDate" className={style.label}>Крайний срок подачи заявки</label>
-         <input
-            name="expiryDate"
-            ref={expiryDateRef}
-            type="date"
-            className={style.input}
-         />
-         <label htmlFor="auctionDate" className={style.label}>Дата торгов</label>
-         <input
-            name="auctionDate"
-            ref={auctionDateRef}
-            type="date"
-            className={style.input}
-         />
-         <label htmlFor="auctionForm" className={style.label}>Форма торгов</label>
-         <select
-            name='auctionForm'
-            className={style.select}
-            ref={auctionFormRef}
-         >
-            <option value={'DOWNGRADE'}>
-               На понижение
-            </option>
-            <option value={'RAISING'}>
-               На повышение
-            </option>
-         </select>
-         <label htmlFor="auctionType" className={style.label}>Тип аукциона</label>
-         <input
-            name="auctionType"
-            ref={auctionTypeRef}
-            type="text"
-            className={style.input}
-         />
-         <label htmlFor="limitations" className={style.label}>Ограничени</label>
-         <input
-            name="limitations"
-            ref={limitationsRef}
-            type="text"
-            className={style.input}
-         />
-         <label htmlFor="limitationDate" className={style.label}>Дата ограничений</label>
-         <input
-            name="limitationDate"
-            ref={limitationDateRef}
-            type="date"
-            className={style.input}
-         />
-         <label htmlFor="link" className={style.label}>Ссылка</label>
-         <input
-            name="link"
-            ref={linkRef}
-            type="text"
-            className={style.input}
-         />
-         <label htmlFor="areaName" className={style.label}>Площадка</label>
-         <input
-            name="areaName"
-            ref={areaNameRef}
-            type="text"
-            className={style.input}
-         />
-         <button className={style.btn}>
-            Отправить
-         </button>
+         <div className={style.left}>
+            <div className={style.leftInputs}>
+               <MyInput name={'number'} text={'Номер лота'} defaultValue={data?.number} />
+               <MyInput name={'initialPrice'} text={'Начальная цена'} defaultValue={data?.initialPrice} />
+               <MyInput name={'deposit'} text={'Задаток'} defaultValue={data?.deposit} />
+               <MyInput name={'name'} text={'Название'} defaultValue={data?.name} />
+               <MyInput name={'marketValue'} text={'Рыночная цена'} defaultValue={data?.marketValue} />
+               <MySelect name={'auctionForm'} text={'Форма торгов'} defaultValue={data?.auctionForm}>
+                  <option
+                     value={'RAISING'}>
+                     На повышение
+                  </option>
+                  <option
+                     value={'DOWNGRADE'}>
+                     На понижение
+                  </option>
+               </MySelect>
+            </div>
+            <button className={style.btn}>
+               Отправить
+            </button>
+         </div>
+         <div className={style.right}>
+
+            <MyDatePicker name={'auctionDate'} text={'Дата торгов'} format={"DD.MM.YYYY HH:mm"} defaultValue={data?.auctionDate} />
+            <MyDatePicker name={'expiryDate'} text={'Дата подачи заявки'} format={"DD.MM.YYYY HH:mm"} defaultValue={data?.expiryDate} />
+            <MyInput name={'auctionType'} text={'Тип аукциона'} defaultValue={data?.auctionType} />
+            <MyInput name={'limitations'} text={'Ограничения'} defaultValue={data?.limitations} />
+            <MyDatePicker name={'limitationDate'} text={'Дата ограничений'} format={"DD.MM.YYYY"} defaultValue={data?.limitationDate} />
+            <MyInput name={'link'} text={'Ссылка'} defaultValue={data?.link} />
+            <MyInput name={'areaName'} text={'Площадка'} defaultValue={data?.areaName} />
+         </div>
       </Form>
    )
 }

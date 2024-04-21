@@ -1,0 +1,26 @@
+$dgray: #5a5a5a;
+$gray: #949494;
+.label {
+   text-align: start;
+   color: #5a5a5a;
+   font-weight: 600;
+   margin-left: 1px;
+}
+.input {
+   padding-left: 10px;
+   height: 40px;
+   margin-bottom: 5px;
+   color: #5a5a5a;
+   border-radius: 5px;
+   background-color: #fff;
+   transition: border-color .4s;
+   border: 1px solid rgba(0, 0, 0, 0.2);
+   &:focus {
+      color: #949494;
+      // border: 2px solid #5a5a5a;
+      outline: 2px solid #5a5a5a;
+   }
+   &:hover {
+      border: 1px solid #5a5a5a;
+   }
+}

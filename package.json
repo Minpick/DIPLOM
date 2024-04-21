@@ -10,19 +10,23 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@mui/material": "^5.15.15",
+    "@mui/x-date-pickers": "^7.2.0",
     "antd": "^5.14.1",
     "axios": "^1.6.5",
     "classnames": "^2.5.1",
+    "date-fns": "^3.6.0",
+    "dayjs": "^1.11.10",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
     "moment": "^2.30.1",
     "react": "^18.2.0",
-    "react-big-calendar": "^1.11.2",
     "react-dom": "^18.2.0",
     "react-query": "^3.39.3",
     "react-router": "^6.4.3",
     "react-router-dom": "^6.4.3",
-    "socket.io-client": "^4.7.5",
     "sort-by": "^1.2.0"
   },
   "devDependencies": {

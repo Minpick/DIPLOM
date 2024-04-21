@@ -1,4 +1,5 @@
 .wrapper {
+   margin-top: 20px;
    width: 100%;
    min-height: 650px;
    // border-radius: 15px;
@@ -21,23 +22,15 @@
    border-radius: 15px;
    background-color: #ebebeba3;
 }
-.exitbtn{
-   font-size: 1rem;
-   font-family: "Open Sans";
-   width: 300px;
-   color: #fff;
-   height: 40px;
-   font-weight: 700;
-   transition: all .4s;
-   margin-top: 40px;
-   &:hover{
-      scale: 1.03;
-   }
-}
+
 .heading{
    font-family: "Open Sans";
    color: black;
    font-size: 1.3rem;
    font-weight: 800;
    margin-bottom: 20px;
+}
+.btnwrapper{
+   display: flex;
+   gap: 20px;
 }

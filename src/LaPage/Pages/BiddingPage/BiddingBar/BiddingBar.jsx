@@ -17,20 +17,33 @@ async function fetchMarks(id) {
       return data.data
    }
 }
+async function download(arr) {
+   console.log(arr);
+   const response = await axios.put(`${BASE_URL}/auction/exportAuctionsToExcel`, arr, {
+      responseType: 'blob'
+   });
+   const url = window.URL.createObjectURL(new Blob([response.data], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}));
+   const link = document.createElement('a');
+   link.href = url;
+   link.setAttribute('download', `Excel.xlsx`);
+   document.body.appendChild(link);
+   link.click();
+}
+
 
 
 const BiddingBar = ({ selectedLots, setSelectedLots, biddingsIds }) => {
    const path = useLocation().pathname.substring(12, 15)
    const shown = ['new', 'edi']
    const { data } = useQuery('biddingClients', fetchBiddingClients)
-   const saveToExcel = useMutation((arr) => {
-      return axios.put(`${BASE_URL}/auction/exportAuctionsToExcel`, arr);
-   }, {
-      onSuccess: () => {
-         setSelectedLots([])
-         setSelectedValue('')
-      },
-   });
+   // const saveToExcel = useMutation((arr) => {
+   //    return axios.put(`${BASE_URL}/auction/exportAuctionsToExcel`, arr);
+   // }, {
+   //    onSuccess: () => {
+   //       setSelectedLots([])
+   //       setSelectedValue('')
+   //    },
+   // });
    const [selectedValue, setSelectedValue] = useState('');
 
    const handleSelectChange = (event) => {
@@ -45,11 +58,11 @@ const BiddingBar = ({ selectedLots, setSelectedLots, biddingsIds }) => {
          setSelectedLots([...marksData.data.auctionsId])
          console.log(selectedLots)
       }
-      else{
-         
+      else {
+
          setSelectedLots([])
       }
-   }, [marksData.data?.auctionsId,selectedValue])
+   }, [marksData.data?.auctionsId, selectedValue])
 
    const addClient = useMutation((arr) => {
       return axios.post(`${BASE_URL}/auction/addClient`, { userId: arr[1], auctionId: arr[0] });
@@ -91,7 +104,10 @@ const BiddingBar = ({ selectedLots, setSelectedLots, biddingsIds }) => {
                {options}
             </select>
             <button className={style.btn}
-               onClick={() => selectedValue ? addClient.mutate([selectedLots, selectedValue]) : saveToExcel.mutate(selectedLots)}
+               onClick={() => selectedValue ? addClient.mutate([selectedLots, selectedValue]) :
+                  //  saveToExcel.mutate(selectedLots)
+                   download(selectedLots)
+                  }
             >
                {selectedValue ? 'Поделиться с клиентом' : 'Сформировать Excel'}
             </button>

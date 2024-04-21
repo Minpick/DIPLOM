@@ -39,16 +39,18 @@ import DayInfo, { action as DayInfoAction } from './LaPage/Pages/CalendarPage/Da
 import BiddingPage from './LaPage/Pages/BiddingPage/BiddingPage'
 import CreateBidding, { action as CreateBiddingAction } from './LaPage/Pages/BiddingPage/CreateBidding/CreateBidding'
 import EditBidding, { action as EditBiddingAction } from './LaPage/Pages/BiddingPage/EditBidding/EditBidding'
-import ProfilePage from './LkPage/Pages/ProfilePage/ProfilePage'
+import ProfilePage,{action as ProfilePageAction} from './LkPage/Pages/ProfilePage/ProfilePage'
 import DocsPage from './LaPage/Pages/DocsPage/DocsPage'
 import DownloadDoc from './LaPage/Pages/DocsPage/DownloadDoc/DownloadDoc'
 import AuctionPage from './LkPage/Pages/AuctionPage/AuctionPage'
+import SchedulePage from './LkPage/Pages/SchedulePage/SchedulePage'
+import PaymentPage from './LkPage/Pages/PaymentPage/PaymentPage'
 
 
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      // keepPreviousData:false,
+      keepPreviousData: false,
       refetchOnWindowFocus: false
     },
   },
@@ -82,9 +84,9 @@ const router = createBrowserRouter(createRoutesFromElements(
       <Route path='progress' element={<ProgressPage />} />
       <Route path='chat' element={<div>chat</div>} />
       <Route path='biddings' element={<AuctionPage />} />
-      <Route path='profile' element={<ProfilePage />} />
-      <Route path='calendar' element={<div>docs</div>} />
-      <Route path='payment' element={<div>payment</div>} />
+      <Route path='profile' element={<ProfilePage />}  action={ProfilePageAction}/>
+      <Route path='calendar' element={<SchedulePage />} />
+      <Route path='payment' element={<PaymentPage />} />
     </Route>
     <Route path='la' element={<Layout />} loader={async () => await requireAuthEmployee()}>
       <Route index element={<Navigate to='clients?status=in_progress' replace />} />

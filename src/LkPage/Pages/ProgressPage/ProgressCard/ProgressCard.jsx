@@ -22,7 +22,7 @@ const ProgressCard = ({ arr }) => {
       )
    })
    return (
-      <CustomCard heading={'Сделка'} name={arr[0].nameDeal}>
+      <CustomCard heading={'Сделка'} ticked={true} name={arr[0].nameDeal}>
          {displayed}
       </CustomCard>
    )

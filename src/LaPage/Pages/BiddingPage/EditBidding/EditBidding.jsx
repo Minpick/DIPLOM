@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Form, redirect, useParams } from 'react-router-dom'
 import style from './EditBidding.module.scss'
 import PopUpAdd from '../../../UI/PopUpAdd/PopUpAdd'
@@ -7,13 +7,15 @@ import { useQuery } from 'react-query'
 import axios from 'axios'
 import { BASE_URL } from '../../../API/requests'
 import { queryClient } from '../../../../App'
+import Loading from '../../../UI/Loading/Loading'
+import moment from 'moment'
 
 async function fetchBidding(id) {
    const data = await axios.get(`${BASE_URL}/auction/${id}`)
    return data
 }
 
-export async function action({ request,params }) {
+export async function action({ request, params }) {
    const searchParams = new URL(request.url)
       .searchParams.toString()
    const formData = await request.formData()
@@ -23,14 +25,15 @@ export async function action({ request,params }) {
    const name = formData.get("name")
    const marketValue = formData.get("marketValue")
    // const expiryDate = moment(formData.get("expiryDate").replace(/(\d{2})\.(\d{2})\.(\d{4})/, '$3-$2-$1')).toISOString()
-
-   const expiryDate = formData.get("expiryDate") + "T07:26:07.507Z"
-   const auctionDate = formData.get("auctionDate") + "T07:26:07.507Z"
+   console.log(formData.get("expiryDate"))
+   const expiryDate = moment.utc(formData.get("expiryDate"), 'DD.MM.YYYY HH:mm').toISOString()
+   console.log(expiryDate)
+   const auctionDate = moment.utc(formData.get("auctionDate"), 'DD.MM.YYYY HH:mm').toISOString()
    // console.log(auctionDate)
    const auctionForm = formData.get("auctionForm")
    const auctionType = formData.get("auctionType")
    const limitations = formData.get("limitations")
-   const limitationDate = formData.get("limitationDate")+ "T07:26:07.507Z"
+   const limitationDate = moment.utc(formData.get("limitationDate"), 'DD.MM.YYYY').toISOString()
    const link = formData.get("link")
    const areaName = formData.get("areaName")
 
@@ -49,7 +52,7 @@ export async function action({ request,params }) {
       link: link,
       areaName: areaName
    }
-
+   console.log(bidding)
    try {
       const data = await axios.patch(`${BASE_URL}/auction/${params.id}`, bidding)
       return redirect(`..?${searchParams}`)
@@ -64,11 +67,18 @@ export async function action({ request,params }) {
 
 const EditBidding = () => {
    const { id } = useParams()
-   const { data } = useQuery({ queryKey: ['bidding'], queryFn: () => fetchBidding(id) })
+   const [key, setKey] = useState(['bidding']);
+   const { data, isPending, isSuccess, isFetched } = useQuery({ queryKey: key, queryFn: () => fetchBidding(id) })
+   if (isPending) {
+      return <Loading />
+   }
+   console.log(data?.data.auctionDate)
    return (
-      <PopUpAdd>
-         <BiddingForm data={data} />
-      </PopUpAdd>
+      <>
+         <PopUpAdd>
+            <BiddingForm data={data?.data} />
+         </PopUpAdd>
+      </>
    )
 }
 
