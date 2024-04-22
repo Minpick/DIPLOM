@@ -14,11 +14,11 @@ async function fetchProgress() {
 }
 
 const ProgressPage = () => {
-  const { data } = useQuery('dealProgress', () => fetchProgress())
+  const { data,isSuccess } = useQuery('dealProgress', () => fetchProgress())
   console.log(data)
   const uniqueValues = []
 
-  if (data) {
+  if (isSuccess) {
     data?.forEach(item => {
       // Получаем значение, которое будем проверять на уникальность
       const value = item.id; // Например, имя

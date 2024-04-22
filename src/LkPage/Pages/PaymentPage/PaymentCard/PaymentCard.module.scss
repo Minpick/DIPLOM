@@ -1,0 +1,38 @@
+.wrapper {
+   color: black;
+   display: flex;
+   flex-direction: column;
+   width: 100%;
+   background-color: #ebebeba3;
+   border-radius: 15px;
+   padding: 20px;
+   color: #616161;
+   font-size: 18px;
+   font-family: "Open Sans";
+   display: flex;
+   font-weight: 500;
+}
+.contentWrapper {
+   display: grid;
+   grid-template-columns: repeat(4,1fr);
+   gap: 20px;
+   line-height: 40px;
+   font-size: 1.1rem;
+}
+.heading {
+   text-align: center;
+   margin-top: -2px;
+   display: flex;
+   margin-bottom: 15px;
+   color: #828282;
+   font-size: 1.2rem;
+   font-weight: 700;
+   flex-direction: column;
+   line-height: 1.6rem;
+   span {
+      color: black;
+      font-weight: 400;
+      font-size: 1.4rem;
+   }
+}
+

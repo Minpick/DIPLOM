@@ -80,7 +80,7 @@ const router = createBrowserRouter(createRoutesFromElements(
       <Route path='login' element={<LoginPage />} action={LoginPageAction} />
     </Route>
     <Route path='lk' element={<LkLayout />} loader={async () => await requireAuthClient()}>
-      <Route index element={<Navigate to='progress' replace />} />
+      <Route index element={<Navigate to='profile' replace />} />
       <Route path='progress' element={<ProgressPage />} />
       <Route path='chat' element={<div>chat</div>} />
       <Route path='biddings' element={<AuctionPage />} />
