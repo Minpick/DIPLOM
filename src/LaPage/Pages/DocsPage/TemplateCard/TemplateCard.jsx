@@ -7,7 +7,7 @@ const TemplateCard = ({ name,image,doc}) => {
 
    return (
       <Link
-      to={`generate?doc=${doc}`}
+      to={`?doc=${doc}`}
          className={style.wrapper}>
          <div className={style.imgwrapper}>
             <img

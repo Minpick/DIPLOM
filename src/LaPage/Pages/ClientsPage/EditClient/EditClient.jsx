@@ -8,8 +8,9 @@ import { queryClient } from '../../../../App'
 import ClientsForm from '../ClientsForm/ClientsForm'
 import Loading from '../../../UI/Loading/Loading'
 import DealBtns from '../../DealPage/DealBtns/DealBtns'
-import './EditClient.scss'
+import style from './EditClient.module.scss'
 import classNames from 'classnames'
+import moment from 'moment'
 
 export async function action({ request, params }) {
 
@@ -22,13 +23,13 @@ export async function action({ request, params }) {
    const lastName = formData.get("lastName")
    const status = formData.get("status")
    const login = formData.get("login")
-   const password = formData.get("password")
-   const birth = formData.get("birth")
+   const passwordForService = formData.get("passwordForService")
+   const birth = moment.utc(formData.get("birth"), 'DD.MM.YYYY').format('YYYY-MM-DD')
    const comment = formData.get("comment")
    const passport = formData.get("passport")
    const patronymic = formData.get("patronymic")
    const passportIssued = formData.get("passportIssued")
-   const dateIssuePassport = formData.get("dateIssuePassport")
+   const dateIssuePassport = moment.utc(formData.get("dateIssuePassport"), 'DD.MM.YYYY').format('YYYY-MM-DD')
    const kp = formData.get("kp")
    const registrationAddress = formData.get("registrationAddress")
    const snils = formData.get("snils")
@@ -42,7 +43,7 @@ export async function action({ request, params }) {
       status: status,
       patronymic: patronymic,
       login: login,
-      password: password,
+      passwordForService: passwordForService,
       birth: birth,
       comment: comment,
       passport: passport,
@@ -73,22 +74,13 @@ const EditClient = () => {
    const { id } = useParams()
    const [searchParams, setSearchParams] = useSearchParams()
    const { data, isLoading } = useQuery({ queryKey: ['client'], queryFn: () => fetchClient(id) })
-   const editClient = useMutation((user) => {
-      return axios.patch(`${BASE_URL}/employee/clients/${id}`, user);
-   }, {
-      onSuccess: () => {
-         queryClient.invalidateQueries('clients')
-      },
-   });
+   // console.log(data)
    const statuses = [{
-      status: 'in_progress',
-      name: 'В работе'
+      'IN_PROGRESS': 'В работе'
    }, {
-      status: 'planned',
-      name: 'Планируемые'
+      'PLANNED': 'Планируемые'
    }, {
-      status: 'completed',
-      name: 'Завершенные'
+      'COMPLETED': 'Завершенные'
    }]
    if (isLoading) {
       return (
@@ -98,14 +90,13 @@ const EditClient = () => {
    return (
       <>
          <PopUpAdd>
-            <div className='form_wrapper'>
-
-               <div className='form_btns_wrapper'>
+            <div className={style.wrapper}>
+               <div className={style.btnsWrapper}>
                   <NavLink
                      to={`/la/clients/${id}/edit?${searchParams.toString()}`}
                      // className='form_btn'
                      className={({ isActive }) =>
-                        isActive ? classNames('form_btn', 'form_btn_active') : 'form_btn'
+                        isActive ? classNames(style.btn, style.activeBtn) : style.btn
                      }
                   >
                      {data ? data?.data.lastName + ' ' + data?.data.firstName : 'Клиент'}
@@ -114,9 +105,8 @@ const EditClient = () => {
                </div>
                <ClientsForm
                   isLoading={isLoading}
-                  data={data}
+                  data={data.data}
                   statuses={statuses}
-                  action={action}
                />
             </div>
          </PopUpAdd>

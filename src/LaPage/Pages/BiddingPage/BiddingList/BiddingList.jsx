@@ -32,6 +32,7 @@ const BiddingList = ({ func, selectedLots,data,isLoading }) => {
          <Loading />
       )
    }
+   console.log(data?.data)
    const biddings = data?.data?.map(bidding => {
       return (
          <li key={bidding.id}
@@ -58,7 +59,7 @@ const BiddingList = ({ func, selectedLots,data,isLoading }) => {
                   {bidding.price}
                </div>
                <div className={style.clients__field}>
-                  {moment(bidding.expiryDate).format('DD.MM.YYYY hh:mm')}
+                  {moment.utc(bidding.expiryDate).format('DD.MM.YYYY hh:mm')}
                </div>
             </Link>
             <DeleteButton onClick={() => deleteBidding.mutate(bidding.id)} />

@@ -13,11 +13,11 @@ const DealPage = () => {
    const { data, isLoading } = useQuery({ queryKey: ['client'], queryFn: () => fetchClient(id) })
    return (
       <PopUpAdd>
-         <div className='form_wrapper'>
-            <div className='form_btns_wrapper'>
+         <div className={style.wrapper}>
+            <div className={style.btnsWrapper}>
                <Link
                   to={`/la/clients/${id}/edit?${searchParams.toString()}`}
-                  className='form_btn'>
+                  className={style.btn}>
                   {data ? data?.data.lastName + ' ' + data?.data.firstName : 'Клиент'}
                </Link>
                <DealBtns />

@@ -4,34 +4,6 @@ import { redirect } from "react-router";
 
 export const BASE_URL = 'http://localhost:8085'
 
-const refreshToken = async () => {
-   try {
-      const response = await axios.post('http://localhost:8085/refreshToken', {
-         // Передайте необходимые данные для обновления токена
-         refreshToken: localStorage.getItem('refreshToken'),
-      })
-      // Обновите токен в axios или в localStorage, в зависимости от вашей логики
-      localStorage.setItem('token', response.data.token)
-      axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
-
-      // Верните новый токен, чтобы его можно было использовать в месте вызова refreshToken
-      return response.data.token;
-   } catch (error) {
-
-
-      // Обработайте ошибку обновления токена, например, выход пользователя или другие действия
-      localStorage.clear()
-      throw error;
-   }
-};
-const setAuthorizationHeader = () => {
-   const token = localStorage.getItem('token');
-   if (token) {
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-   } else {
-      delete axios.defaults.headers.common['Authorization'];
-   }
-};
 axios.interceptors.request.use(
    config => {
       setAuthorizationHeader();
@@ -41,6 +13,29 @@ axios.interceptors.request.use(
       return Promise.reject(error);
    }
 );
+const setAuthorizationHeader = () => {
+   const token = localStorage.getItem('token');
+   if (token) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+   } else {
+      delete axios.defaults.headers.common['Authorization'];
+   }
+};
+const refreshToken = async () => {
+   try {
+      const response = await axios.post('http://localhost:8085/refreshToken', {
+         refreshToken: localStorage.getItem('refreshToken'),
+      })
+      localStorage.setItem('token', response.data.token)
+      axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+
+      return response.data.token;
+   } catch (error) {
+      localStorage.clear()
+      throw error;
+   }
+};
+
 
 axios.interceptors.response.use(
    (response) => response,
@@ -56,15 +51,12 @@ axios.interceptors.response.use(
          try {
             if (localStorage.length) {
                const newAccessToken = await refreshToken();
-               // Повторите оригинальный запрос с обновленным токеном
                originalRequest.headers['Authorization'] = 'Bearer ' + newAccessToken;
                if (newAccessToken) {
                   return axios(originalRequest);
                }
             }
          } catch (refreshError) {
-
-            // Обработайте ошибку обновления токена, например, перенаправьте пользователя на страницу входа
             localStorage.clear()
             throw refreshError
          }

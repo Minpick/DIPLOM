@@ -1,12 +1,16 @@
 .wrapper {
-   width: 200px;
+   // width: 200px;
    border-radius: 10px;
    overflow: hidden;
    position: relative;
    cursor: pointer;
-   transition: all .5s;
-   border: 1px solid #eeeeee;
+   transition: all 0.5s;
+   border: 0.3px solid rgba(0, 0, 0, 0.277);
+   // box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.182);
+   outline: none;
    box-shadow: none;
+   -webkit-box-shadow: none;
+   -moz-box-shadow: none;
 
    &::after {
       content: "";
@@ -14,21 +18,32 @@
       bottom: 0;
       left: 0;
       width: 100%;
-      transition: all .5s;
+      transition: all 0.5s;
       height: 70%; /* Высота затемненной области (30% от высоты карточки) */
-      background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)); /* Градиент от прозрачного к затемненному */
-    }
-    &:hover::after{
+      background: linear-gradient(
+         to bottom,
+         rgba(0, 0, 0, 0),
+         rgba(0, 0, 0, 0.612)
+      ); /* Градиент от прозрачного к затемненному */
+   }
+   &:hover::after {
       height: 100%;
-    }
-    &:hover{
+   }
+   &:hover {
       scale: 1.03;
-    }
+   }
 }
 .imgwrapper {
    border: none;
-   img{
+   outline: none;
+   box-shadow: none;
+   -webkit-box-shadow: none;
+   -moz-box-shadow: none;
+
+   img {
       box-shadow: none;
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
       border: none;
       outline: none;
    }
@@ -36,11 +51,13 @@
 .name {
    position: absolute;
    left: 0;
-   bottom: 0;
+   bottom: 10px;
    right: 0;
    z-index: 5;
+   // -webkit-text-stroke: .1px black;
    text-align: center;
-   font-weight: 400;
-   font-size: 1.1rem;
-   color: rgb(227, 227, 227);
+   font-weight: 500;
+   font-size: 1.2rem;
+   // color: rgb(227, 227, 227);
+   color: #fff;
 }

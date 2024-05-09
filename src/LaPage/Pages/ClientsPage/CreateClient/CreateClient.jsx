@@ -9,6 +9,7 @@ import ClientsForm from '../ClientsForm/ClientsForm'
 import { queryClient } from '../../../../App'
 import Loading from '../../../UI/Loading/Loading'
 import PopUpAdd from '../../../UI/PopUpAdd/PopUpAdd'
+import moment from 'moment'
 
 
 export async function action({ request }) {
@@ -26,12 +27,12 @@ export async function action({ request }) {
    const status = formData.get("status")
    const login = formData.get("login")
    const password = formData.get("password")
-   const birth = formData.get("birth")
+   const birth = moment.utc(formData.get("birth"), 'DD.MM.YYYY').format('YYYY-MM-DD')
    const comment = formData.get("comment")
    const passport = formData.get("passport")
    const patronymic = formData.get("patronymic")
    const passportIssued = formData.get("passportIssued")
-   const dateIssuePassport = formData.get("dateIssuePassport")
+   const dateIssuePassport = moment.utc(formData.get("dateIssuePassport"), 'DD.MM.YYYY').format('YYYY-MM-DD')
    const kp = formData.get("kp")
    const registrationAddress = formData.get("registrationAddress")
    const snils = formData.get("snils")
@@ -84,24 +85,19 @@ const CreateClient = () => {
    //    },
    // });
    const statuses = [{
-      status: 'in_progress',
-      name: 'В работе'
+      'IN_PROGRESS': 'В работе'
    }, {
-      status: 'planned',
-      name: 'Планируемые'
+      'PLANNED': 'Планируемые'
    }, {
-      status: 'completed',
-      name: 'Завершенные'
+      'COMPLETED': 'Завершенные'
    }]
 
    return (
       <PopUpAdd>
-         <div className='form_wrapper'>
             <ClientsForm
                statuses={statuses}
                action = {action}
             />
-         </div>
       </PopUpAdd>
    )
 }

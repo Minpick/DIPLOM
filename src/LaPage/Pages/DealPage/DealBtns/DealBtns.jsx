@@ -69,7 +69,7 @@ const DealBtns = () => {
    return (
       <>
          {data?.data.length !== 0 &&
-            <div className={classNames('form_btn', style.wrapper)}>
+            <div className={classNames(style.btn, style.wrapper)}>
                {!showList && !deal && <NavLink
                   className={({ isActive }) =>
                      isActive ? classNames(style.active, style.link) : style.link
@@ -90,7 +90,7 @@ const DealBtns = () => {
          {data?.data.length === 0 &&
             <Link
                to={`/la/clients/${id}/deal/new`}
-               className='form_btn'
+               className={style.btn}
             >Создать сделку
             </Link>}
          {/* <div className={classNames('form_btn', style.wrapper)}>

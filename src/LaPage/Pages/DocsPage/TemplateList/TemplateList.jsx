@@ -11,6 +11,10 @@ const TemplateList = () => {
   return (
     <div className={style.wrapper}>
       <TemplateCard name={'Договор юридических услуг с ИП'} image={IPcontract} doc={'IPcontract'}/>
+      <TemplateCard name={'Заявка в банк'} image={IPcontract} doc={'IPcontract'}/>
+      <TemplateCard name={'Договор юридических услуг'} image={IPcontract} doc={'IPcontract'}/>
+      <TemplateCard name={'Исковое заявление'} image={IPcontract} doc={'IPcontract'}/>
+      <TemplateCard name={'Заявление в арбитражный суд'} image={IPcontract} doc={'IPcontract'}/>
     </div>
   )
 }

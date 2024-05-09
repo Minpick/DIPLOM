@@ -39,7 +39,7 @@ import DayInfo, { action as DayInfoAction } from './LaPage/Pages/CalendarPage/Da
 import BiddingPage from './LaPage/Pages/BiddingPage/BiddingPage'
 import CreateBidding, { action as CreateBiddingAction } from './LaPage/Pages/BiddingPage/CreateBidding/CreateBidding'
 import EditBidding, { action as EditBiddingAction } from './LaPage/Pages/BiddingPage/EditBidding/EditBidding'
-import ProfilePage,{action as ProfilePageAction} from './LkPage/Pages/ProfilePage/ProfilePage'
+import ProfilePage, { action as ProfilePageAction } from './LkPage/Pages/ProfilePage/ProfilePage'
 import DocsPage from './LaPage/Pages/DocsPage/DocsPage'
 import DownloadDoc from './LaPage/Pages/DocsPage/DownloadDoc/DownloadDoc'
 import AuctionPage from './LkPage/Pages/AuctionPage/AuctionPage'
@@ -84,7 +84,7 @@ const router = createBrowserRouter(createRoutesFromElements(
       <Route path='progress' element={<ProgressPage />} />
       <Route path='chat' element={<div>chat</div>} />
       <Route path='biddings' element={<AuctionPage />} />
-      <Route path='profile' element={<ProfilePage />}  action={ProfilePageAction}/>
+      <Route path='profile' element={<ProfilePage />} action={ProfilePageAction} />
       <Route path='calendar' element={<SchedulePage />} />
       <Route path='payment' element={<PaymentPage />} />
     </Route>
@@ -103,20 +103,14 @@ const router = createBrowserRouter(createRoutesFromElements(
           </Route>
         </Route>
       </Route>
-
       <Route path='employee' element={<EmployeePage />} >
         <Route path='new' action={CreateEmployeeAction} element={<CreateEmployee />} />
         <Route path='edit/:id' action={EditEmployeeAction} element={<EditEmployee />} />
       </Route>
-
       <Route path='tasks' element={<TasksPage />} >
-        <Route path='new'
-          action={CreateTaskAction}
-          element={<CreateTask />}
+        <Route path='new' action={CreateTaskAction} element={<CreateTask />}
         />
-        <Route path='edit/:id'
-          action={EditTaskAction}
-          element={<EditTask />}
+        <Route path='edit/:id' action={EditTaskAction} element={<EditTask />}
         />
       </Route>
       <Route path='chat' element={<ChatPage />} >
@@ -126,17 +120,13 @@ const router = createBrowserRouter(createRoutesFromElements(
         <Route path='info' element={<DayInfo />} action={DayInfoAction} />
       </Route>
       <Route path='bidding' element={<BiddingPage />}>
-        <Route path='new'
-          action={CreateBiddingAction}
-          element={<CreateBidding />}
+        <Route path='new' action={CreateBiddingAction} element={<CreateBidding />}
         />
-        <Route path='edit/:id'
-          action={EditBiddingAction}
-          element={<EditBidding />}
+        <Route path='edit/:id' action={EditBiddingAction} element={<EditBidding />}
         />
       </Route>
       <Route path='docs' element={<DocsPage />}>
-        <Route path='generate' element={<DownloadDoc />} />
+        <Route index element={<DownloadDoc />} />
       </Route>
     </Route>
   </Route>
@@ -145,7 +135,6 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-
       <RouterProvider router={router} />
     </QueryClientProvider>
   )

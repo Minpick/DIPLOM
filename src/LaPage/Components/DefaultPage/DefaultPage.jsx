@@ -26,7 +26,7 @@ const DefaultPage = ({ li, children, statuses}) => {
    })
    return (
       <div className={style.page}>
-         <Outlet />
+        <Outlet />
          {statuses && <ParamsBtns statuses={statuses} />}
          <ul className={style.page__navbar_list}>
             {menu}

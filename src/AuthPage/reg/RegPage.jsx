@@ -12,48 +12,45 @@ async function regUser(formData) {
       password: formData.get('password'),
       confirmPassword: formData.get('confirmPassword')
    }
-   console.log(user)
    axios.defaults.headers.common['Authorization'] = ``;
-  const data = axios.post('http://localhost:8085/signup', user)
-    .then(function (response) {
-      console.log(response)
-      if(response.status===200){
-        return redirect('/auth/login')
-      }
-      return response
-    })
-    .catch(function (error) {
-      console.log(error);
-      return error
-    })
-  return data
+   const data = axios.post('http://localhost:8085/signup', user)
+      .then(function (response) {
+         if (response.status === 200) {
+            return redirect('/auth/login')
+         }
+         return response
+      })
+      .catch(function (error) {
+         return error
+      })
+   return data
 }
 
 export async function action({ request }) {
-  const formData = await request.formData()
-  const res = await regUser(formData)
-  return res
+   const formData = await request.formData()
+   const res = await regUser(formData)
+   return res
 }
 
 
 const RegPage = () => {
 
-  const [error, setError] = useState(false)
-  const res = useActionData()
-  useEffect(() => {
-     setError(true)
-  }, [res])
-  return (
-    <>
+   const [error, setError] = useState(false)
+   const res = useActionData()
+   useEffect(() => {
+      setError(true)
+   }, [res])
+   return (
+      <>
 
-<div className='auth'>
+         <div className='auth'>
             <div className="align">
 
                <div className="grid align__item">
                   <div className="register">
                      <Link to='/'><img src={logo} alt="logo" className="site__logo" /></Link>
                      <h2>Регистрация</h2>
-                     {error&&(typeof res?.response?.data)=='string' && <p>{res?.response?.data}</p>}
+                     {error && (typeof res?.response?.data) == 'string' && <p>{res?.response?.data}</p>}
                      {error && <p>{res?.response?.data?.phone}</p>}
                      {error && <p>{res?.response?.data?.password}</p>}
                      <Form replace method="post" className="form">
@@ -94,8 +91,8 @@ const RegPage = () => {
             </div>
          </div>
 
-    </>
-  )
+      </>
+   )
 }
 
 export default RegPage

@@ -40,24 +40,29 @@ const DownloadDoc = () => {
       )
    })
    return (
-      <PopUpAdd>
-         <div className={style.wrapper}>
+      // <PopUpAdd>
+      <div className={style.wrapper}>
+         <div className={style.chooseDoc}>
+            Выберите документ: {doc}
+         </div>
+         <div className={style.chooseClient}>Выберите клиента:
             <select
                value={selectedValue} onChange={handleSelectChange}
                className={style.select}>
                <option
                   value={''}>
-                  ---
                </option>
                {options}
             </select>
             <button
+            className={style.btn}
                onClick={() => download(selectedValue, doc)}
             >
                Сформировать документ
             </button>
          </div>
-      </PopUpAdd>
+      </div>
+      // </PopUpAdd>
    )
 }
 

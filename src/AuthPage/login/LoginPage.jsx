@@ -13,9 +13,7 @@ async function loginUser(formData) {
       password: formData.get('password'),
    })
       .then(function (response) {
-         console.log(response)
          if (response.status === 200) {
-            // console.log(response.data.token)
             localStorage.setItem("token", response.data.token)
             localStorage.setItem("refreshToken", response.data.refreshToken)
             localStorage.setItem("role", response.data.user.roleName)
@@ -25,7 +23,6 @@ async function loginUser(formData) {
          }
       })
       .catch(function (error) {
-         console.log(error)
          return error
       });
    return data

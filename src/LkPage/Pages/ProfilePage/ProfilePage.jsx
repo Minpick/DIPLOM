@@ -21,24 +21,17 @@ export async function action({request}){
    const lastName = formData.get("lastName")
    const birth = moment(formData.get("birth"),'DD.MM.YYYY').format('YYYY-MM-DD')
    const patronymic = formData.get("patronymic")
-   // const phone = formData.get("phone")
-   // console.log(phone)
-   
    const user = {
       firstName: firstName,
       lastName: lastName,
       email:email,
       patronymic: patronymic,
       birth: birth,
-      // phone:phone
-
    }
-   console.log(user)
    try {
       const data = await axios.post(`${BASE_URL}/employee/clients/updateForClient`, user)
       return redirect(`..?${searchParams}`)
    } catch (err) {
-      // console.log(err.response.data.phone)
       return err
    }
    finally{

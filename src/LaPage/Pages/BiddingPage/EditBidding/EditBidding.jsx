@@ -20,10 +20,10 @@ export async function action({ request, params }) {
       .searchParams.toString()
    const formData = await request.formData()
    const number = formData.get("number")
-   const initialPrice = formData.get("initialPrice")
-   const deposit = formData.get("deposit")
+   const initialPrice = formData.get("initialPrice").replace(/\s+/g, '')
+   const deposit = formData.get("deposit").replace(/\s+/g, '')
    const name = formData.get("name")
-   const marketValue = formData.get("marketValue")
+   const marketValue = formData.get("marketValue").replace(/\s+/g, '')
    // const expiryDate = moment(formData.get("expiryDate").replace(/(\d{2})\.(\d{2})\.(\d{4})/, '$3-$2-$1')).toISOString()
    console.log(formData.get("expiryDate"))
    const expiryDate = moment.utc(formData.get("expiryDate"), 'DD.MM.YYYY HH:mm').toISOString()
@@ -69,6 +69,7 @@ const EditBidding = () => {
    const { id } = useParams()
    const [key, setKey] = useState(['bidding']);
    const { data, isPending, isSuccess, isFetched } = useQuery({ queryKey: key, queryFn: () => fetchBidding(id) })
+   console.log(data?.data)
    if (isPending) {
       return <Loading />
    }
