@@ -9,8 +9,6 @@ import {
   redirect,
 } from "react-router-dom"
 import LandingPage from './LandingPage/LandingPage'
-
-
 import Layout from './LaPage/Components/Layout/Layout'
 import ClientsPage from './LaPage/Pages/ClientsPage/ClientsPage'
 import EmployeePage from './LaPage/Pages/EmployeePage/EmployeePage'

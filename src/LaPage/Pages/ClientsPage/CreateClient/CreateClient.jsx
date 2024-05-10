@@ -7,83 +7,52 @@ import axios from 'axios'
 import './CreateClient.scss'
 import ClientsForm from '../ClientsForm/ClientsForm'
 import { queryClient } from '../../../../App'
-import Loading from '../../../UI/Loading/Loading'
 import PopUpAdd from '../../../UI/PopUpAdd/PopUpAdd'
-import moment from 'moment'
 
+export async function makeObject(request, fieldsArr) {
+   const formData = await request.formData()
+   const dataObject = fieldsArr.reduce((obj, field) => ({
+      ...obj,
+      [field]: formData.get(field),
+   }), {});
+   return dataObject
+}
+export const clientFields = [
+   'email',
+   'phone',
+   'firstName',
+   'lastName',
+   'status',
+   'login',
+   'passwordForService',
+   'birth',
+   'comment',
+   'passport',
+   'patronymic',
+   'passportIssued',
+   'dateIssuePassport',
+   'kp',
+   'registrationAddress',
+   'snils',
+   'placeOfBirth'
+]
 
 export async function action({ request }) {
-   // console.log(params)
-   // return redirect(`..`)
-   const searchParams = new URL(request.url)
-   .searchParams.toString()
-   console.log(searchParams)
-   // return redirect(`..?${searchParams}`)
-   const formData = await request.formData()
-   const email = formData.get("email")
-   const phone = formData.get("phone")
-   const firstName = formData.get("firstName")
-   const lastName = formData.get("lastName")
-   const status = formData.get("status")
-   const login = formData.get("login")
-   const password = formData.get("password")
-   const birth = moment.utc(formData.get("birth"), 'DD.MM.YYYY').format('YYYY-MM-DD')
-   const comment = formData.get("comment")
-   const passport = formData.get("passport")
-   const patronymic = formData.get("patronymic")
-   const passportIssued = formData.get("passportIssued")
-   const dateIssuePassport = moment.utc(formData.get("dateIssuePassport"), 'DD.MM.YYYY').format('YYYY-MM-DD')
-   const kp = formData.get("kp")
-   const registrationAddress = formData.get("registrationAddress")
-   const snils = formData.get("snils")
-   const placeOfBirth = formData.get("placeOfBirth")
-   
-   const user = {
-      firstName: firstName,
-      lastName: lastName,
-      email:email,
-      phone:phone,
-      status: status,
-      patronymic: patronymic,
-      login: login,
-      password: password,
-      birth: birth,
-      comment: comment,
-      passport: passport,
-      passportIssued: passportIssued,
-      dateIssuePassport: dateIssuePassport,
-      kp: kp,
-      registrationAddress: registrationAddress,
-      snils: snils,
-      placeOfBirth: placeOfBirth
-
-   }
-   
-   console.log(user)
+   const searchParams = new URL(request.url).searchParams.toString()
+   const obj = await makeObject(request, fields)
    try {
-      const data = await axios.post(`${BASE_URL}/employee/clients/new`, user)
+      await axios.post(`${BASE_URL}/employee/clients/new`, obj)
       return redirect(`..?${searchParams}`)
    } catch (err) {
-      // return <Loading/>
-      console.log(err.response.data.phone)
       return err
-   }
-   finally{
+   } finally {
       queryClient.invalidateQueries('clients')
    }
+
 }
 
 const CreateClient = () => {
    const action = useActionData()
-
-   // console.log(action)
-   // const createClient = useMutation((user) => {
-   //    return axios.post(`${BASE_URL}/employee/clients/new`, user);
-   // }, {
-   //    onSuccess: () => {
-   //       queryClient.invalidateQueries('clients')
-   //    },
-   // });
    const statuses = [{
       'IN_PROGRESS': 'В работе'
    }, {
@@ -94,10 +63,10 @@ const CreateClient = () => {
 
    return (
       <PopUpAdd>
-            <ClientsForm
-               statuses={statuses}
-               action = {action}
-            />
+         <ClientsForm
+            statuses={statuses}
+            action={action}
+         />
       </PopUpAdd>
    )
 }

@@ -10,58 +10,15 @@ import Loading from '../../../UI/Loading/Loading'
 import DealBtns from '../../DealPage/DealBtns/DealBtns'
 import style from './EditClient.module.scss'
 import classNames from 'classnames'
-import moment from 'moment'
+import { clientFields, makeObject } from '../CreateClient/CreateClient'
 
 export async function action({ request, params }) {
-
-   const searchParams = new URL(request.url)
-      .searchParams.toString()
-   const formData = await request.formData()
-   const email = formData.get("email")
-   const phone = formData.get("phone")
-   const firstName = formData.get("firstName")
-   const lastName = formData.get("lastName")
-   const status = formData.get("status")
-   const login = formData.get("login")
-   const passwordForService = formData.get("passwordForService")
-   const birth = moment.utc(formData.get("birth"), 'DD.MM.YYYY').format('YYYY-MM-DD')
-   const comment = formData.get("comment")
-   const passport = formData.get("passport")
-   const patronymic = formData.get("patronymic")
-   const passportIssued = formData.get("passportIssued")
-   const dateIssuePassport = moment.utc(formData.get("dateIssuePassport"), 'DD.MM.YYYY').format('YYYY-MM-DD')
-   const kp = formData.get("kp")
-   const registrationAddress = formData.get("registrationAddress")
-   const snils = formData.get("snils")
-   const placeOfBirth = formData.get("placeOfBirth")
-
-   const user = {
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      phone: phone,
-      status: status,
-      patronymic: patronymic,
-      login: login,
-      passwordForService: passwordForService,
-      birth: birth,
-      comment: comment,
-      passport: passport,
-      passportIssued: passportIssued,
-      dateIssuePassport: dateIssuePassport,
-      kp: kp,
-      registrationAddress: registrationAddress,
-      snils: snils,
-      placeOfBirth: placeOfBirth
-
-   }
-
-   console.log(user)
+   const searchParams = new URL(request.url).searchParams.toString()
+   const obj = await makeObject(request, clientFields)
    try {
-      const data = await axios.patch(`${BASE_URL}/employee/clients/${params.id}`, user)
+       await axios.patch(`${BASE_URL}/employee/clients/${params.id}`, obj)
       return redirect(`..?${searchParams}`)
    } catch (err) {
-      console.log(err.response.data)
       return err
    }
    finally {

@@ -21,9 +21,8 @@ const MySelect = ({ name, text, defaultValue, options }) => {
          {text && <InputLabel id={name}>{text}</InputLabel>}
          <Select
             labelId={name}
-            value={value}
+            value={value || Object.keys(options[0])[0]}
             name={name}
-            defaultValue={defaultValue}
             onChange={(e) => setValue(e.target.value)}
          >
             {myOptions}

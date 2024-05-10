@@ -11,9 +11,6 @@ import MyTextarea from '../../../UI/MyTextarea/MyTextarea'
 
 const ClientsForm = ({ data, statuses, isLoading }) => {
    const location = useLocation()
-   // const btn_text = location.pathname === '/la/clients/new' ? 'Добавить клиента' :
-   //    location.pathname.substring(0, 15) === '/la/clients/edi' ? 'Редактировать клиента' :
-   //       location.pathname === '/la/employee/new' ? 'Создать сотрудника' : 'Редактировать сотрудника'
 
    if (isLoading) {
       return (
@@ -41,13 +38,6 @@ const ClientsForm = ({ data, statuses, isLoading }) => {
                }
                {statuses &&
                   <MySelect name={'status'} text={'Статус'} defaultValue={data?.status}
-                     // options={
-                     //    [
-                     //       { 'RAISING': 'На повышение' },
-                     //       { 'DOWNGRADE': 'На понижение' }
-                     //    ]
-                     // } 
-                     // options={statuses.map(status => { return { ${ status.status.toUpperCase() }:${status.name}}}) }
                      options={statuses}
                   />
                }
@@ -82,19 +72,6 @@ const ClientsForm = ({ data, statuses, isLoading }) => {
             </>
          }
       />
-         // {/* {location.pathname.substring(0, 11) === '/la/clients' && !data?.data.role &&
-         //    <div className='add_right'>
-         //       <div className='add_right_wrapper'>
-         //       </div>
-         //       <textarea
-         //          placeholder="Комментарии"
-         //          name="comment"
-         //          value={addData.comment || ''}
-         //          className="add_comment"
-         //          onChange={handleChange}
-         //       />
-         //    </div>
-         // } */}
          )
 }
 
